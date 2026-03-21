@@ -1,0 +1,295 @@
+asyncapi: 2.6.0
+info:
+  title: Strapi Webhooks
+  description: >-
+    Strapi includes a built-in webhook system that notifies external services
+    whenever certain events occur in the CMS. Rather than polling the Strapi
+    API for changes, you can configure Strapi to send HTTP POST requests to
+    a specified URL when content entries or media assets are created, updated,
+    deleted, published, or unpublished. Webhooks are configured through the
+    Strapi admin panel under Settings > Webhooks and include a custom
+    X-Strapi-Event header identifying the event type. Global webhook headers
+    can also be configured in the server configuration file.
+  version: '5.0.0'
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  externalDocs:
+    description: Strapi Webhooks Documentation
+    url: https://docs.strapi.io/cms/backend-customization/webhooks
+servers:
+  webhookReceiver:
+    url: '{webhookUrl}'
+    protocol: https
+    description: >-
+      The external URL configured to receive webhook events from Strapi.
+      This URL is set by the user in the Strapi admin panel when creating
+      a webhook configuration.
+    variables:
+      webhookUrl:
+        description: The URL of the webhook receiver endpoint
+channels:
+  /webhook:
+    description: >-
+      The webhook delivery channel. Strapi sends HTTP POST requests to the
+      configured URL whenever a subscribed event occurs. Each request
+      includes an X-Strapi-Event header with the event type and any
+      globally configured headers.
+    publish:
+      operationId: receiveWebhookEvent
+      summary: Receive a Strapi webhook event
+      description: >-
+        Strapi publishes webhook events to this channel when content entries
+        or media assets are created, updated, deleted, published, or
+        unpublished. The receiving application processes these events to
+        trigger downstream actions such as cache invalidation, search index
+        updates, or notifications.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/EntryCreate'
+          - $ref: '#/components/messages/EntryUpdate'
+          - $ref: '#/components/messages/EntryDelete'
+          - $ref: '#/components/messages/EntryPublish'
+          - $ref: '#/components/messages/EntryUnpublish'
+          - $ref: '#/components/messages/MediaCreate'
+          - $ref: '#/components/messages/MediaUpdate'
+          - $ref: '#/components/messages/MediaDelete'
+components:
+  messages:
+    EntryCreate:
+      name: entry.create
+      title: Entry Created
+      summary: >-
+        Triggered when a new content entry is created in Strapi.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/EntryEventPayload'
+    EntryUpdate:
+      name: entry.update
+      title: Entry Updated
+      summary: >-
+        Triggered when an existing content entry is updated in Strapi.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/EntryEventPayload'
+    EntryDelete:
+      name: entry.delete
+      title: Entry Deleted
+      summary: >-
+        Triggered when a content entry is deleted from Strapi.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/EntryEventPayload'
+    EntryPublish:
+      name: entry.publish
+      title: Entry Published
+      summary: >-
+        Triggered when a draft content entry is published. Only available
+        when Draft and Publish is enabled on the content-type.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/EntryEventPayload'
+    EntryUnpublish:
+      name: entry.unpublish
+      title: Entry Unpublished
+      summary: >-
+        Triggered when a published content entry is unpublished and reverted
+        to draft status. Only available when Draft and Publish is enabled on
+        the content-type.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/EntryEventPayload'
+    MediaCreate:
+      name: media.create
+      title: Media Created
+      summary: >-
+        Triggered when a new file is uploaded to the Strapi media library,
+        either directly or as part of a content entry creation.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/MediaEventPayload'
+    MediaUpdate:
+      name: media.update
+      title: Media Updated
+      summary: >-
+        Triggered when a file in the Strapi media library is updated, such
+        as changing its metadata or replacing the file.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/MediaEventPayload'
+    MediaDelete:
+      name: media.delete
+      title: Media Deleted
+      summary: >-
+        Triggered when a file is deleted from the Strapi media library.
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/MediaEventPayload'
+  schemas:
+    WebhookHeaders:
+      type: object
+      properties:
+        X-Strapi-Event:
+          type: string
+          description: >-
+            The event type that triggered the webhook (e.g., entry.create,
+            entry.update, media.delete)
+          enum:
+            - entry.create
+            - entry.update
+            - entry.delete
+            - entry.publish
+            - entry.unpublish
+            - media.create
+            - media.update
+            - media.delete
+        Content-Type:
+          type: string
+          description: The content type of the webhook payload
+          const: application/json
+    EntryEventPayload:
+      type: object
+      description: >-
+        The payload sent when a content entry event occurs. Contains the
+        event type, the date it occurred, the content-type model, and the
+        entry data.
+      properties:
+        event:
+          type: string
+          description: The event type identifier
+          enum:
+            - entry.create
+            - entry.update
+            - entry.delete
+            - entry.publish
+            - entry.unpublish
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the event occurred
+        model:
+          type: string
+          description: >-
+            The singular name of the content-type model (e.g., article,
+            category, product)
+        uid:
+          type: string
+          description: >-
+            The unique identifier of the content-type (e.g.,
+            api::article.article)
+        entry:
+          type: object
+          description: >-
+            The full content entry data including all field values,
+            timestamps, and the document ID
+          properties:
+            id:
+              type: integer
+              description: The unique integer ID of the entry
+            documentId:
+              type: string
+              description: The unique document identifier
+            createdAt:
+              type: string
+              format: date-time
+              description: The timestamp when the entry was created
+            updatedAt:
+              type: string
+              format: date-time
+              description: The timestamp when the entry was last updated
+            publishedAt:
+              type: string
+              format: date-time
+              nullable: true
+              description: The timestamp when the entry was published
+            locale:
+              type: string
+              nullable: true
+              description: The locale code if internationalization is enabled
+          additionalProperties: true
+    MediaEventPayload:
+      type: object
+      description: >-
+        The payload sent when a media file event occurs. Contains the event
+        type, the date it occurred, and the media file data.
+      properties:
+        event:
+          type: string
+          description: The event type identifier
+          enum:
+            - media.create
+            - media.update
+            - media.delete
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the event occurred
+        media:
+          type: object
+          description: >-
+            The media file data including metadata, URL, and format
+            information
+          properties:
+            id:
+              type: integer
+              description: The unique ID of the file
+            name:
+              type: string
+              description: The original file name
+            alternativeText:
+              type: string
+              nullable: true
+              description: Alternative text for accessibility
+            caption:
+              type: string
+              nullable: true
+              description: A caption for the file
+            width:
+              type: integer
+              nullable: true
+              description: The width in pixels for image files
+            height:
+              type: integer
+              nullable: true
+              description: The height in pixels for image files
+            formats:
+              type: object
+              nullable: true
+              description: >-
+                Responsive image format variants (thumbnail, small,
+                medium, large)
+            hash:
+              type: string
+              description: A unique hash identifier for the file
+            ext:
+              type: string
+              description: The file extension
+            mime:
+              type: string
+              description: The MIME type of the file
+            size:
+              type: number
+              description: The file size in kilobytes
+            url:
+              type: string
+              description: The URL path to access the file
+            provider:
+              type: string
+              description: >-
+                The storage provider (e.g., local, aws-s3, cloudinary)
+            createdAt:
+              type: string
+              format: date-time
+              description: The timestamp when the file was uploaded
+            updatedAt:
+              type: string
+              format: date-time
+              description: The timestamp when the file was last updated

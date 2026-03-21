@@ -1,0 +1,248 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "strapi": "https://strapi.io/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "ContentEntry": {
+      "@id": "strapi:ContentEntry",
+      "@context": {
+        "documentId": "strapi:documentId",
+        "locale": {
+          "@id": "schema:inLanguage",
+          "@type": "xsd:string"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "publishedAt": {
+          "@id": "schema:datePublished",
+          "@type": "xsd:dateTime"
+        },
+        "localizations": {
+          "@id": "strapi:localizations",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "ContentType": {
+      "@id": "strapi:ContentType",
+      "@context": {
+        "uid": {
+          "@id": "dcterms:identifier",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "singularName": "strapi:singularName",
+        "pluralName": "strapi:pluralName",
+        "kind": "strapi:kind",
+        "attributes": {
+          "@id": "strapi:attributes",
+          "@container": "@index"
+        }
+      }
+    },
+
+    "MediaFile": {
+      "@id": "strapi:MediaFile",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "alternativeText": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "caption": {
+          "@id": "schema:caption",
+          "@type": "xsd:string"
+        },
+        "width": {
+          "@id": "schema:width",
+          "@type": "xsd:integer"
+        },
+        "height": {
+          "@id": "schema:height",
+          "@type": "xsd:integer"
+        },
+        "mime": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "size": {
+          "@id": "schema:contentSize",
+          "@type": "xsd:float"
+        },
+        "url": {
+          "@id": "schema:contentUrl",
+          "@type": "@id"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "User": {
+      "@id": "strapi:User",
+      "@context": {
+        "username": {
+          "@id": "schema:alternateName",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "confirmed": {
+          "@id": "strapi:confirmed",
+          "@type": "xsd:boolean"
+        },
+        "blocked": {
+          "@id": "strapi:blocked",
+          "@type": "xsd:boolean"
+        },
+        "provider": {
+          "@id": "strapi:authProvider",
+          "@type": "xsd:string"
+        },
+        "role": {
+          "@id": "strapi:role"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "AdminUser": {
+      "@id": "strapi:AdminUser",
+      "@context": {
+        "firstname": {
+          "@id": "schema:givenName",
+          "@type": "xsd:string"
+        },
+        "lastname": {
+          "@id": "schema:familyName",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "isActive": {
+          "@id": "strapi:isActive",
+          "@type": "xsd:boolean"
+        },
+        "roles": {
+          "@id": "strapi:roles",
+          "@container": "@set"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Role": {
+      "@id": "strapi:Role",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "strapi:roleType",
+          "@type": "xsd:string"
+        },
+        "permissions": {
+          "@id": "strapi:permissions",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Webhook": {
+      "@id": "strapi:Webhook",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "url": {
+          "@id": "strapi:webhookUrl",
+          "@type": "@id"
+        },
+        "events": {
+          "@id": "strapi:webhookEvents",
+          "@container": "@set"
+        },
+        "isEnabled": {
+          "@id": "strapi:isEnabled",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "ApiToken": {
+      "@id": "strapi:ApiToken",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "strapi:tokenType",
+          "@type": "xsd:string"
+        },
+        "lastUsedAt": {
+          "@id": "strapi:lastUsedAt",
+          "@type": "xsd:dateTime"
+        },
+        "expiresAt": {
+          "@id": "strapi:expiresAt",
+          "@type": "xsd:dateTime"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

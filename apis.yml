@@ -1,0 +1,127 @@
+aid: strapi
+url: https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/apis.yml
+apis:
+  - aid: strapi:rest-api
+    name: Strapi REST API
+    tags:
+      - Content Management
+      - Headless CMS
+      - REST
+      - CRUD
+      - Content Delivery
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.example.com
+    humanURL: https://docs.strapi.io/cms/api/rest
+    properties:
+      - url: https://docs.strapi.io/cms/api/rest
+        type: Documentation
+      - type: OpenAPI
+        url: openapi/strapi-rest-api-openapi.yml
+    description: >-
+      The Strapi REST API provides endpoints for accessing and managing
+      content-types created within the Strapi headless CMS. When a new
+      content-type is created in Strapi, REST API endpoints are automatically
+      generated, supporting full CRUD operations including filtering, sorting,
+      pagination, and population of relational fields. Developers can use these
+      endpoints to deliver content to any frontend application, mobile app, or
+      third-party service.
+  - aid: strapi:graphql-api
+    name: Strapi GraphQL API
+    tags:
+      - Content Management
+      - Headless CMS
+      - GraphQL
+      - Content Delivery
+      - Query Language
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.example.com
+    humanURL: https://docs.strapi.io/cms/api/graphql
+    properties:
+      - url: https://docs.strapi.io/cms/api/graphql
+        type: Documentation
+    description: >-
+      The Strapi GraphQL API enables developers to query and mutate content
+      using GraphQL instead of REST. Powered by the GraphQL plugin, it
+      automatically generates type definitions, queries, mutations, and
+      resolvers based on the content-types defined in Strapi through a
+      Shadow CRUD feature. The API includes an interactive GraphQL playground
+      for building and testing queries, and supports custom resolvers,
+      policies, and middlewares for extending the generated schema.
+  - aid: strapi:users-and-permissions-api
+    name: Strapi Users and Permissions API
+    tags:
+      - Authentication
+      - Authorization
+      - Users
+      - JWT
+      - Access Control
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.example.com
+    humanURL: https://docs.strapi.io/cms/features/users-permissions
+    properties:
+      - url: https://docs.strapi.io/cms/features/users-permissions
+        type: Documentation
+      - type: OpenAPI
+        url: openapi/strapi-users-and-permissions-api-openapi.yml
+    description: >-
+      The Strapi Users and Permissions API provides a full authentication
+      process based on JSON Web Tokens (JWT) to protect API endpoints, along
+      with an access-control list (ACL) strategy for managing permissions
+      between groups of users. It supports user registration, login, password
+      reset, and email confirmation workflows. End users and their account
+      information are managed as a content-type, and the API enables
+      configuration of roles and permissions to control which API endpoints
+      are accessible to authenticated and public users.
+  - aid: strapi:admin-panel-api
+    name: Strapi Admin Panel API
+    tags:
+      - Administration
+      - Content Management
+      - Role-Based Access Control
+      - Headless CMS
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.example.com
+    humanURL: https://docs.strapi.io/cms/features/admin-panel
+    properties:
+      - url: https://docs.strapi.io/cms/features/admin-panel
+        type: Documentation
+      - type: OpenAPI
+        url: openapi/strapi-admin-panel-api-openapi.yml
+    description: >-
+      The Strapi Admin Panel API powers the back-office interface used to
+      manage content-types, content entries, media assets, and administrator
+      accounts. It provides endpoints for the Content-Type Builder, Content
+      Manager, Media Library, and role-based access control configuration.
+      The API supports three default administrator roles (Super Admin, Editor,
+      and Author) with granular permission management, allowing organizations
+      to control which administrative functions each role can access.
+  - aid: strapi:backend-customization-api
+    name: Strapi Backend Customization API
+    tags:
+      - Customization
+      - Middleware
+      - Plugins
+      - Controllers
+      - Services
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.example.com
+    humanURL: https://docs.strapi.io/cms/backend-customization
+    properties:
+      - url: https://docs.strapi.io/cms/backend-customization
+        type: Documentation
+    description: >-
+      The Strapi Backend Customization API allows developers to extend and
+      customize the default behavior of Strapi's core backend. It provides
+      programmatic interfaces for creating custom controllers, services,
+      routes, policies, and middlewares. Developers can use this API to add
+      custom business logic, integrate with third-party services, modify
+      request and response handling, and build custom plugins that extend
+      Strapi's functionality beyond the default content management features.
+common:
+  - type: AsyncAPI
+    url: asyncapi/strapi-webhooks-asyncapi.yml
+  - type: JSONSchema
+    url: json-schema/strapi-content-entry-schema.json
+  - type: JSON-LD
+    url: json-ld/strapi-context.jsonld
+modified: '2026-03-20'

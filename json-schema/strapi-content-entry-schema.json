@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://strapi.io/schemas/strapi/content-entry.json",
+  "title": "Strapi Content Entry",
+  "description": "Represents a content entry in the Strapi headless CMS. Content entries are instances of content-types and contain the field values defined by the content-type schema. In Strapi 5, entry attributes are directly accessible at the first level of the data object (flattened response format).",
+  "type": "object",
+  "required": ["id", "documentId"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique integer identifier for the content entry"
+    },
+    "documentId": {
+      "type": "string",
+      "description": "The unique document identifier for the content entry, used as the primary key in REST API operations"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The ISO 8601 timestamp when the entry was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The ISO 8601 timestamp when the entry was last updated"
+    },
+    "publishedAt": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The ISO 8601 timestamp when the entry was published, or null if the entry is in draft status. Only present when Draft and Publish is enabled on the content-type."
+    },
+    "locale": {
+      "type": ["string", "null"],
+      "description": "The locale code of the entry (e.g., en, fr, de). Only present when internationalization (i18n) is enabled on the content-type.",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+    },
+    "localizations": {
+      "type": "array",
+      "description": "An array of localized versions of this entry. Only present when internationalization is enabled and the populate parameter includes localizations.",
+      "items": {
+        "$ref": "#"
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "ContentTypeSchema": {
+      "type": "object",
+      "title": "Content Type Schema",
+      "description": "Defines the structure of a content-type in Strapi, including its display name, kind, and attribute definitions.",
+      "required": ["displayName", "singularName", "pluralName", "kind"],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable display name of the content-type shown in the admin panel"
+        },
+        "singularName": {
+          "type": "string",
+          "description": "The singular name used internally and in the API identifier",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "pluralName": {
+          "type": "string",
+          "description": "The plural name used in REST API route paths",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Whether this content-type is a collection (multiple entries) or single (one entry)",
+          "enum": ["collectionType", "singleType"]
+        },
+        "draftAndPublish": {
+          "type": "boolean",
+          "description": "Whether Draft and Publish is enabled for this content-type",
+          "default": true
+        },
+        "attributes": {
+          "type": "object",
+          "description": "The field definitions for the content-type, keyed by attribute name",
+          "additionalProperties": {
+            "$ref": "#/$defs/Attribute"
+          }
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "title": "Content Type Attribute",
+      "description": "Defines a single field attribute within a content-type schema.",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The data type of the attribute",
+          "enum": [
+            "string",
+            "text",
+            "richtext",
+            "blocks",
+            "email",
+            "password",
+            "uid",
+            "integer",
+            "biginteger",
+            "float",
+            "decimal",
+            "boolean",
+            "date",
+            "time",
+            "datetime",
+            "timestamp",
+            "json",
+            "enumeration",
+            "media",
+            "relation",
+            "component",
+            "dynamiczone"
+          ]
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether this field is required",
+          "default": false
+        },
+        "unique": {
+          "type": "boolean",
+          "description": "Whether this field must have unique values",
+          "default": false
+        },
+        "private": {
+          "type": "boolean",
+          "description": "Whether this field is hidden from API responses",
+          "default": false
+        },
+        "default": {
+          "description": "The default value for this field"
+        },
+        "minLength": {
+          "type": "integer",
+          "description": "Minimum character length for string-type fields",
+          "minimum": 0
+        },
+        "maxLength": {
+          "type": "integer",
+          "description": "Maximum character length for string-type fields",
+          "minimum": 1
+        },
+        "min": {
+          "type": "number",
+          "description": "Minimum value for numeric fields"
+        },
+        "max": {
+          "type": "number",
+          "description": "Maximum value for numeric fields"
+        },
+        "enum": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed values for enumeration-type fields"
+        },
+        "multiple": {
+          "type": "boolean",
+          "description": "Whether multiple files are allowed for media-type fields"
+        },
+        "allowedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["images", "files", "videos", "audios"]
+          },
+          "description": "Allowed file types for media-type fields"
+        },
+        "relation": {
+          "type": "string",
+          "description": "The relation type for relation-type fields",
+          "enum": [
+            "oneToOne",
+            "oneToMany",
+            "manyToOne",
+            "manyToMany"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "description": "The target content-type UID for relation-type fields"
+        },
+        "component": {
+          "type": "string",
+          "description": "The component UID for component-type fields"
+        },
+        "repeatable": {
+          "type": "boolean",
+          "description": "Whether the component is repeatable (array of components)"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed component UIDs for dynamic zone fields"
+        }
+      }
+    },
+    "PaginationMeta": {
+      "type": "object",
+      "title": "Pagination Metadata",
+      "description": "Pagination information returned with list responses from the Strapi REST API.",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "description": "The current page number",
+          "minimum": 1
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "The number of entries per page",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "pageCount": {
+          "type": "integer",
+          "description": "The total number of pages",
+          "minimum": 0
+        },
+        "total": {
+          "type": "integer",
+          "description": "The total number of entries matching the query",
+          "minimum": 0
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "title": "Error Response",
+      "description": "The standard error response format returned by Strapi APIs when a request fails.",
+      "properties": {
+        "data": {
+          "description": "Always null in error responses"
+        },
+        "error": {
+          "type": "object",
+          "required": ["status", "name", "message"],
+          "properties": {
+            "status": {
+              "type": "integer",
+              "description": "The HTTP status code of the error"
+            },
+            "name": {
+              "type": "string",
+              "description": "The error type name (e.g., ValidationError, NotFoundError, ForbiddenError)"
+            },
+            "message": {
+              "type": "string",
+              "description": "A human-readable description of the error"
+            },
+            "details": {
+              "type": "object",
+              "description": "Additional error details, such as validation errors per field"
+            }
+          }
+        }
+      }
+    }
+  }
+}
