@@ -30,15 +30,15 @@ tags:
     description: >-
       Endpoints for user authentication including login, registration,
       and password management using JWT tokens.
-  - name: Users
-    description: >-
-      Endpoints for managing end-user accounts and profiles.
-  - name: Roles
-    description: >-
-      Endpoints for managing user roles and their associated permissions.
   - name: Permissions
     description: >-
       Endpoints for viewing and configuring permissions assigned to roles.
+  - name: Roles
+    description: >-
+      Endpoints for managing user roles and their associated permissions.
+  - name: Users
+    description: >-
+      Endpoints for managing end-user accounts and profiles.
 security:
   - bearerAuth: []
 paths:

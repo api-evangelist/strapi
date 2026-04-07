@@ -29,33 +29,33 @@ tags:
     description: >-
       Authentication endpoints for administrator accounts used to access
       the Strapi admin panel.
-  - name: Admin Users
-    description: >-
-      Endpoints for managing administrator user accounts that have access
-      to the Strapi admin panel.
   - name: Admin Roles
     description: >-
       Endpoints for managing administrator roles (Super Admin, Editor,
       Author) and their associated permissions.
-  - name: Content Types
+  - name: Admin Users
     description: >-
-      Endpoints for managing content-type definitions through the
-      Content-Type Builder.
-  - name: Content Manager
-    description: >-
-      Endpoints for managing content entries through the admin panel
-      Content Manager interface.
-  - name: Webhooks
-    description: >-
-      Endpoints for managing webhook configurations from the admin panel.
+      Endpoints for managing administrator user accounts that have access
+      to the Strapi admin panel.
   - name: API Tokens
     description: >-
       Endpoints for managing API tokens used to authenticate REST and
       GraphQL API requests.
+  - name: Content Manager
+    description: >-
+      Endpoints for managing content entries through the admin panel
+      Content Manager interface.
+  - name: Content Types
+    description: >-
+      Endpoints for managing content-type definitions through the
+      Content-Type Builder.
   - name: Transfer Tokens
     description: >-
       Endpoints for managing transfer tokens used for data transfer
       operations between Strapi instances.
+  - name: Webhooks
+    description: >-
+      Endpoints for managing webhook configurations from the admin panel.
 security:
   - adminBearerAuth: []
 paths:
@@ -1301,7 +1301,7 @@ components:
             - 7
             - 30
             - 90
-            - null
+            - 
           description: >-
             The lifespan of the token in days, or null for unlimited
         permissions:
