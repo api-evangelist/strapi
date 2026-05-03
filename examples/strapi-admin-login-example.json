@@ -1,0 +1,41 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://localhost:1337/admin/login",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "email": "admin@example.com",
+      "password": "SecurePassword123!"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        "user": {
+          "id": 1,
+          "firstname": "Jane",
+          "lastname": "Admin",
+          "email": "admin@example.com",
+          "isActive": true,
+          "blocked": false,
+          "preferedLanguage": "en",
+          "roles": [
+            {
+              "id": 1,
+              "name": "Super Admin",
+              "code": "strapi-super-admin",
+              "description": "Super Admins can access and manage all features and settings.",
+              "usersCount": 1
+            }
+          ],
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "updatedAt": "2026-05-02T08:00:00.000Z"
+        }
+      }
+    }
+  }
+}

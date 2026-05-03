@@ -1,0 +1,168 @@
+vocabulary:
+  name: Strapi Vocabulary
+  description: >-
+    Domain vocabulary for Strapi headless CMS, covering content management
+    concepts, API conventions, authentication models, and plugin architecture.
+  version: '5.0.0'
+  created: '2026-05-02'
+  modified: '2026-05-02'
+
+terms:
+  - term: Content Type
+    definition: >-
+      A schema definition in Strapi that specifies the data structure and
+      fields for a class of content. Content types can be Collection Types
+      (multiple entries) or Single Types (one entry). Each content type
+      automatically generates REST and GraphQL API endpoints.
+    synonyms:
+      - Content Model
+      - Schema
+
+  - term: Collection Type
+    definition: >-
+      A content type that supports multiple entries (e.g., Articles, Products,
+      Users). Generates CRUD endpoints at /api/{pluralApiId}.
+    synonyms:
+      - Collection
+
+  - term: Single Type
+    definition: >-
+      A content type limited to a single entry (e.g., Homepage, Global Settings).
+      Generates simplified endpoints without document IDs.
+
+  - term: Document ID
+    definition: >-
+      A unique string identifier assigned to each content entry in Strapi v5,
+      used as the primary key in REST API operations. Replaced the numeric ID
+      as the primary lookup key in Strapi 5.
+    synonyms:
+      - documentId
+
+  - term: Entry
+    definition: >-
+      An instance of a content type containing field values. In Strapi v5,
+      entry attributes are returned at the top level of the data object
+      (flattened response format).
+    synonyms:
+      - Document
+      - Content Entry
+
+  - term: Draft and Publish
+    definition: >-
+      A Strapi feature that enables a two-stage content workflow where entries
+      exist in either draft or published state. Published entries are visible
+      through the Content API while drafts are only accessible via the admin API
+      or with the ?status=draft query parameter.
+
+  - term: Populate
+    definition: >-
+      The process of including related content (relations, media, components,
+      dynamic zones) in an API response. Controlled by the ?populate query
+      parameter. Use populate=* to populate all first-level relations.
+
+  - term: API Token
+    definition: >-
+      A credential generated in the Strapi admin panel used to authenticate
+      REST and GraphQL API requests. Tokens can be read-only, full-access,
+      or custom with granular permission settings.
+    synonyms:
+      - API Key
+
+  - term: Transfer Token
+    definition: >-
+      A credential used for data transfer operations between Strapi instances.
+      Enables controlled migration of content and schema between environments.
+
+  - term: Plugin
+    definition: >-
+      A self-contained package that extends Strapi's functionality. Core plugins
+      include Users and Permissions, Upload, i18n, and Draft and Publish. Custom
+      plugins can be developed and distributed via npm.
+
+  - term: Upload Plugin
+    definition: >-
+      The built-in Strapi plugin that manages the media library, providing file
+      upload, storage, and retrieval capabilities. Supports local storage and
+      various cloud providers (AWS S3, Cloudinary, etc.).
+
+  - term: Document Service API
+    definition: >-
+      The Strapi v5 internal API layer replacing the Entity Service API.
+      Provides a TypeScript-friendly interface for CRUD operations on content
+      entries, used when building custom business logic.
+
+  - term: Relation
+    definition: >-
+      A field type linking one content type to another. Strapi supports
+      one-to-one, one-to-many, many-to-one, and many-to-many relations that
+      can be populated in API responses.
+
+  - term: Component
+    definition: >-
+      A reusable group of fields that can be embedded in content types.
+      Components can be single-use or repeatable and are stored in the
+      components directory of a Strapi project.
+
+  - term: Dynamic Zone
+    definition: >-
+      A field type that allows content authors to choose from multiple
+      component types when building content, enabling flexible page builder
+      layouts.
+
+  - term: Locale
+    definition: >-
+      A language/region code (e.g., en, fr, de) used with Strapi's i18n
+      internationalization plugin. Content types with i18n enabled store
+      separate versions for each configured locale.
+
+  - term: Super Admin
+    definition: >-
+      The highest-privilege administrator role in Strapi with access to all
+      features and settings. Created during initial setup.
+
+  - term: Strapi Cloud
+    definition: >-
+      The managed hosting platform for Strapi applications provided by
+      Strapi SAS, offering automated deployments, database hosting, and
+      media storage.
+
+  - term: Headless CMS
+    definition: >-
+      A content management system that provides content through APIs without
+      a front-end rendering layer. Strapi is headless-first, allowing any
+      frontend framework to consume its content APIs.
+
+  - term: Content Manager
+    definition: >-
+      The back-office interface in the Strapi admin panel where content
+      editors create, edit, and manage content entries for all content types.
+
+  - term: Content Type Builder
+    definition: >-
+      The admin panel tool for designing and modifying content type schemas,
+      including adding fields, relations, and components without writing code.
+
+  - term: Pluralize
+    definition: >-
+      Strapi automatically generates the plural form of a content type name
+      for use in REST API routes (e.g., article → articles, category → categories).
+
+  - term: Webhook
+    definition: >-
+      An HTTP callback triggered by Strapi events (entry.create, entry.update,
+      entry.delete, entry.publish, entry.unpublish, media.create, media.update,
+      media.delete) that sends a POST request to a configured external URL.
+
+  - term: Strapi v5
+    definition: >-
+      The latest major version of Strapi featuring a flattened response format,
+      the Document Service API replacing Entity Service API, improved TypeScript
+      support, and Strapi Cloud integration.
+    synonyms:
+      - v5
+
+  - term: Filter
+    definition: >-
+      Query parameter syntax for narrowing REST API results using operators
+      such as $eq, $ne, $lt, $gt, $contains, $in, $null, $and, $or, $not.
+      Applied using bracket notation (e.g., filters[title][$eq]=Hello).

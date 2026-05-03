@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://localhost:1337/api/articles",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": {
+        "title": "Introduction to Strapi Content API",
+        "slug": "introduction-strapi-content-api",
+        "content": "This article covers the basics of the Strapi REST API...",
+        "publishedAt": null
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "data": {
+        "id": 3,
+        "documentId": "clxyz789ghi012jkl",
+        "title": "Introduction to Strapi Content API",
+        "slug": "introduction-strapi-content-api",
+        "content": "This article covers the basics of the Strapi REST API...",
+        "publishedAt": null,
+        "createdAt": "2026-05-02T08:00:00.000Z",
+        "updatedAt": "2026-05-02T08:00:00.000Z",
+        "locale": "en"
+      },
+      "meta": {}
+    }
+  }
+}

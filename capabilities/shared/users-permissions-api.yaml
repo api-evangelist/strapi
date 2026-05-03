@@ -1,0 +1,181 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Strapi Users and Permissions API"
+  description: >-
+    Strapi Users and Permissions API providing JWT-based authentication,
+    user registration, password management, social provider auth callbacks,
+    and role/permission configuration for end-user access control.
+  tags:
+    - Authentication
+    - CMS
+    - Permissions
+    - User Management
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STRAPI_JWT_TOKEN: STRAPI_JWT_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: strapi-users
+      baseUri: https://{host}
+      description: "Strapi Users and Permissions API"
+      authentication:
+        type: bearer
+        token: "{{STRAPI_JWT_TOKEN}}"
+      resources:
+        - name: user-auth
+          path: /api/auth/local
+          description: "User authentication endpoints"
+          operations:
+            - name: login-user
+              method: POST
+              description: "Authenticate with email/username and password"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  identifier: "{{tools.identifier}}"
+                  password: "{{tools.password}}"
+        - name: user-registration
+          path: /api/auth/local/register
+          description: "User registration"
+          operations:
+            - name: register-user
+              method: POST
+              description: "Register a new user account"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  username: "{{tools.username}}"
+                  email: "{{tools.email}}"
+                  password: "{{tools.password}}"
+        - name: users-list
+          path: /api/users
+          description: "User account management"
+          operations:
+            - name: list-users
+              method: GET
+              description: "List all registered user accounts"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: current-user
+          path: /api/users/me
+          description: "Current authenticated user profile"
+          operations:
+            - name: get-authenticated-user
+              method: GET
+              description: "Get the profile of the currently authenticated user"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: roles-list
+          path: /api/users-permissions/roles
+          description: "User roles management"
+          operations:
+            - name: list-roles
+              method: GET
+              description: "List all user roles"
+              inputParameters: []
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: strapi-users-api
+      resources:
+        - path: /v1/users
+          name: users
+          description: "User account endpoints"
+          operations:
+            - method: GET
+              name: list-users
+              description: "List registered users"
+              call: "strapi-users.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/auth/login
+          name: auth-login
+          description: "User authentication"
+          operations:
+            - method: POST
+              name: login-user
+              description: "Authenticate a user"
+              call: "strapi-users.login-user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: strapi-users-mcp
+      transport: http
+      tools:
+        - name: login-user
+          description: "Authenticate a user with identifier and password"
+          hints:
+            readOnly: false
+          call: "strapi-users.login-user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: register-user
+          description: "Register a new user account"
+          hints:
+            readOnly: false
+          call: "strapi-users.register-user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-authenticated-user
+          description: "Get the currently authenticated user's profile"
+          hints:
+            readOnly: true
+          call: "strapi-users.get-authenticated-user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-users
+          description: "List all registered user accounts"
+          hints:
+            readOnly: true
+          call: "strapi-users.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-roles
+          description: "List all user roles and permissions"
+          hints:
+            readOnly: true
+          call: "strapi-users.list-roles"
+          outputParameters:
+            - type: object
+              mapping: "$."

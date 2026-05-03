@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://localhost:1337/api/articles?pagination[page]=1&pagination[pageSize]=10&sort=createdAt:desc&populate=*",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": 1,
+          "documentId": "clxyz123abc456def",
+          "title": "Getting Started with Strapi",
+          "slug": "getting-started-with-strapi",
+          "content": "Strapi is an open-source headless CMS...",
+          "publishedAt": "2026-05-01T10:00:00.000Z",
+          "createdAt": "2026-04-30T09:00:00.000Z",
+          "updatedAt": "2026-05-01T10:00:00.000Z",
+          "locale": "en"
+        },
+        {
+          "id": 2,
+          "documentId": "clxyz456def789ghi",
+          "title": "Building APIs with Strapi v5",
+          "slug": "building-apis-strapi-v5",
+          "content": "Strapi v5 introduces a new Document Service API...",
+          "publishedAt": "2026-04-28T12:00:00.000Z",
+          "createdAt": "2026-04-27T11:00:00.000Z",
+          "updatedAt": "2026-04-28T12:00:00.000Z",
+          "locale": "en"
+        }
+      ],
+      "meta": {
+        "pagination": {
+          "page": 1,
+          "pageSize": 10,
+          "pageCount": 1,
+          "total": 2
+        }
+      }
+    }
+  }
+}

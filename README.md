@@ -1,110 +1,131 @@
-# Strapi (strapi)
-Strapi is an open-source headless CMS that provides developers with a flexible content management framework and a powerful developer platform. It offers both REST and GraphQL APIs for delivering content to any frontend, along with an extensible admin panel, user authentication, and backend customization capabilities for building tailored content workflows.
+# Strapi
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/apis.yml)
+Strapi is an open-source, headless CMS built with Node.js that gives developers full control over their content API. It provides a customizable admin panel for content management, automatically generates REST and GraphQL APIs for every content-type, and supports flexible database options including SQLite, PostgreSQL, MySQL, and MongoDB. Strapi v5 introduces a Document Service API with flattened response format, improved TypeScript support, and an enhanced content delivery API for building fast, decoupled frontends.
 
-## Scope
+**Human URL:** [https://strapi.io](https://strapi.io)  
+**Base URL:** `https://{host}`
 
-- **Type:** Contract
-- **Position:** Consuming
-- **Access:** 3rd-Party
+## Links
 
-## Tags:
-
- - Headless CMS, Content Management, REST, GraphQL, Open Source, API
-
-## Timestamps
-
-- **Created:** 2026-03-20
-- **Modified:** 2026-03-20
+- [Documentation](https://docs.strapi.io)
+- [GitHub](https://github.com/strapi/strapi)
+- [Blog](https://strapi.io/blog)
+- [Forum](https://forum.strapi.io)
+- [Discord](https://discord.strapi.io)
+- [Roadmap](https://feedback.strapi.io)
+- [Changelog](https://github.com/strapi/strapi/releases)
+- [Pricing](https://strapi.io/pricing-cloud)
 
 ## APIs
 
 ### Strapi REST API
-The Strapi REST API provides endpoints for accessing and managing content-types created within the Strapi headless CMS. When a new content-type is created in Strapi, REST API endpoints are automatically generated, supporting full CRUD operations including filtering, sorting, pagination, and population of relational fields. Developers can use these endpoints to deliver content to any frontend application, mobile app, or third-party service.
 
-**Human URL:** [https://docs.strapi.io/cms/api/rest](https://docs.strapi.io/cms/api/rest)
+The Strapi REST API provides automatically generated endpoints for accessing and managing content-types. Supports full CRUD operations with filtering, sorting, pagination, and population of relational fields. Also includes the Upload plugin for media library management.
 
-
-#### Tags:
-
- - Content Management, Headless CMS, REST, CRUD, Content Delivery
-
-#### Properties
-
+- [OpenAPI Spec](openapi/strapi-rest-api-openapi.yml)
 - [Documentation](https://docs.strapi.io/cms/api/rest)
-- [OpenAPI](openapi/strapi-rest-api-openapi.yml)
-
-### Strapi GraphQL API
-The Strapi GraphQL API enables developers to query and mutate content using GraphQL instead of REST. Powered by the GraphQL plugin, it automatically generates type definitions, queries, mutations, and resolvers based on the content-types defined in Strapi through a Shadow CRUD feature. The API includes an interactive GraphQL playground for building and testing queries, and supports custom resolvers, policies, and middlewares for extending the generated schema.
-
-**Human URL:** [https://docs.strapi.io/cms/api/graphql](https://docs.strapi.io/cms/api/graphql)
-
-
-#### Tags:
-
- - Content Management, Headless CMS, GraphQL, Content Delivery, Query Language
-
-#### Properties
-
-- [Documentation](https://docs.strapi.io/cms/api/graphql)
-
-### Strapi Users and Permissions API
-The Strapi Users and Permissions API provides a full authentication process based on JSON Web Tokens (JWT) to protect API endpoints, along with an access-control list (ACL) strategy for managing permissions between groups of users. It supports user registration, login, password reset, and email confirmation workflows. End users and their account information are managed as a content-type, and the API enables configuration of roles and permissions to control which API endpoints are accessible to authenticated and public users.
-
-**Human URL:** [https://docs.strapi.io/cms/features/users-permissions](https://docs.strapi.io/cms/features/users-permissions)
-
-
-#### Tags:
-
- - Authentication, Authorization, Users, JWT, Access Control
-
-#### Properties
-
-- [Documentation](https://docs.strapi.io/cms/features/users-permissions)
-- [OpenAPI](openapi/strapi-users-and-permissions-api-openapi.yml)
 
 ### Strapi Admin Panel API
-The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
 
-**Human URL:** [https://docs.strapi.io/cms/features/admin-panel](https://docs.strapi.io/cms/features/admin-panel)
+Powers the back-office interface for managing content-types, admin accounts, roles, webhooks, and API tokens. Supports three default roles (Super Admin, Editor, Author) with granular permissions.
 
-
-#### Tags:
-
- - Administration, Content Management, Role-Based Access Control, Headless CMS
-
-#### Properties
-
+- [OpenAPI Spec](openapi/strapi-admin-panel-api-openapi.yml)
 - [Documentation](https://docs.strapi.io/cms/features/admin-panel)
-- [OpenAPI](openapi/strapi-admin-panel-api-openapi.yml)
 
-### Strapi Backend Customization API
-The Strapi Backend Customization API allows developers to extend and customize the default behavior of Strapi's core backend. It provides programmatic interfaces for creating custom controllers, services, routes, policies, and middlewares. Developers can use this API to add custom business logic, integrate with third-party services, modify request and response handling, and build custom plugins that extend Strapi's functionality beyond the default content management features.
+### Strapi Users and Permissions API
 
-**Human URL:** [https://docs.strapi.io/cms/backend-customization](https://docs.strapi.io/cms/backend-customization)
+Full JWT-based authentication system with user registration, login, password management, social provider OAuth callbacks, and role/permission configuration for end-user access control.
 
+- [OpenAPI Spec](openapi/strapi-users-and-permissions-api-openapi.yml)
+- [Documentation](https://docs.strapi.io/cms/features/users-permissions)
 
-#### Tags:
+### Strapi Webhooks
 
- - Customization, Middleware, Plugins, Controllers, Services
+Event-driven webhook system notifying external services when content entries or media assets are created, updated, deleted, published, or unpublished.
 
-#### Properties
+- [AsyncAPI Spec](asyncapi/strapi-webhooks-asyncapi.yml)
+- [Documentation](https://docs.strapi.io/cms/backend-customization/webhooks)
 
-- [Documentation](https://docs.strapi.io/cms/backend-customization)
+## Artifacts
 
-## Common Properties
+### OpenAPI Specifications
 
-- [Portal](https://docs.strapi.io/dev-docs/intro)
-- [Documentation](https://docs.strapi.io/)
-- [Website](https://strapi.io/)
-- [PrivacyPolicy](https://strapi.io/privacy)
-- [TermsOfService](https://strapi.io/terms)
-- [Blog](https://strapi.io/blog)
-- [Login](https://cloud.strapi.io/login)
+| File | Description |
+|---|---|
+| [strapi-rest-api-openapi.yml](openapi/strapi-rest-api-openapi.yml) | REST API for content entry CRUD and media management |
+| [strapi-admin-panel-api-openapi.yml](openapi/strapi-admin-panel-api-openapi.yml) | Admin panel API for platform administration |
+| [strapi-users-and-permissions-api-openapi.yml](openapi/strapi-users-and-permissions-api-openapi.yml) | Users, authentication, and permissions API |
+
+### AsyncAPI Specifications
+
+| File | Description |
+|---|---|
+| [strapi-webhooks-asyncapi.yml](asyncapi/strapi-webhooks-asyncapi.yml) | Webhook event definitions for content and media lifecycle events |
+
+### JSON Schema
+
+| File | Description |
+|---|---|
+| [strapi-content-entry-schema.json](json-schema/strapi-content-entry-schema.json) | JSON Schema for Strapi v5 content entries |
+
+### JSON Structure
+
+| File | Description |
+|---|---|
+| [strapi-content-entry-structure.json](json-structure/strapi-content-entry-structure.json) | Field structure documentation for content entries |
+
+### JSON-LD Context
+
+| File | Description |
+|---|---|
+| [strapi-context.jsonld](json-ld/strapi-context.jsonld) | JSON-LD context mapping Strapi vocabulary to linked data ontologies |
+
+### Examples
+
+| File | Description |
+|---|---|
+| [strapi-find-entries-example.json](examples/strapi-find-entries-example.json) | List content entries with pagination |
+| [strapi-create-entry-example.json](examples/strapi-create-entry-example.json) | Create a new content entry |
+| [strapi-admin-login-example.json](examples/strapi-admin-login-example.json) | Admin panel login and JWT token retrieval |
+| [strapi-register-user-example.json](examples/strapi-register-user-example.json) | Register a new end-user account |
+
+### Spectral Rules
+
+| File | Description |
+|---|---|
+| [strapi-rules.yml](rules/strapi-rules.yml) | Spectral ruleset enforcing Strapi API conventions |
+
+### Naftiko Capabilities
+
+#### Shared Definitions
+
+| File | Description |
+|---|---|
+| [capabilities/shared/rest-api.yaml](capabilities/shared/rest-api.yaml) | Strapi REST API — content entry and media operations |
+| [capabilities/shared/admin-panel-api.yaml](capabilities/shared/admin-panel-api.yaml) | Admin Panel API — users, roles, tokens, webhooks |
+| [capabilities/shared/users-permissions-api.yaml](capabilities/shared/users-permissions-api.yaml) | Users and Permissions API — auth and role management |
+
+#### Workflow Capabilities
+
+| File | Description |
+|---|---|
+| [capabilities/content-management.yaml](capabilities/content-management.yaml) | Unified content management (REST + Admin + Users, 17 tools) |
+
+### Vocabulary
+
+| File | Description |
+|---|---|
+| [vocabulary/strapi-vocabulary.yml](vocabulary/strapi-vocabulary.yml) | Strapi domain vocabulary and terminology definitions |
+
+## Tags
+
+- CMS
+- Content Management
+- Headless CMS
+- Node.js
+- Open Source
 
 ## Maintainers
 
-**FN:** API Evangelist
-
-**Email:** info@apievangelist.com
+**FN:** Kin Lane  
+**Email:** kin@apievangelist.com

@@ -1,0 +1,36 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://localhost:1337/api/auth/local/register",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "username": "johndoe",
+      "email": "john@example.com",
+      "password": "StrongPassword123!"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "user": {
+        "id": 5,
+        "username": "johndoe",
+        "email": "john@example.com",
+        "provider": "local",
+        "confirmed": false,
+        "blocked": false,
+        "createdAt": "2026-05-02T08:30:00.000Z",
+        "updatedAt": "2026-05-02T08:30:00.000Z",
+        "role": {
+          "id": 1,
+          "name": "Authenticated",
+          "description": "Default role given to authenticated user.",
+          "type": "authenticated"
+        }
+      }
+    }
+  }
+}

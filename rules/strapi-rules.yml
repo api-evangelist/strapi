@@ -1,0 +1,127 @@
+extends:
+  - spectral:oas
+
+rules:
+  strapi-operation-ids-camel-case:
+    description: >-
+      Strapi operationIds use camelCase (e.g., findEntries, createEntry,
+      listAdminUsers). All operation IDs must follow camelCase convention.
+    message: "OperationId '{{value}}' must use camelCase format"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  strapi-tags-title-case:
+    description: >-
+      All OpenAPI tags must use Title Case (e.g., 'Content Entries',
+      'Admin Users', 'API Tokens').
+    message: "Tag '{{value}}' must use Title Case"
+    severity: warn
+    given: "$.tags[*].name"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z]*(\\s[A-Z][a-zA-Z]*)*$"
+
+  strapi-api-paths-prefix:
+    description: >-
+      All content API paths must begin with /api/. Admin API paths must
+      begin with /admin/. Strapi enforces this routing convention.
+    message: "Path '{{property}}' must start with /api/ or /admin/"
+    severity: warn
+    given: "$.paths"
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^/(api|admin)/"
+
+  strapi-bearer-auth-on-protected-endpoints:
+    description: >-
+      Protected Strapi endpoints must declare security using bearerAuth or
+      adminBearerAuth schemes. Public endpoints explicitly set security to [].
+    message: "Protected operation must declare bearerAuth or adminBearerAuth security"
+    severity: info
+    given: "$.paths[*][get,put,delete,patch]"
+    then:
+      function: truthy
+      field: "security"
+
+  strapi-response-data-wrapper:
+    description: >-
+      Strapi REST API list responses wrap results in a 'data' array with a
+      'meta' object containing pagination. Single-entry responses wrap the
+      entry in a 'data' object.
+    message: "200 response should include a 'data' property at the top level"
+    severity: info
+    given: "$.paths[*][get].responses['200'].content['application/json'].schema.properties"
+    then:
+      function: truthy
+      field: "data"
+
+  strapi-document-id-param-name:
+    description: >-
+      Strapi v5 uses 'documentId' as the path parameter for content entry
+      identifiers. Path parameters for individual entries must be named
+      'documentId' (not 'id') in REST API paths.
+    message: "Content entry path parameter should be named 'documentId'"
+    severity: info
+    given: "$.paths['/api/{pluralApiId}/{documentId}'][*].parameters[*]"
+    then:
+      field: "name"
+      function: enumeration
+      functionOptions:
+        values:
+          - documentId
+          - pluralApiId
+
+  strapi-pagination-parameters:
+    description: >-
+      Strapi list endpoints support both page-based (pagination[page] /
+      pagination[pageSize]) and offset-based (pagination[start] /
+      pagination[limit]) pagination. Both styles use bracket notation.
+    message: "List endpoints should document pagination parameters using bracket notation"
+    severity: info
+    given: "$.paths[*][get].parameters[*].name"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^page$|^pageSize$|^limit$|^offset$"
+
+  strapi-error-schema-shape:
+    description: >-
+      Strapi error responses follow a consistent shape with a top-level
+      'data' (null) property and an 'error' object containing 'status',
+      'name', 'message', and 'details'.
+    message: "Error schema must include 'data' and 'error' properties"
+    severity: warn
+    given: "$.components.schemas.Error.properties"
+    then:
+      - function: truthy
+        field: "data"
+      - function: truthy
+        field: "error"
+
+  strapi-operation-summaries-present:
+    description: >-
+      All operations must have a summary. Strapi docs use action-noun
+      format (e.g., 'List content entries', 'Create a content entry').
+    message: "Operation must have a summary"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      function: truthy
+      field: "summary"
+
+  strapi-upload-multipart:
+    description: >-
+      Strapi file upload endpoints must use multipart/form-data content type.
+    message: "Upload endpoint must use multipart/form-data"
+    severity: warn
+    given: "$.paths['/api/upload'][post].requestBody.content"
+    then:
+      function: truthy
+      field: "multipart/form-data"

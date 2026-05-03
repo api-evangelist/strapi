@@ -1,0 +1,61 @@
+{
+  "name": "ContentEntry",
+  "description": "A content entry in Strapi v5. Content entries are instances of content-types with attributes directly accessible at the top level (flattened format).",
+  "fields": [
+    {
+      "name": "id",
+      "type": "integer",
+      "required": true,
+      "description": "The unique integer identifier for the content entry"
+    },
+    {
+      "name": "documentId",
+      "type": "string",
+      "required": true,
+      "description": "The unique document identifier used as the primary key in REST API operations"
+    },
+    {
+      "name": "createdAt",
+      "type": "string",
+      "format": "date-time",
+      "required": false,
+      "description": "ISO 8601 timestamp when the entry was created"
+    },
+    {
+      "name": "updatedAt",
+      "type": "string",
+      "format": "date-time",
+      "required": false,
+      "description": "ISO 8601 timestamp when the entry was last updated"
+    },
+    {
+      "name": "publishedAt",
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "required": false,
+      "description": "ISO 8601 timestamp when the entry was published, null if draft. Only present when Draft and Publish is enabled."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "nullable": true,
+      "required": false,
+      "description": "Locale code (e.g., en, fr, de). Present when internationalization is enabled."
+    },
+    {
+      "name": "...",
+      "type": "any",
+      "required": false,
+      "description": "Additional fields defined by the content-type schema. In Strapi v5, all attributes are at the top level of the data object."
+    }
+  ],
+  "relationships": [
+    {
+      "name": "localizations",
+      "type": "array",
+      "target": "ContentEntry",
+      "description": "Localized versions of this entry (populated when using ?populate=localizations)"
+    }
+  ]
+}
