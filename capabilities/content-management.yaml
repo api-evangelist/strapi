@@ -1,365 +1,810 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Strapi Content Management"
-  description: >-
-    Unified capability for managing content in Strapi headless CMS. Combines
-    the REST content API, admin panel API, and users/permissions API into a
-    single workflow for content authors, developers, and platform admins.
-    Enables creating, reading, updating, publishing, and deleting content
-    entries; managing media uploads; configuring roles and permissions;
+  label: Strapi Content Management
+  description: Unified capability for managing content in Strapi headless CMS. Combines the REST content API, admin panel
+    API, and users/permissions API into a single workflow for content authors, developers, and platform admins. Enables creating,
+    reading, updating, publishing, and deleting content entries; managing media uploads; configuring roles and permissions;
     and administering API tokens and webhooks.
   tags:
-    - CMS
-    - Content Management
-    - Headless CMS
-    - Node.js
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - CMS
+  - Content Management
+  - Headless CMS
+  - Node.js
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      STRAPI_JWT_TOKEN: STRAPI_JWT_TOKEN
-      STRAPI_ADMIN_JWT_TOKEN: STRAPI_ADMIN_JWT_TOKEN
-
+- namespace: env
+  keys:
+    STRAPI_JWT_TOKEN: STRAPI_JWT_TOKEN
+    STRAPI_ADMIN_JWT_TOKEN: STRAPI_ADMIN_JWT_TOKEN
 capability:
   consumes:
-    - import: strapi-rest
-      location: ./shared/rest-api.yaml
-    - import: strapi-admin
-      location: ./shared/admin-panel-api.yaml
-    - import: strapi-users
-      location: ./shared/users-permissions-api.yaml
-
+  - type: http
+    namespace: strapi-rest
+    baseUri: https://{host}
+    description: Strapi REST API for content management
+    authentication:
+      type: bearer
+      token: '{{STRAPI_JWT_TOKEN}}'
+    resources:
+    - name: content-entries
+      path: /api/{pluralApiId}
+      description: CRUD operations on content-type entries
+      operations:
+      - name: find-entries
+        method: GET
+        description: List content entries with filtering, sorting, and pagination
+        inputParameters:
+        - name: pluralApiId
+          in: path
+          type: string
+          required: true
+          description: The plural API identifier of the content-type
+        - name: sort
+          in: query
+          type: string
+          required: false
+          description: Sort criteria (e.g., createdAt:desc)
+        - name: pagination[page]
+          in: query
+          type: integer
+          required: false
+          description: Page number for pagination
+        - name: pagination[pageSize]
+          in: query
+          type: integer
+          required: false
+          description: Number of results per page
+        - name: populate
+          in: query
+          type: string
+          required: false
+          description: Fields to populate (* for all)
+        - name: filters
+          in: query
+          type: object
+          required: false
+          description: Filter criteria using operator syntax
+        - name: locale
+          in: query
+          type: string
+          required: false
+          description: Locale code for internationalized content
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Publication status filter (draft or published)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-entry
+        method: POST
+        description: Create a new content entry
+        inputParameters:
+        - name: pluralApiId
+          in: path
+          type: string
+          required: true
+          description: The plural API identifier of the content-type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            data: '{{tools.data}}'
+    - name: content-entry
+      path: /api/{pluralApiId}/{documentId}
+      description: Single content entry operations
+      operations:
+      - name: find-one-entry
+        method: GET
+        description: Get a single content entry by document ID
+        inputParameters:
+        - name: pluralApiId
+          in: path
+          type: string
+          required: true
+          description: The plural API identifier of the content-type
+        - name: documentId
+          in: path
+          type: string
+          required: true
+          description: The unique document ID of the entry
+        - name: populate
+          in: query
+          type: string
+          required: false
+          description: Fields to populate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-entry
+        method: PUT
+        description: Update a content entry by document ID
+        inputParameters:
+        - name: pluralApiId
+          in: path
+          type: string
+          required: true
+          description: The plural API identifier of the content-type
+        - name: documentId
+          in: path
+          type: string
+          required: true
+          description: The unique document ID of the entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            data: '{{tools.data}}'
+      - name: delete-entry
+        method: DELETE
+        description: Delete a content entry by document ID
+        inputParameters:
+        - name: pluralApiId
+          in: path
+          type: string
+          required: true
+          description: The plural API identifier of the content-type
+        - name: documentId
+          in: path
+          type: string
+          required: true
+          description: The unique document ID of the entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: upload-files
+      path: /api/upload
+      description: File upload and media library management
+      operations:
+      - name: upload-files
+        method: POST
+        description: Upload files to the Strapi media library
+        inputParameters:
+        - name: ref
+          in: query
+          type: string
+          required: false
+          description: API identifier of the content-type to link the file to
+        - name: refId
+          in: query
+          type: string
+          required: false
+          description: Document ID of the entry to link the file to
+        - name: field
+          in: query
+          type: string
+          required: false
+          description: Field name on the entry where the file should be linked
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: upload-files-list
+      path: /api/upload/files
+      description: List files in the media library
+      operations:
+      - name: list-upload-files
+        method: GET
+        description: Returns a list of all files in the Strapi media library
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: strapi-admin
+    baseUri: https://{host}
+    description: Strapi Admin Panel API
+    authentication:
+      type: bearer
+      token: '{{STRAPI_ADMIN_JWT_TOKEN}}'
+    resources:
+    - name: admin-users
+      path: /admin/users
+      description: Administrator user account management
+      operations:
+      - name: list-admin-users
+        method: GET
+        description: List all administrator accounts
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number
+        - name: pageSize
+          in: query
+          type: integer
+          required: false
+          description: Results per page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-admin-user
+        method: POST
+        description: Create a new administrator account
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            firstname: '{{tools.firstname}}'
+            lastname: '{{tools.lastname}}'
+            email: '{{tools.email}}'
+            roles: '{{tools.roles}}'
+    - name: admin-user
+      path: /admin/users/{id}
+      description: Single administrator user operations
+      operations:
+      - name: get-admin-user
+        method: GET
+        description: Get an administrator user by ID
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: The administrator user ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-admin-user
+        method: PUT
+        description: Update an administrator user
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: The administrator user ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            firstname: '{{tools.firstname}}'
+            lastname: '{{tools.lastname}}'
+            isActive: '{{tools.isActive}}'
+            roles: '{{tools.roles}}'
+      - name: delete-admin-user
+        method: DELETE
+        description: Delete an administrator user
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: The administrator user ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: admin-roles
+      path: /admin/roles
+      description: Administrator role management
+      operations:
+      - name: list-admin-roles
+        method: GET
+        description: List all administrator roles
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-admin-role
+        method: POST
+        description: Create a custom administrator role
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+            permissions: '{{tools.permissions}}'
+    - name: api-tokens
+      path: /admin/api-tokens
+      description: API token management
+      operations:
+      - name: list-api-tokens
+        method: GET
+        description: List all API tokens
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-api-token
+        method: POST
+        description: Create a new API token
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            type: '{{tools.type}}'
+            lifespan: '{{tools.lifespan}}'
+    - name: webhooks
+      path: /admin/webhooks
+      description: Webhook configuration management
+      operations:
+      - name: list-webhooks
+        method: GET
+        description: List all webhook configurations
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-webhook
+        method: POST
+        description: Create a new webhook
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            url: '{{tools.url}}'
+            events: '{{tools.events}}'
+            isEnabled: '{{tools.isEnabled}}'
+  - type: http
+    namespace: strapi-users
+    baseUri: https://{host}
+    description: Strapi Users and Permissions API
+    authentication:
+      type: bearer
+      token: '{{STRAPI_JWT_TOKEN}}'
+    resources:
+    - name: user-auth
+      path: /api/auth/local
+      description: User authentication endpoints
+      operations:
+      - name: login-user
+        method: POST
+        description: Authenticate with email/username and password
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            identifier: '{{tools.identifier}}'
+            password: '{{tools.password}}'
+    - name: user-registration
+      path: /api/auth/local/register
+      description: User registration
+      operations:
+      - name: register-user
+        method: POST
+        description: Register a new user account
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            username: '{{tools.username}}'
+            email: '{{tools.email}}'
+            password: '{{tools.password}}'
+    - name: users-list
+      path: /api/users
+      description: User account management
+      operations:
+      - name: list-users
+        method: GET
+        description: List all registered user accounts
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: current-user
+      path: /api/users/me
+      description: Current authenticated user profile
+      operations:
+      - name: get-authenticated-user
+        method: GET
+        description: Get the profile of the currently authenticated user
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: roles-list
+      path: /api/users-permissions/roles
+      description: User roles management
+      operations:
+      - name: list-roles
+        method: GET
+        description: List all user roles
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: strapi-content-management-api
-      description: "Unified REST API for Strapi content management workflows."
-      resources:
-        - path: /v1/content/{pluralApiId}
-          name: content-entries
-          description: "Content entry collection management"
-          operations:
-            - method: GET
-              name: find-entries
-              description: "List content entries with filtering and pagination"
-              call: "strapi-rest.find-entries"
-              with:
-                pluralApiId: "rest.pluralApiId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-entry
-              description: "Create a new content entry"
-              call: "strapi-rest.create-entry"
-              with:
-                pluralApiId: "rest.pluralApiId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/content/{pluralApiId}/{documentId}
-          name: content-entry
-          description: "Single content entry management"
-          operations:
-            - method: GET
-              name: find-one-entry
-              description: "Get a single content entry"
-              call: "strapi-rest.find-one-entry"
-              with:
-                pluralApiId: "rest.pluralApiId"
-                documentId: "rest.documentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: PUT
-              name: update-entry
-              description: "Update a content entry"
-              call: "strapi-rest.update-entry"
-              with:
-                pluralApiId: "rest.pluralApiId"
-                documentId: "rest.documentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: delete-entry
-              description: "Delete a content entry"
-              call: "strapi-rest.delete-entry"
-              with:
-                pluralApiId: "rest.pluralApiId"
-                documentId: "rest.documentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/media
-          name: media
-          description: "Media library management"
-          operations:
-            - method: GET
-              name: list-media-files
-              description: "List all files in the media library"
-              call: "strapi-rest.list-upload-files"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/admin/users
-          name: admin-users
-          description: "Administrator user management"
-          operations:
-            - method: GET
-              name: list-admin-users
-              description: "List administrator accounts"
-              call: "strapi-admin.list-admin-users"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-admin-user
-              description: "Create a new administrator"
-              call: "strapi-admin.create-admin-user"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/admin/roles
-          name: admin-roles
-          description: "Administrator role management"
-          operations:
-            - method: GET
-              name: list-admin-roles
-              description: "List administrator roles"
-              call: "strapi-admin.list-admin-roles"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/admin/api-tokens
-          name: api-tokens
-          description: "API token management"
-          operations:
-            - method: GET
-              name: list-api-tokens
-              description: "List all API tokens"
-              call: "strapi-admin.list-api-tokens"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-api-token
-              description: "Create a new API token"
-              call: "strapi-admin.create-api-token"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/admin/webhooks
-          name: webhooks
-          description: "Webhook configuration management"
-          operations:
-            - method: GET
-              name: list-webhooks
-              description: "List webhook configurations"
-              call: "strapi-admin.list-webhooks"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-webhook
-              description: "Create a new webhook"
-              call: "strapi-admin.create-webhook"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/users
-          name: end-users
-          description: "End-user account management"
-          operations:
-            - method: GET
-              name: list-users
-              description: "List registered end-users"
-              call: "strapi-users.list-users"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/auth/login
-          name: auth
-          description: "User authentication"
-          operations:
-            - method: POST
-              name: login-user
-              description: "Authenticate a user"
-              call: "strapi-users.login-user"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: strapi-content-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted Strapi content management."
-      tools:
-        - name: find-entries
-          description: "List content entries for a content-type with filtering and pagination"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "strapi-rest.find-entries"
-          with:
-            pluralApiId: "tools.pluralApiId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-entry
-          description: "Create a new content entry"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "strapi-rest.create-entry"
-          with:
-            pluralApiId: "tools.pluralApiId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: find-one-entry
-          description: "Get a single content entry by document ID"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "strapi-rest.find-one-entry"
-          with:
-            pluralApiId: "tools.pluralApiId"
-            documentId: "tools.documentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-entry
-          description: "Update an existing content entry"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "strapi-rest.update-entry"
-          with:
-            pluralApiId: "tools.pluralApiId"
-            documentId: "tools.documentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-entry
-          description: "Delete a content entry permanently"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "strapi-rest.delete-entry"
-          with:
-            pluralApiId: "tools.pluralApiId"
-            documentId: "tools.documentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-media-files
-          description: "List all files in the Strapi media library"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "strapi-rest.list-upload-files"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-admin-users
-          description: "List all administrator accounts"
-          hints:
-            readOnly: true
-          call: "strapi-admin.list-admin-users"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-admin-user
-          description: "Create a new administrator account"
-          hints:
-            readOnly: false
-          call: "strapi-admin.create-admin-user"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-admin-roles
-          description: "List all administrator roles"
-          hints:
-            readOnly: true
-          call: "strapi-admin.list-admin-roles"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-api-tokens
-          description: "List all API tokens configured in Strapi"
-          hints:
-            readOnly: true
-          call: "strapi-admin.list-api-tokens"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-api-token
-          description: "Create a new API token"
-          hints:
-            readOnly: false
-          call: "strapi-admin.create-api-token"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-webhooks
-          description: "List all webhook configurations"
-          hints:
-            readOnly: true
-          call: "strapi-admin.list-webhooks"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-webhook
-          description: "Create a new webhook configuration"
-          hints:
-            readOnly: false
-          call: "strapi-admin.create-webhook"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: login-user
-          description: "Authenticate an end-user and obtain a JWT token"
-          hints:
-            readOnly: false
-          call: "strapi-users.login-user"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: register-user
-          description: "Register a new end-user account"
-          hints:
-            readOnly: false
-          call: "strapi-users.register-user"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-authenticated-user
-          description: "Get the currently authenticated user's profile"
-          hints:
-            readOnly: true
-          call: "strapi-users.get-authenticated-user"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-users
-          description: "List all registered end-user accounts"
-          hints:
-            readOnly: true
-          call: "strapi-users.list-users"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-roles
-          description: "List user roles and their permissions"
-          hints:
-            readOnly: true
-          call: "strapi-users.list-roles"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: strapi-content-management-api
+    description: Unified REST API for Strapi content management workflows.
+    resources:
+    - path: /v1/content/{pluralApiId}
+      name: content-entries
+      description: Content entry collection management
+      operations:
+      - method: GET
+        name: find-entries
+        description: List content entries with filtering and pagination
+        call: strapi-rest.find-entries
+        with:
+          pluralApiId: rest.pluralApiId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-entry
+        description: Create a new content entry
+        call: strapi-rest.create-entry
+        with:
+          pluralApiId: rest.pluralApiId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/content/{pluralApiId}/{documentId}
+      name: content-entry
+      description: Single content entry management
+      operations:
+      - method: GET
+        name: find-one-entry
+        description: Get a single content entry
+        call: strapi-rest.find-one-entry
+        with:
+          pluralApiId: rest.pluralApiId
+          documentId: rest.documentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: update-entry
+        description: Update a content entry
+        call: strapi-rest.update-entry
+        with:
+          pluralApiId: rest.pluralApiId
+          documentId: rest.documentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete-entry
+        description: Delete a content entry
+        call: strapi-rest.delete-entry
+        with:
+          pluralApiId: rest.pluralApiId
+          documentId: rest.documentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/media
+      name: media
+      description: Media library management
+      operations:
+      - method: GET
+        name: list-media-files
+        description: List all files in the media library
+        call: strapi-rest.list-upload-files
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/users
+      name: admin-users
+      description: Administrator user management
+      operations:
+      - method: GET
+        name: list-admin-users
+        description: List administrator accounts
+        call: strapi-admin.list-admin-users
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-admin-user
+        description: Create a new administrator
+        call: strapi-admin.create-admin-user
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/roles
+      name: admin-roles
+      description: Administrator role management
+      operations:
+      - method: GET
+        name: list-admin-roles
+        description: List administrator roles
+        call: strapi-admin.list-admin-roles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/api-tokens
+      name: api-tokens
+      description: API token management
+      operations:
+      - method: GET
+        name: list-api-tokens
+        description: List all API tokens
+        call: strapi-admin.list-api-tokens
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-api-token
+        description: Create a new API token
+        call: strapi-admin.create-api-token
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/webhooks
+      name: webhooks
+      description: Webhook configuration management
+      operations:
+      - method: GET
+        name: list-webhooks
+        description: List webhook configurations
+        call: strapi-admin.list-webhooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-webhook
+        description: Create a new webhook
+        call: strapi-admin.create-webhook
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: end-users
+      description: End-user account management
+      operations:
+      - method: GET
+        name: list-users
+        description: List registered end-users
+        call: strapi-users.list-users
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/auth/login
+      name: auth
+      description: User authentication
+      operations:
+      - method: POST
+        name: login-user
+        description: Authenticate a user
+        call: strapi-users.login-user
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: strapi-content-management-mcp
+    transport: http
+    description: MCP server for AI-assisted Strapi content management.
+    tools:
+    - name: find-entries
+      description: List content entries for a content-type with filtering and pagination
+      hints:
+        readOnly: true
+        openWorld: true
+      call: strapi-rest.find-entries
+      with:
+        pluralApiId: tools.pluralApiId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-entry
+      description: Create a new content entry
+      hints:
+        readOnly: false
+        destructive: false
+      call: strapi-rest.create-entry
+      with:
+        pluralApiId: tools.pluralApiId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: find-one-entry
+      description: Get a single content entry by document ID
+      hints:
+        readOnly: true
+        openWorld: false
+      call: strapi-rest.find-one-entry
+      with:
+        pluralApiId: tools.pluralApiId
+        documentId: tools.documentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-entry
+      description: Update an existing content entry
+      hints:
+        readOnly: false
+        idempotent: true
+      call: strapi-rest.update-entry
+      with:
+        pluralApiId: tools.pluralApiId
+        documentId: tools.documentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-entry
+      description: Delete a content entry permanently
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: strapi-rest.delete-entry
+      with:
+        pluralApiId: tools.pluralApiId
+        documentId: tools.documentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-media-files
+      description: List all files in the Strapi media library
+      hints:
+        readOnly: true
+        openWorld: true
+      call: strapi-rest.list-upload-files
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-admin-users
+      description: List all administrator accounts
+      hints:
+        readOnly: true
+      call: strapi-admin.list-admin-users
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-admin-user
+      description: Create a new administrator account
+      hints:
+        readOnly: false
+      call: strapi-admin.create-admin-user
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-admin-roles
+      description: List all administrator roles
+      hints:
+        readOnly: true
+      call: strapi-admin.list-admin-roles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-api-tokens
+      description: List all API tokens configured in Strapi
+      hints:
+        readOnly: true
+      call: strapi-admin.list-api-tokens
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api-token
+      description: Create a new API token
+      hints:
+        readOnly: false
+      call: strapi-admin.create-api-token
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-webhooks
+      description: List all webhook configurations
+      hints:
+        readOnly: true
+      call: strapi-admin.list-webhooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-webhook
+      description: Create a new webhook configuration
+      hints:
+        readOnly: false
+      call: strapi-admin.create-webhook
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: login-user
+      description: Authenticate an end-user and obtain a JWT token
+      hints:
+        readOnly: false
+      call: strapi-users.login-user
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: register-user
+      description: Register a new end-user account
+      hints:
+        readOnly: false
+      call: strapi-users.register-user
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-authenticated-user
+      description: Get the currently authenticated user's profile
+      hints:
+        readOnly: true
+      call: strapi-users.get-authenticated-user
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-users
+      description: List all registered end-user accounts
+      hints:
+        readOnly: true
+      call: strapi-users.list-users
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-roles
+      description: List user roles and their permissions
+      hints:
+        readOnly: true
+      call: strapi-users.list-roles
+      outputParameters:
+      - type: object
+        mapping: $.
