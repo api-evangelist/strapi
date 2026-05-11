@@ -151,6 +151,18 @@ common:
   - type: JSONLDContext
     url: >-
       https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/json-ld/strapi-context.jsonld
+  - type: Integrations
+    url: https://strapi.io/integrations
+integrations:
+  - name: React CMS
+  - name: Next.js CMS
+  - name: Tanstack CMS
+  - name: Vue.js CMS
+  - name: Nuxt.js CMS
+  - name: Astro CMS
+  - name: Flutter CMS
+  - name: Svelte CMS
+  - name: React Native CMS
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
