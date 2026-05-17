@@ -127,9 +127,9 @@ common:
     url: https://forum.strapi.io
   - type: Discord
     url: https://discord.strapi.io
-  - type: Roadmap
+  - type: RoadMap
     url: https://feedback.strapi.io
-  - type: Changelog
+  - type: ChangeLog
     url: https://github.com/strapi/strapi/releases
   - type: Pricing
     url: https://strapi.io/pricing-cloud
