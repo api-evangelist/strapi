@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Strapi Users and Permissions API — Permissions
+  description: 'Strapi Users and Permissions API — Permissions. 1 operations. Lead operation: List permissions. Self-contained
+    Naftiko capability covering one Strapi business surface.'
+  tags:
+  - Strapi
+  - Permissions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STRAPI_API_KEY: STRAPI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: users-and-permissions-permissions
+    baseUri: https://{host}
+    description: Strapi Users and Permissions API — Permissions business capability. Self-contained, no shared references.
+    resources:
+    - name: api-users-permissions-permissions
+      path: /api/users-permissions/permissions
+      operations:
+      - name: listpermissions
+        method: GET
+        description: List permissions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.STRAPI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: users-and-permissions-permissions-rest
+    port: 8080
+    description: REST adapter for Strapi Users and Permissions API — Permissions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/users-permissions/permissions
+      name: api-users-permissions-permissions
+      description: REST surface for api-users-permissions-permissions.
+      operations:
+      - method: GET
+        name: listpermissions
+        description: List permissions
+        call: users-and-permissions-permissions.listpermissions
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: users-and-permissions-permissions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Strapi Users and Permissions API — Permissions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-permissions
+      description: List permissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: users-and-permissions-permissions.listpermissions
+      outputParameters:
+      - type: object
+        mapping: $.

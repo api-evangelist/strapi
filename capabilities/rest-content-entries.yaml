@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Strapi REST API — Content Entries
+  description: 'Strapi REST API — Content Entries. 7 operations. Lead operation: List content entries. Self-contained Naftiko
+    capability covering one Strapi business surface.'
+  tags:
+  - Strapi
+  - Content Entries
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STRAPI_API_KEY: STRAPI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-content-entries
+    baseUri: https://{host}
+    description: Strapi REST API — Content Entries business capability. Self-contained, no shared references.
+    resources:
+    - name: api-pluralApiId
+      path: /api/{pluralApiId}
+      operations:
+      - name: findentries
+        method: GET
+        description: List content entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createentry
+        method: POST
+        description: Create a content entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-pluralApiId-documentId
+      path: /api/{pluralApiId}/{documentId}
+      operations:
+      - name: findoneentry
+        method: GET
+        description: Get a content entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateentry
+        method: PUT
+        description: Update a content entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteentry
+        method: DELETE
+        description: Delete a content entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-pluralApiId-documentId-actions-publish
+      path: /api/{pluralApiId}/{documentId}/actions/publish
+      operations:
+      - name: publishentry
+        method: POST
+        description: Publish a content entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-pluralApiId-documentId-actions-unpublish
+      path: /api/{pluralApiId}/{documentId}/actions/unpublish
+      operations:
+      - name: unpublishentry
+        method: POST
+        description: Unpublish a content entry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.STRAPI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-content-entries-rest
+    port: 8080
+    description: REST adapter for Strapi REST API — Content Entries. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/{pluralapiid}
+      name: api-pluralapiid
+      description: REST surface for api-pluralApiId.
+      operations:
+      - method: GET
+        name: findentries
+        description: List content entries
+        call: rest-content-entries.findentries
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createentry
+        description: Create a content entry
+        call: rest-content-entries.createentry
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/{pluralapiid}/{documentid}
+      name: api-pluralapiid-documentid
+      description: REST surface for api-pluralApiId-documentId.
+      operations:
+      - method: GET
+        name: findoneentry
+        description: Get a content entry
+        call: rest-content-entries.findoneentry
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateentry
+        description: Update a content entry
+        call: rest-content-entries.updateentry
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteentry
+        description: Delete a content entry
+        call: rest-content-entries.deleteentry
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/{pluralapiid}/{documentid}/actions/publish
+      name: api-pluralapiid-documentid-actions-publish
+      description: REST surface for api-pluralApiId-documentId-actions-publish.
+      operations:
+      - method: POST
+        name: publishentry
+        description: Publish a content entry
+        call: rest-content-entries.publishentry
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/{pluralapiid}/{documentid}/actions/unpublish
+      name: api-pluralapiid-documentid-actions-unpublish
+      description: REST surface for api-pluralApiId-documentId-actions-unpublish.
+      operations:
+      - method: POST
+        name: unpublishentry
+        description: Unpublish a content entry
+        call: rest-content-entries.unpublishentry
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-content-entries-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Strapi REST API — Content Entries. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-content-entries
+      description: List content entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-content-entries.findentries
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-content-entry
+      description: Create a content entry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-content-entries.createentry
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-content-entry
+      description: Get a content entry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-content-entries.findoneentry
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-content-entry
+      description: Update a content entry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: rest-content-entries.updateentry
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-content-entry
+      description: Delete a content entry
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-content-entries.deleteentry
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publish-content-entry
+      description: Publish a content entry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-content-entries.publishentry
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unpublish-content-entry
+      description: Unpublish a content entry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-content-entries.unpublishentry
+      outputParameters:
+      - type: object
+        mapping: $.

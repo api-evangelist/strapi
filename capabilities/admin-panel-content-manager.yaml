@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Strapi Admin Panel API — Content Manager
+  description: 'Strapi Admin Panel API — Content Manager. 1 operations. Lead operation: List collection type entries. Self-contained
+    Naftiko capability covering one Strapi business surface.'
+  tags:
+  - Strapi
+  - Content Manager
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STRAPI_API_KEY: STRAPI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-panel-content-manager
+    baseUri: https://{host}
+    description: Strapi Admin Panel API — Content Manager business capability. Self-contained, no shared references.
+    resources:
+    - name: admin-content-manager-collection-types-contentType
+      path: /admin/content-manager/collection-types/{contentType}
+      operations:
+      - name: listcollectionentries
+        method: GET
+        description: List collection type entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contentType
+          in: path
+          type: string
+          description: The UID of the collection type (e.g., api::article.article)
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: The page number
+        - name: pageSize
+          in: query
+          type: integer
+          description: The number of results per page
+    authentication:
+      type: bearer
+      token: '{{env.STRAPI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-panel-content-manager-rest
+    port: 8080
+    description: REST adapter for Strapi Admin Panel API — Content Manager. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/admin/content-manager/collection-types/{contenttype}
+      name: admin-content-manager-collection-types-contenttype
+      description: REST surface for admin-content-manager-collection-types-contentType.
+      operations:
+      - method: GET
+        name: listcollectionentries
+        description: List collection type entries
+        call: admin-panel-content-manager.listcollectionentries
+        with:
+          contentType: rest.contentType
+          page: rest.page
+          pageSize: rest.pageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-panel-content-manager-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Strapi Admin Panel API — Content Manager. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-collection-type-entries
+      description: List collection type entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-panel-content-manager.listcollectionentries
+      with:
+        contentType: tools.contentType
+        page: tools.page
+        pageSize: tools.pageSize
+      outputParameters:
+      - type: object
+        mapping: $.

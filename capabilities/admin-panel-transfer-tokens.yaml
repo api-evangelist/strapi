@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Strapi Admin Panel API — Transfer Tokens
+  description: 'Strapi Admin Panel API — Transfer Tokens. 3 operations. Lead operation: List transfer tokens. Self-contained
+    Naftiko capability covering one Strapi business surface.'
+  tags:
+  - Strapi
+  - Transfer Tokens
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STRAPI_API_KEY: STRAPI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-panel-transfer-tokens
+    baseUri: https://{host}
+    description: Strapi Admin Panel API — Transfer Tokens business capability. Self-contained, no shared references.
+    resources:
+    - name: admin-transfer-tokens
+      path: /admin/transfer/tokens
+      operations:
+      - name: listtransfertokens
+        method: GET
+        description: List transfer tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createtransfertoken
+        method: POST
+        description: Create a transfer token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: admin-transfer-tokens-id
+      path: /admin/transfer/tokens/{id}
+      operations:
+      - name: deletetransfertoken
+        method: DELETE
+        description: Delete a transfer token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of the transfer token
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.STRAPI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-panel-transfer-tokens-rest
+    port: 8080
+    description: REST adapter for Strapi Admin Panel API — Transfer Tokens. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/admin/transfer/tokens
+      name: admin-transfer-tokens
+      description: REST surface for admin-transfer-tokens.
+      operations:
+      - method: GET
+        name: listtransfertokens
+        description: List transfer tokens
+        call: admin-panel-transfer-tokens.listtransfertokens
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtransfertoken
+        description: Create a transfer token
+        call: admin-panel-transfer-tokens.createtransfertoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/transfer/tokens/{id}
+      name: admin-transfer-tokens-id
+      description: REST surface for admin-transfer-tokens-id.
+      operations:
+      - method: DELETE
+        name: deletetransfertoken
+        description: Delete a transfer token
+        call: admin-panel-transfer-tokens.deletetransfertoken
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-panel-transfer-tokens-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Strapi Admin Panel API — Transfer Tokens. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-transfer-tokens
+      description: List transfer tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-panel-transfer-tokens.listtransfertokens
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-transfer-token
+      description: Create a transfer token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-panel-transfer-tokens.createtransfertoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-transfer-token
+      description: Delete a transfer token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-panel-transfer-tokens.deletetransfertoken
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

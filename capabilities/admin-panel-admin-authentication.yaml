@@ -1,0 +1,248 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Strapi Admin Panel API — Admin Authentication
+  description: 'Strapi Admin Panel API — Admin Authentication. 5 operations. Lead operation: Request admin password reset.
+    Self-contained Naftiko capability covering one Strapi business surface.'
+  tags:
+  - Strapi
+  - Admin Authentication
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STRAPI_API_KEY: STRAPI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-panel-admin-authentication
+    baseUri: https://{host}
+    description: Strapi Admin Panel API — Admin Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: admin-forgot-password
+      path: /admin/forgot-password
+      operations:
+      - name: adminforgotpassword
+        method: POST
+        description: Request admin password reset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: admin-login
+      path: /admin/login
+      operations:
+      - name: adminlogin
+        method: POST
+        description: Login to admin panel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: admin-register-admin
+      path: /admin/register-admin
+      operations:
+      - name: registerfirstadmin
+        method: POST
+        description: Register the first administrator
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: admin-renew-token
+      path: /admin/renew-token
+      operations:
+      - name: adminrenewtoken
+        method: POST
+        description: Renew admin JWT token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: admin-reset-password
+      path: /admin/reset-password
+      operations:
+      - name: adminresetpassword
+        method: POST
+        description: Reset admin password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.STRAPI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-panel-admin-authentication-rest
+    port: 8080
+    description: REST adapter for Strapi Admin Panel API — Admin Authentication. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/admin/forgot-password
+      name: admin-forgot-password
+      description: REST surface for admin-forgot-password.
+      operations:
+      - method: POST
+        name: adminforgotpassword
+        description: Request admin password reset
+        call: admin-panel-admin-authentication.adminforgotpassword
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/login
+      name: admin-login
+      description: REST surface for admin-login.
+      operations:
+      - method: POST
+        name: adminlogin
+        description: Login to admin panel
+        call: admin-panel-admin-authentication.adminlogin
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/register-admin
+      name: admin-register-admin
+      description: REST surface for admin-register-admin.
+      operations:
+      - method: POST
+        name: registerfirstadmin
+        description: Register the first administrator
+        call: admin-panel-admin-authentication.registerfirstadmin
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/renew-token
+      name: admin-renew-token
+      description: REST surface for admin-renew-token.
+      operations:
+      - method: POST
+        name: adminrenewtoken
+        description: Renew admin JWT token
+        call: admin-panel-admin-authentication.adminrenewtoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/reset-password
+      name: admin-reset-password
+      description: REST surface for admin-reset-password.
+      operations:
+      - method: POST
+        name: adminresetpassword
+        description: Reset admin password
+        call: admin-panel-admin-authentication.adminresetpassword
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-panel-admin-authentication-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Strapi Admin Panel API — Admin Authentication. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: request-admin-password-reset
+      description: Request admin password reset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-panel-admin-authentication.adminforgotpassword
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: login-admin-panel
+      description: Login to admin panel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-panel-admin-authentication.adminlogin
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: register-first-administrator
+      description: Register the first administrator
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-panel-admin-authentication.registerfirstadmin
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: renew-admin-jwt-token
+      description: Renew admin JWT token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-panel-admin-authentication.adminrenewtoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-admin-password
+      description: Reset admin password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-panel-admin-authentication.adminresetpassword
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

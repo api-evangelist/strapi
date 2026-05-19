@@ -1,0 +1,194 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Strapi Users and Permissions API — Users
+  description: 'Strapi Users and Permissions API — Users. 5 operations. Lead operation: List users. Self-contained Naftiko
+    capability covering one Strapi business surface.'
+  tags:
+  - Strapi
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STRAPI_API_KEY: STRAPI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: users-and-permissions-users
+    baseUri: https://{host}
+    description: Strapi Users and Permissions API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: api-users
+      path: /api/users
+      operations:
+      - name: listusers
+        method: GET
+        description: List users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-me
+      path: /api/users/me
+      operations:
+      - name: getauthenticateduser
+        method: GET
+        description: Get the authenticated user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-id
+      path: /api/users/{id}
+      operations:
+      - name: getuser
+        method: GET
+        description: Get a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuser
+        method: PUT
+        description: Update a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteuser
+        method: DELETE
+        description: Delete a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.STRAPI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: users-and-permissions-users-rest
+    port: 8080
+    description: REST adapter for Strapi Users and Permissions API — Users. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/users
+      name: api-users
+      description: REST surface for api-users.
+      operations:
+      - method: GET
+        name: listusers
+        description: List users
+        call: users-and-permissions-users.listusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/users/me
+      name: api-users-me
+      description: REST surface for api-users-me.
+      operations:
+      - method: GET
+        name: getauthenticateduser
+        description: Get the authenticated user
+        call: users-and-permissions-users.getauthenticateduser
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/users/{id}
+      name: api-users-id
+      description: REST surface for api-users-id.
+      operations:
+      - method: GET
+        name: getuser
+        description: Get a user
+        call: users-and-permissions-users.getuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuser
+        description: Update a user
+        call: users-and-permissions-users.updateuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuser
+        description: Delete a user
+        call: users-and-permissions-users.deleteuser
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: users-and-permissions-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Strapi Users and Permissions API — Users. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-users
+      description: List users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: users-and-permissions-users.listusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-authenticated-user
+      description: Get the authenticated user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: users-and-permissions-users.getauthenticateduser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get a user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: users-and-permissions-users.getuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: users-and-permissions-users.updateuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user
+      description: Delete a user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: users-and-permissions-users.deleteuser
+      outputParameters:
+      - type: object
+        mapping: $.

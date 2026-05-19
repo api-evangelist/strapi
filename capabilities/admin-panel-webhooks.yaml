@@ -1,0 +1,224 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Strapi Admin Panel API — Webhooks
+  description: 'Strapi Admin Panel API — Webhooks. 5 operations. Lead operation: List webhooks. Self-contained Naftiko capability
+    covering one Strapi business surface.'
+  tags:
+  - Strapi
+  - Webhooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    STRAPI_API_KEY: STRAPI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-panel-webhooks
+    baseUri: https://{host}
+    description: Strapi Admin Panel API — Webhooks business capability. Self-contained, no shared references.
+    resources:
+    - name: admin-webhooks
+      path: /admin/webhooks
+      operations:
+      - name: listwebhooks
+        method: GET
+        description: List webhooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createwebhook
+        method: POST
+        description: Create a webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: admin-webhooks-id
+      path: /admin/webhooks/{id}
+      operations:
+      - name: getwebhook
+        method: GET
+        description: Get a webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of the webhook
+          required: true
+      - name: updatewebhook
+        method: PUT
+        description: Update a webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of the webhook
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletewebhook
+        method: DELETE
+        description: Delete a webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of the webhook
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.STRAPI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-panel-webhooks-rest
+    port: 8080
+    description: REST adapter for Strapi Admin Panel API — Webhooks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/admin/webhooks
+      name: admin-webhooks
+      description: REST surface for admin-webhooks.
+      operations:
+      - method: GET
+        name: listwebhooks
+        description: List webhooks
+        call: admin-panel-webhooks.listwebhooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createwebhook
+        description: Create a webhook
+        call: admin-panel-webhooks.createwebhook
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/admin/webhooks/{id}
+      name: admin-webhooks-id
+      description: REST surface for admin-webhooks-id.
+      operations:
+      - method: GET
+        name: getwebhook
+        description: Get a webhook
+        call: admin-panel-webhooks.getwebhook
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatewebhook
+        description: Update a webhook
+        call: admin-panel-webhooks.updatewebhook
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletewebhook
+        description: Delete a webhook
+        call: admin-panel-webhooks.deletewebhook
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-panel-webhooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Strapi Admin Panel API — Webhooks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-webhooks
+      description: List webhooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-panel-webhooks.listwebhooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-webhook
+      description: Create a webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-panel-webhooks.createwebhook
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-webhook
+      description: Get a webhook
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-panel-webhooks.getwebhook
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-webhook
+      description: Update a webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-panel-webhooks.updatewebhook
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-webhook
+      description: Delete a webhook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-panel-webhooks.deletewebhook
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
