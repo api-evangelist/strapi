@@ -156,6 +156,8 @@ common:
   url: https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/json-ld/strapi-context.jsonld
 - type: Integrations
   url: https://strapi.io/integrations
+- type: LLMsTxt
+  url: https://docs.strapi.io/llms.txt
 integrations:
 - name: React CMS
 - name: Next.js CMS
