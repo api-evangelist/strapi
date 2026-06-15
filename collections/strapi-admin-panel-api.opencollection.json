@@ -1,0 +1,623 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login to admin panel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates an administrator with their email and password. Returns a JWT token for accessing admin panel API endpoints."
+        },
+        {
+          "info": {
+            "name": "Renew admin JWT token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/renew-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renews the admin JWT token using a valid refresh token to extend the admin session without requiring re-authentication."
+        },
+        {
+          "info": {
+            "name": "Request admin password reset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/forgot-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a password reset email to the specified administrator email address."
+        },
+        {
+          "info": {
+            "name": "Reset admin password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/reset-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resets an administrator's password using the code received via the forgot-password email."
+        },
+        {
+          "info": {
+            "name": "Register the first administrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/register-admin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers the initial Super Admin account during Strapi setup. This endpoint is only available when no administrator accounts exist in the system."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Admin Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List administrator users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all administrator accounts with their roles and metadata."
+        },
+        {
+          "info": {
+            "name": "Create an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new administrator account with specified roles. An invitation email is sent to the new administrator."
+        },
+        {
+          "info": {
+            "name": "Get an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator user"
+              }
+            ]
+          },
+          "docs": "Returns a single administrator account by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an administrator account's details including name, email, password, active status, and role assignments."
+        },
+        {
+          "info": {
+            "name": "Delete an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator user"
+              }
+            ]
+          },
+          "docs": "Deletes an administrator account by its ID. This action is irreversible."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Admin Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List administrator roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/roles"
+          },
+          "docs": "Returns a list of all administrator roles. Default roles include Super Admin, Editor, and Author."
+        },
+        {
+          "info": {
+            "name": "Create an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom administrator role with specified permissions."
+        },
+        {
+          "info": {
+            "name": "Get an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator role"
+              }
+            ]
+          },
+          "docs": "Returns a single administrator role by its ID, including its associated permissions."
+        },
+        {
+          "info": {
+            "name": "Update an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/admin/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator role"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an administrator role's name, description, and permissions."
+        },
+        {
+          "info": {
+            "name": "Delete an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator role"
+              }
+            ]
+          },
+          "docs": "Deletes an administrator role by its ID. Default roles cannot be deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Content Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List content types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/content-type-builder/content-types"
+          },
+          "docs": "Returns a list of all content-types defined in the Strapi application, including their schemas, attributes, and configuration."
+        },
+        {
+          "info": {
+            "name": "Get a content type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/content-type-builder/content-types/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the content-type (e.g., api::article.article)"
+              }
+            ]
+          },
+          "docs": "Returns a single content-type definition by its UID, including its full schema with all attributes, relations, and configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Content Manager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List collection type entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/content-manager/collection-types/:contentType",
+            "params": [
+              {
+                "name": "contentType",
+                "value": "",
+                "type": "path",
+                "description": "The UID of the collection type (e.g., api::article.article)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of entries for a collection type through the admin Content Manager interface."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/webhooks"
+          },
+          "docs": "Returns a list of all configured webhooks in the Strapi admin panel."
+        },
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new webhook configuration with the specified URL, events, and headers."
+        },
+        {
+          "info": {
+            "name": "Get a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the webhook"
+              }
+            ]
+          },
+          "docs": "Returns a single webhook configuration by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/admin/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the webhook"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a webhook configuration by its ID."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the webhook"
+              }
+            ]
+          },
+          "docs": "Deletes a webhook configuration by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/api-tokens"
+          },
+          "docs": "Returns a list of all API tokens configured in the Strapi admin panel. API tokens allow authenticating REST and GraphQL API requests without managing user accounts."
+        },
+        {
+          "info": {
+            "name": "Create an API token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/api-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API token with specified permissions. The full token value is only returned once upon creation and cannot be retrieved again."
+        },
+        {
+          "info": {
+            "name": "Get an API token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/api-tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API token"
+              }
+            ]
+          },
+          "docs": "Returns a single API token's metadata by its ID. The full token value is not returned."
+        },
+        {
+          "info": {
+            "name": "Update an API token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/admin/api-tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an API token's name, description, type, or permissions."
+        },
+        {
+          "info": {
+            "name": "Delete an API token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/api-tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the API token"
+              }
+            ]
+          },
+          "docs": "Deletes an API token by its ID. Any requests using this token will fail after deletion."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transfer Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List transfer tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/transfer/tokens"
+          },
+          "docs": "Returns a list of all transfer tokens configured for data transfer operations between Strapi instances."
+        },
+        {
+          "info": {
+            "name": "Create a transfer token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/transfer/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new transfer token for data transfer operations. The full token value is only returned once upon creation."
+        },
+        {
+          "info": {
+            "name": "Delete a transfer token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/transfer/tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the transfer token"
+              }
+            ]
+          },
+          "docs": "Deletes a transfer token by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

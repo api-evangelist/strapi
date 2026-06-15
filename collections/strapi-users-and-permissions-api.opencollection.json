@@ -1,0 +1,306 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Users and Permissions API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login with local credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/auth/local",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a user with their identifier (email or username) and password. Returns a JWT token and the user profile on successful authentication. The JWT token should be included in subsequent requests as an Authorization Bearer header."
+        },
+        {
+          "info": {
+            "name": "Register a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/auth/local/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user account with the default Authenticated role. Returns a JWT token and the newly created user profile. Registration can be restricted or require email confirmation depending on the plugin configuration."
+        },
+        {
+          "info": {
+            "name": "Request a password reset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/auth/forgot-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a password reset email to the specified email address if an account exists. The email contains a link with a reset code that can be used with the reset-password endpoint."
+        },
+        {
+          "info": {
+            "name": "Reset a user password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/auth/reset-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resets a user's password using the code received via the forgot-password email. Both a new password and password confirmation must be provided and must match."
+        },
+        {
+          "info": {
+            "name": "Confirm a user email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/auth/email-confirmation",
+            "params": [
+              {
+                "name": "confirmation",
+                "value": "",
+                "type": "query",
+                "description": "The email confirmation token"
+              }
+            ]
+          },
+          "docs": "Confirms a user's email address using the confirmation token sent via email during registration. This endpoint is typically accessed by clicking the confirmation link in the email."
+        },
+        {
+          "info": {
+            "name": "Resend email confirmation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/auth/send-email-confirmation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resends the email confirmation link to the specified email address. Useful when the original confirmation email was lost or expired."
+        },
+        {
+          "info": {
+            "name": "Change user password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/auth/change-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the password for the currently authenticated user. Requires the current password for verification along with the new password and confirmation."
+        },
+        {
+          "info": {
+            "name": "Social provider authentication callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/auth/:provider/callback",
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "The name of the authentication provider (e.g., google, github, facebook, twitter)"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "The access token from the authentication provider"
+              }
+            ]
+          },
+          "docs": "Callback endpoint used during social provider authentication (e.g., Google, GitHub, Facebook). After the user authenticates with the provider, this endpoint processes the callback and returns a JWT token and user profile."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/users"
+          },
+          "docs": "Returns a list of all registered end-user accounts. Requires appropriate permissions to access."
+        },
+        {
+          "info": {
+            "name": "Get a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the user"
+              }
+            ]
+          },
+          "docs": "Returns a single end-user account by their ID."
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an end-user account by their ID. Only the fields included in the request body will be updated."
+        },
+        {
+          "info": {
+            "name": "Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/api/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the user"
+              }
+            ]
+          },
+          "docs": "Deletes an end-user account by their ID. This action is irreversible."
+        },
+        {
+          "info": {
+            "name": "Get the authenticated user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/users/me"
+          },
+          "docs": "Returns the profile of the currently authenticated user based on the JWT token provided in the Authorization header."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/users-permissions/roles"
+          },
+          "docs": "Returns a list of all roles defined in the Users and Permissions plugin, including their associated permissions."
+        },
+        {
+          "info": {
+            "name": "Get a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/users-permissions/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the role"
+              }
+            ]
+          },
+          "docs": "Returns a single role by its ID, including its associated permissions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/users-permissions/permissions"
+          },
+          "docs": "Returns the full list of available permissions grouped by plugin and controller. Used to understand which actions can be assigned to roles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
