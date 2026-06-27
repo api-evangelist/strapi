@@ -114,7 +114,7 @@ common:
   url: https://github.com/strapi/strapi
 - type: Blog
   url: https://strapi.io/blog
-- type: Forum
+- type: Forums
   url: https://forum.strapi.io
 - type: Discord
   url: https://discord.strapi.io
@@ -140,7 +140,7 @@ common:
   url: https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/json-ld/strapi-context.jsonld
 - type: Integrations
   url: https://strapi.io/integrations
-- type: LLMsTxt
+- type: LlmsText
   url: https://docs.strapi.io/llms.txt
 integrations:
 - name: React CMS

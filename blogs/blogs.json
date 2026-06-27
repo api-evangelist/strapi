@@ -3,16 +3,12 @@
   "feeds": [
     {
       "source": "https://strapi.io/blog",
-      "error": "timeout"
-    },
-    {
-      "source": "https://github.com/strapi/strapi",
-      "feed_url": "https://github.com/strapi/strapi",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "feed_url": "",
+      "saved": 1,
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 3,
+  "fetched": "2026-06-27T13:12:34Z",
+  "agent_pulled": "2026-06-27"
 }
