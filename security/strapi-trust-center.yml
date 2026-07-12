@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://strapi.io/security
+url: https://strapi.io/security
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://strapi.io/security
+  keywords:
+  - soc 2
+  - soc2
+  - gdpr

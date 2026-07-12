@@ -104,6 +104,12 @@ apis:
   - type: Documentation
     url: https://docs.strapi.io/cms/backend-customization/webhooks
 common:
+- type: TrustCenter
+  url: security/strapi-trust-center.yml
+- type: DomainSecurity
+  url: security/strapi-domain-security.yml
+- type: Authentication
+  url: authentication/strapi-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/strapi
 - type: Website

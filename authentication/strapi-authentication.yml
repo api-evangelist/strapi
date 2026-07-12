@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/strapi-admin-panel-api-openapi.yml, openapi/strapi-rest-api-openapi.yml, openapi/strapi-users-and-permissions-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: adminBearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization:
+    Bearer {token}.'
+  sources:
+  - openapi/strapi-admin-panel-api-openapi.yml
+  - openapi/strapi-rest-api-openapi.yml
+  - openapi/strapi-users-and-permissions-api-openapi.yml
+- name: apiTokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'API token created in the Strapi admin panel under Settings > Global settings
+    > API Tokens. Include as Authorization: Bearer {token}.'
+  sources:
+  - openapi/strapi-rest-api-openapi.yml
