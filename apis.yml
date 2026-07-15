@@ -104,6 +104,8 @@ apis:
   - type: Documentation
     url: https://docs.strapi.io/cms/backend-customization/webhooks
 common:
+- type: AgenticAccess
+  url: agentic-access/strapi-agentic-access.yml
 - type: TrustCenter
   url: security/strapi-trust-center.yml
 - type: DomainSecurity
