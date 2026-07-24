@@ -1,0 +1,398 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Authentication
+  description: Endpoints for user authentication including login, registration, and password management using JWT tokens.
+paths:
+  /api/auth/local:
+    post:
+      operationId: loginUser
+      summary: Login with local credentials
+      description: Authenticates a user with their identifier (email or username) and password. Returns a JWT token and the user profile on successful authentication. The JWT token should be included in subsequent requests as an Authorization Bearer header.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - identifier
+              - password
+              properties:
+                identifier:
+                  type: string
+                  description: The user's email address or username
+                password:
+                  type: string
+                  format: password
+                  description: The user's password
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/local/register:
+    post:
+      operationId: registerUser
+      summary: Register a new user
+      description: Creates a new user account with the default Authenticated role. Returns a JWT token and the newly created user profile. Registration can be restricted or require email confirmation depending on the plugin configuration.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - username
+              - email
+              - password
+              properties:
+                username:
+                  type: string
+                  description: The desired username for the new account
+                email:
+                  type: string
+                  format: email
+                  description: The email address for the new account
+                password:
+                  type: string
+                  format: password
+                  description: The password for the new account
+      responses:
+        '200':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/forgot-password:
+    post:
+      operationId: forgotPassword
+      summary: Request a password reset
+      description: Sends a password reset email to the specified email address if an account exists. The email contains a link with a reset code that can be used with the reset-password endpoint.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The email address associated with the user account
+      responses:
+        '200':
+          description: Password reset email sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    description: Indicates the request was processed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/reset-password:
+    post:
+      operationId: resetPassword
+      summary: Reset a user password
+      description: Resets a user's password using the code received via the forgot-password email. Both a new password and password confirmation must be provided and must match.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - code
+              - password
+              - passwordConfirmation
+              properties:
+                code:
+                  type: string
+                  description: The reset code received in the password reset email
+                password:
+                  type: string
+                  format: password
+                  description: The new password
+                passwordConfirmation:
+                  type: string
+                  format: password
+                  description: Confirmation of the new password (must match password)
+      responses:
+        '200':
+          description: Password reset successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/email-confirmation:
+    get:
+      operationId: confirmEmail
+      summary: Confirm a user email
+      description: Confirms a user's email address using the confirmation token sent via email during registration. This endpoint is typically accessed by clicking the confirmation link in the email.
+      tags:
+      - Authentication
+      security: []
+      parameters:
+      - name: confirmation
+        in: query
+        required: true
+        description: The email confirmation token
+        schema:
+          type: string
+      responses:
+        '302':
+          description: Redirects to the configured confirmation redirect URL
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/send-email-confirmation:
+    post:
+      operationId: sendEmailConfirmation
+      summary: Resend email confirmation
+      description: Resends the email confirmation link to the specified email address. Useful when the original confirmation email was lost or expired.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The email address to send the confirmation to
+      responses:
+        '200':
+          description: Confirmation email sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    description: The email address the confirmation was sent to
+                  sent:
+                    type: boolean
+                    description: Whether the email was sent successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/change-password:
+    post:
+      operationId: changePassword
+      summary: Change user password
+      description: Changes the password for the currently authenticated user. Requires the current password for verification along with the new password and confirmation.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - currentPassword
+              - password
+              - passwordConfirmation
+              properties:
+                currentPassword:
+                  type: string
+                  format: password
+                  description: The user's current password
+                password:
+                  type: string
+                  format: password
+                  description: The new password
+                passwordConfirmation:
+                  type: string
+                  format: password
+                  description: Confirmation of the new password (must match password)
+      responses:
+        '200':
+          description: Password changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/auth/{provider}/callback:
+    get:
+      operationId: providerCallback
+      summary: Social provider authentication callback
+      description: Callback endpoint used during social provider authentication (e.g., Google, GitHub, Facebook). After the user authenticates with the provider, this endpoint processes the callback and returns a JWT token and user profile.
+      tags:
+      - Authentication
+      security: []
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        description: The name of the authentication provider (e.g., google, github, facebook, twitter)
+        schema:
+          type: string
+      - name: access_token
+        in: query
+        description: The access token from the authentication provider
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AuthResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: The JSON Web Token for authenticating subsequent API requests
+        user:
+          $ref: '#/components/schemas/User'
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: The permissions assigned to this role, grouped by plugin and controller action
+          additionalProperties: true
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the user
+        username:
+          type: string
+          description: The username of the user
+        email:
+          type: string
+          format: email
+          description: The email address of the user
+        provider:
+          type: string
+          description: The authentication provider (e.g., local, google, github)
+        confirmed:
+          type: boolean
+          description: Whether the user's email has been confirmed
+        blocked:
+          type: boolean
+          description: Whether the user account is blocked
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the user was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the user was last updated
+        role:
+          $ref: '#/components/schemas/Role'
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

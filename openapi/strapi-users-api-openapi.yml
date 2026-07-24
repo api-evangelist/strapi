@@ -1,0 +1,262 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication Users API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Users
+  description: Endpoints for managing end-user accounts and profiles.
+paths:
+  /api/users:
+    get:
+      operationId: listUsers
+      summary: List users
+      description: Returns a list of all registered end-user accounts. Requires appropriate permissions to access.
+      tags:
+      - Users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/users/{id}:
+    get:
+      operationId: getUser
+      summary: Get a user
+      description: Returns a single end-user account by their ID.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: The user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateUser
+      summary: Update a user
+      description: Updates an end-user account by their ID. Only the fields included in the request body will be updated.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequest'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteUser
+      summary: Delete a user
+      description: Deletes an end-user account by their ID. This action is irreversible.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/users/me:
+    get:
+      operationId: getAuthenticatedUser
+      summary: Get the authenticated user
+      description: Returns the profile of the currently authenticated user based on the JWT token provided in the Authorization header.
+      tags:
+      - Users
+      responses:
+        '200':
+          description: The authenticated user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the user
+        username:
+          type: string
+          description: The username of the user
+        email:
+          type: string
+          format: email
+          description: The email address of the user
+        provider:
+          type: string
+          description: The authentication provider (e.g., local, google, github)
+        confirmed:
+          type: boolean
+          description: Whether the user's email has been confirmed
+        blocked:
+          type: boolean
+          description: Whether the user account is blocked
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the user was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the user was last updated
+        role:
+          $ref: '#/components/schemas/Role'
+    UserUpdateRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The updated username
+        email:
+          type: string
+          format: email
+          description: The updated email address
+        password:
+          type: string
+          format: password
+          description: A new password for the user
+        blocked:
+          type: boolean
+          description: Whether to block or unblock the user
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: The permissions assigned to this role, grouped by plugin and controller action
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  parameters:
+    UserId:
+      name: id
+      in: path
+      required: true
+      description: The unique ID of the user
+      schema:
+        type: string
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

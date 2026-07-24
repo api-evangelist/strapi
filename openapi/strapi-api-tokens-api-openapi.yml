@@ -1,0 +1,280 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication API Tokens API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: API Tokens
+  description: Endpoints for managing API tokens used to authenticate REST and GraphQL API requests.
+paths:
+  /admin/api-tokens:
+    get:
+      operationId: listApiTokens
+      summary: List API tokens
+      description: Returns a list of all API tokens configured in the Strapi admin panel. API tokens allow authenticating REST and GraphQL API requests without managing user accounts.
+      tags:
+      - API Tokens
+      responses:
+        '200':
+          description: A list of API tokens
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApiToken'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createApiToken
+      summary: Create an API token
+      description: Creates a new API token with specified permissions. The full token value is only returned once upon creation and cannot be retrieved again.
+      tags:
+      - API Tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiTokenRequest'
+      responses:
+        '201':
+          description: API token created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /admin/api-tokens/{id}:
+    get:
+      operationId: getApiToken
+      summary: Get an API token
+      description: Returns a single API token's metadata by its ID. The full token value is not returned.
+      tags:
+      - API Tokens
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the API token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The API token details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateApiToken
+      summary: Update an API token
+      description: Updates an API token's name, description, type, or permissions.
+      tags:
+      - API Tokens
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the API token
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiTokenRequest'
+      responses:
+        '200':
+          description: API token updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiToken'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteApiToken
+      summary: Delete an API token
+      description: Deletes an API token by its ID. Any requests using this token will fail after deletion.
+      tags:
+      - API Tokens
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the API token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: API token deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ApiToken:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the API token
+        name:
+          type: string
+          description: The display name of the API token
+        description:
+          type: string
+          description: A description of the token's purpose
+        type:
+          type: string
+          enum:
+          - read-only
+          - full-access
+          - custom
+          description: The access level of the token. read-only allows only GET operations, full-access allows all operations, and custom allows specifying individual permissions.
+        accessKey:
+          type: string
+          description: The truncated access key (full value only returned on creation)
+        lastUsedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: The timestamp when the token was last used
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: The expiration date of the token, or null for tokens that never expire
+        lifespan:
+          type: integer
+          nullable: true
+          description: The lifespan of the token in days (7, 30, 90, or null for unlimited)
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the token was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the token was last updated
+    ApiTokenRequest:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: The display name of the API token
+        description:
+          type: string
+          description: A description of the token's purpose
+        type:
+          type: string
+          enum:
+          - read-only
+          - full-access
+          - custom
+          description: The access level of the token
+        lifespan:
+          type: integer
+          nullable: true
+          enum:
+          - 7
+          - 30
+          - 90
+          - null
+          description: The lifespan of the token in days, or null for unlimited
+        permissions:
+          type: array
+          items:
+            type: string
+          description: An array of permission action identifiers (only for custom type)
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

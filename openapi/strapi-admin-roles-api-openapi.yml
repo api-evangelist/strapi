@@ -1,0 +1,241 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication Admin Roles API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Admin Roles
+  description: Endpoints for managing administrator roles (Super Admin, Editor, Author) and their associated permissions.
+paths:
+  /admin/roles:
+    get:
+      operationId: listAdminRoles
+      summary: List administrator roles
+      description: Returns a list of all administrator roles. Default roles include Super Admin, Editor, and Author.
+      tags:
+      - Admin Roles
+      responses:
+        '200':
+          description: A list of admin roles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AdminRole'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createAdminRole
+      summary: Create an administrator role
+      description: Creates a new custom administrator role with specified permissions.
+      tags:
+      - Admin Roles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminRoleRequest'
+      responses:
+        '201':
+          description: Admin role created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRole'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /admin/roles/{id}:
+    get:
+      operationId: getAdminRole
+      summary: Get an administrator role
+      description: Returns a single administrator role by its ID, including its associated permissions.
+      tags:
+      - Admin Roles
+      parameters:
+      - $ref: '#/components/parameters/AdminRoleId'
+      responses:
+        '200':
+          description: The admin role details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRole'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateAdminRole
+      summary: Update an administrator role
+      description: Updates an administrator role's name, description, and permissions.
+      tags:
+      - Admin Roles
+      parameters:
+      - $ref: '#/components/parameters/AdminRoleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminRoleRequest'
+      responses:
+        '200':
+          description: Admin role updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRole'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteAdminRole
+      summary: Delete an administrator role
+      description: Deletes an administrator role by its ID. Default roles cannot be deleted.
+      tags:
+      - Admin Roles
+      parameters:
+      - $ref: '#/components/parameters/AdminRoleId'
+      responses:
+        '200':
+          description: Admin role deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AdminRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        code:
+          type: string
+          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
+        description:
+          type: string
+          description: A description of the role's purpose and access level
+        usersCount:
+          type: integer
+          description: The number of administrators assigned to this role
+    AdminRoleRequest:
+      type: object
+      required:
+      - name
+      - description
+      properties:
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        permissions:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+                description: The permission action identifier
+              subject:
+                type: string
+                nullable: true
+                description: The subject the permission applies to
+          description: An array of permission objects to assign to the role
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  parameters:
+    AdminRoleId:
+      name: id
+      in: path
+      required: true
+      description: The unique ID of the administrator role
+      schema:
+        type: string
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

@@ -1,0 +1,339 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication Admin Users API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Admin Users
+  description: Endpoints for managing administrator user accounts that have access to the Strapi admin panel.
+paths:
+  /admin/users:
+    get:
+      operationId: listAdminUsers
+      summary: List administrator users
+      description: Returns a paginated list of all administrator accounts with their roles and metadata.
+      tags:
+      - Admin Users
+      parameters:
+      - name: page
+        in: query
+        description: The page number
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        description: The number of results per page
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: A list of admin users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/AdminUser'
+                      pagination:
+                        $ref: '#/components/schemas/AdminPagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createAdminUser
+      summary: Create an administrator user
+      description: Creates a new administrator account with specified roles. An invitation email is sent to the new administrator.
+      tags:
+      - Admin Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminUserCreateRequest'
+      responses:
+        '201':
+          description: Admin user created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUser'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /admin/users/{id}:
+    get:
+      operationId: getAdminUser
+      summary: Get an administrator user
+      description: Returns a single administrator account by its ID.
+      tags:
+      - Admin Users
+      parameters:
+      - $ref: '#/components/parameters/AdminUserId'
+      responses:
+        '200':
+          description: The admin user details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUser'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateAdminUser
+      summary: Update an administrator user
+      description: Updates an administrator account's details including name, email, password, active status, and role assignments.
+      tags:
+      - Admin Users
+      parameters:
+      - $ref: '#/components/parameters/AdminUserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminUserUpdateRequest'
+      responses:
+        '200':
+          description: Admin user updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUser'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteAdminUser
+      summary: Delete an administrator user
+      description: Deletes an administrator account by its ID. This action is irreversible.
+      tags:
+      - Admin Users
+      parameters:
+      - $ref: '#/components/parameters/AdminUserId'
+      responses:
+        '200':
+          description: Admin user deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUser'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AdminUserCreateRequest:
+      type: object
+      required:
+      - firstname
+      - lastname
+      - email
+      - roles
+      properties:
+        firstname:
+          type: string
+          description: The administrator's first name
+        lastname:
+          type: string
+          description: The administrator's last name
+        email:
+          type: string
+          format: email
+          description: The administrator's email address
+        roles:
+          type: array
+          items:
+            type: integer
+          description: An array of role IDs to assign to the administrator
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+    AdminPagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The current page number
+        pageSize:
+          type: integer
+          description: The number of results per page
+        pageCount:
+          type: integer
+          description: The total number of pages
+        total:
+          type: integer
+          description: The total number of results
+    AdminUserUpdateRequest:
+      type: object
+      properties:
+        firstname:
+          type: string
+          description: The updated first name
+        lastname:
+          type: string
+          description: The updated last name
+        email:
+          type: string
+          format: email
+          description: The updated email address
+        password:
+          type: string
+          format: password
+          description: A new password for the administrator
+        isActive:
+          type: boolean
+          description: Whether to activate or deactivate the account
+        roles:
+          type: array
+          items:
+            type: integer
+          description: Updated array of role IDs
+    AdminUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the administrator
+        firstname:
+          type: string
+          description: The administrator's first name
+        lastname:
+          type: string
+          description: The administrator's last name
+        email:
+          type: string
+          format: email
+          description: The administrator's email address
+        isActive:
+          type: boolean
+          description: Whether the administrator account is active
+        blocked:
+          type: boolean
+          description: Whether the administrator account is blocked
+        preferedLanguage:
+          type: string
+          description: The administrator's preferred admin panel language
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminRole'
+          description: The roles assigned to the administrator
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the account was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the account was last updated
+    AdminRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        code:
+          type: string
+          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
+        description:
+          type: string
+          description: A description of the role's purpose and access level
+        usersCount:
+          type: integer
+          description: The number of administrators assigned to this role
+  parameters:
+    AdminUserId:
+      name: id
+      in: path
+      required: true
+      description: The unique ID of the administrator user
+      schema:
+        type: string
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

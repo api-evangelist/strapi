@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication Content Manager API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Content Manager
+  description: Endpoints for managing content entries through the admin panel Content Manager interface.
+paths:
+  /admin/content-manager/collection-types/{contentType}:
+    get:
+      operationId: listCollectionEntries
+      summary: List collection type entries
+      description: Returns a paginated list of entries for a collection type through the admin Content Manager interface.
+      tags:
+      - Content Manager
+      parameters:
+      - name: contentType
+        in: path
+        required: true
+        description: The UID of the collection type (e.g., api::article.article)
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: The page number
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        description: The number of results per page
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A list of collection entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  pagination:
+                    $ref: '#/components/schemas/AdminPagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AdminPagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: The current page number
+        pageSize:
+          type: integer
+          description: The number of results per page
+        pageCount:
+          type: integer
+          description: The total number of pages
+        total:
+          type: integer
+          description: The total number of results
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

@@ -1,0 +1,216 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication Transfer Tokens API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Transfer Tokens
+  description: Endpoints for managing transfer tokens used for data transfer operations between Strapi instances.
+paths:
+  /admin/transfer/tokens:
+    get:
+      operationId: listTransferTokens
+      summary: List transfer tokens
+      description: Returns a list of all transfer tokens configured for data transfer operations between Strapi instances.
+      tags:
+      - Transfer Tokens
+      responses:
+        '200':
+          description: A list of transfer tokens
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TransferToken'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createTransferToken
+      summary: Create a transfer token
+      description: Creates a new transfer token for data transfer operations. The full token value is only returned once upon creation.
+      tags:
+      - Transfer Tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferTokenRequest'
+      responses:
+        '201':
+          description: Transfer token created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferToken'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /admin/transfer/tokens/{id}:
+    delete:
+      operationId: deleteTransferToken
+      summary: Delete a transfer token
+      description: Deletes a transfer token by its ID.
+      tags:
+      - Transfer Tokens
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the transfer token
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transfer token deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    TransferTokenRequest:
+      type: object
+      required:
+      - name
+      - permissions
+      properties:
+        name:
+          type: string
+          description: The display name of the transfer token
+        description:
+          type: string
+          description: A description of the token's purpose
+        lifespan:
+          type: integer
+          nullable: true
+          description: The lifespan of the token in days
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - push
+            - pull
+          description: The transfer permissions to grant
+    TransferToken:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the transfer token
+        name:
+          type: string
+          description: The display name of the transfer token
+        description:
+          type: string
+          description: A description of the token's purpose
+        accessKey:
+          type: string
+          description: The truncated access key
+        lastUsedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: The timestamp when the token was last used
+        expiresAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: The expiration date of the token
+        lifespan:
+          type: integer
+          nullable: true
+          description: The lifespan of the token in days
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+            - push
+            - pull
+          description: The transfer permissions (push, pull, or both)
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the token was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the token was last updated
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

@@ -1,0 +1,252 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication Upload API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Upload
+  description: File upload and media library management endpoints powered by the Upload plugin.
+paths:
+  /api/upload:
+    post:
+      operationId: uploadFiles
+      summary: Upload files
+      description: Uploads one or more files to the Strapi media library. Files can optionally be linked to a content-type entry by providing ref, refId, and field parameters. Uploaded files are placed in the API Uploads folder by default.
+      tags:
+      - Upload
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - files
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: The file(s) to upload
+                ref:
+                  type: string
+                  description: The API identifier of the content-type to link the file to
+                refId:
+                  type: string
+                  description: The document ID of the entry to link the file to
+                field:
+                  type: string
+                  description: The field name on the entry where the file should be linked
+                fileInfo:
+                  type: string
+                  description: JSON string containing file metadata such as name, alternativeText, and caption
+      responses:
+        '200':
+          description: Files uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UploadFile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/upload/files:
+    get:
+      operationId: listUploadFiles
+      summary: List uploaded files
+      description: Returns a list of all files stored in the Strapi media library.
+      tags:
+      - Upload
+      responses:
+        '200':
+          description: A list of uploaded files
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UploadFile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/upload/files/{id}:
+    get:
+      operationId: getUploadFile
+      summary: Get an uploaded file
+      description: Returns a single file from the Strapi media library by its ID.
+      tags:
+      - Upload
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the uploaded file
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The uploaded file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadFile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteUploadFile
+      summary: Delete an uploaded file
+      description: Deletes a file from the Strapi media library by its ID.
+      tags:
+      - Upload
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the uploaded file
+        schema:
+          type: string
+      responses:
+        '204':
+          description: File deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    UploadFile:
+      type: object
+      description: A file object stored in the Strapi media library
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the file
+        name:
+          type: string
+          description: The original name of the file
+        alternativeText:
+          type: string
+          nullable: true
+          description: Alternative text for accessibility
+        caption:
+          type: string
+          nullable: true
+          description: A caption for the file
+        width:
+          type: integer
+          nullable: true
+          description: The width in pixels for image files
+        height:
+          type: integer
+          nullable: true
+          description: The height in pixels for image files
+        formats:
+          type: object
+          nullable: true
+          description: Responsive image format variants (thumbnail, small, medium, large)
+        hash:
+          type: string
+          description: A unique hash identifier for the file
+        ext:
+          type: string
+          description: The file extension
+        mime:
+          type: string
+          description: The MIME type of the file
+        size:
+          type: number
+          description: The file size in kilobytes
+        url:
+          type: string
+          description: The URL path to access the file
+        previewUrl:
+          type: string
+          nullable: true
+          description: A preview URL for the file
+        provider:
+          type: string
+          description: The storage provider (e.g., local, aws-s3, cloudinary)
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the file was uploaded
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the file was last updated
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

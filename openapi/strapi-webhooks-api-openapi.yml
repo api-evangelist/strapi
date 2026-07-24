@@ -1,0 +1,256 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication Webhooks API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Webhooks
+  description: Endpoints for managing webhook configurations from the admin panel.
+paths:
+  /admin/webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List webhooks
+      description: Returns a list of all configured webhooks in the Strapi admin panel.
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: A list of webhooks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createWebhook
+      summary: Create a webhook
+      description: Creates a new webhook configuration with the specified URL, events, and headers.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookRequest'
+      responses:
+        '201':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /admin/webhooks/{id}:
+    get:
+      operationId: getWebhook
+      summary: Get a webhook
+      description: Returns a single webhook configuration by its ID.
+      tags:
+      - Webhooks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the webhook
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The webhook details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateWebhook
+      summary: Update a webhook
+      description: Updates a webhook configuration by its ID.
+      tags:
+      - Webhooks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the webhook
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookRequest'
+      responses:
+        '200':
+          description: Webhook updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteWebhook
+      summary: Delete a webhook
+      description: Deletes a webhook configuration by its ID.
+      tags:
+      - Webhooks
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the webhook
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the webhook
+        name:
+          type: string
+          description: The display name of the webhook
+        url:
+          type: string
+          format: uri
+          description: The URL where events will be sent
+        headers:
+          type: object
+          description: Custom HTTP headers to include with webhook requests
+          additionalProperties:
+            type: string
+        events:
+          type: array
+          items:
+            type: string
+          description: The event types that trigger this webhook (e.g., entry.create, entry.update, entry.delete, entry.publish, entry.unpublish, media.create, media.update, media.delete)
+        isEnabled:
+          type: boolean
+          description: Whether the webhook is currently active
+    WebhookRequest:
+      type: object
+      required:
+      - name
+      - url
+      - events
+      properties:
+        name:
+          type: string
+          description: The display name of the webhook
+        url:
+          type: string
+          format: uri
+          description: The URL where events will be sent
+        headers:
+          type: object
+          description: Custom HTTP headers to include with webhook requests
+          additionalProperties:
+            type: string
+        events:
+          type: array
+          items:
+            type: string
+          description: The event types that trigger this webhook
+        isEnabled:
+          type: boolean
+          description: Whether the webhook should be active
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel

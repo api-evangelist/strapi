@@ -1,0 +1,301 @@
+openapi: 3.1.0
+info:
+  title: Strapi Admin Panel Admin Authentication API
+  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  version: 5.0.0
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+servers:
+- url: https://{host}
+  description: Strapi Server
+  variables:
+    host:
+      default: localhost:1337
+      description: The hostname and port of your Strapi instance
+security:
+- adminBearerAuth: []
+tags:
+- name: Admin Authentication
+  description: Authentication endpoints for administrator accounts used to access the Strapi admin panel.
+paths:
+  /admin/login:
+    post:
+      operationId: adminLogin
+      summary: Login to admin panel
+      description: Authenticates an administrator with their email and password. Returns a JWT token for accessing admin panel API endpoints.
+      tags:
+      - Admin Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The administrator's email address
+                password:
+                  type: string
+                  format: password
+                  description: The administrator's password
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminAuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /admin/renew-token:
+    post:
+      operationId: adminRenewToken
+      summary: Renew admin JWT token
+      description: Renews the admin JWT token using a valid refresh token to extend the admin session without requiring re-authentication.
+      tags:
+      - Admin Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - token
+              properties:
+                token:
+                  type: string
+                  description: The refresh token obtained during login
+      responses:
+        '200':
+          description: Token renewed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminAuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /admin/forgot-password:
+    post:
+      operationId: adminForgotPassword
+      summary: Request admin password reset
+      description: Sends a password reset email to the specified administrator email address.
+      tags:
+      - Admin Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The administrator's email address
+      responses:
+        '200':
+          description: Password reset email sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /admin/reset-password:
+    post:
+      operationId: adminResetPassword
+      summary: Reset admin password
+      description: Resets an administrator's password using the code received via the forgot-password email.
+      tags:
+      - Admin Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - resetPasswordToken
+              - password
+              properties:
+                resetPasswordToken:
+                  type: string
+                  description: The reset token received in the password reset email
+                password:
+                  type: string
+                  format: password
+                  description: The new admin password
+      responses:
+        '200':
+          description: Password reset successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminAuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /admin/register-admin:
+    post:
+      operationId: registerFirstAdmin
+      summary: Register the first administrator
+      description: Registers the initial Super Admin account during Strapi setup. This endpoint is only available when no administrator accounts exist in the system.
+      tags:
+      - Admin Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - firstname
+              - lastname
+              - email
+              - password
+              properties:
+                firstname:
+                  type: string
+                  description: The administrator's first name
+                lastname:
+                  type: string
+                  description: The administrator's last name
+                email:
+                  type: string
+                  format: email
+                  description: The administrator's email address
+                password:
+                  type: string
+                  format: password
+                  description: The administrator's password
+      responses:
+        '200':
+          description: First admin registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminAuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    AdminAuthResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+              description: The JWT token for authenticating admin API requests
+            user:
+              $ref: '#/components/schemas/AdminUser'
+    AdminRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        code:
+          type: string
+          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
+        description:
+          type: string
+          description: A description of the role's purpose and access level
+        usersCount:
+          type: integer
+          description: The number of administrators assigned to this role
+    AdminUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the administrator
+        firstname:
+          type: string
+          description: The administrator's first name
+        lastname:
+          type: string
+          description: The administrator's last name
+        email:
+          type: string
+          format: email
+          description: The administrator's email address
+        isActive:
+          type: boolean
+          description: Whether the administrator account is active
+        blocked:
+          type: boolean
+          description: Whether the administrator account is blocked
+        preferedLanguage:
+          type: string
+          description: The administrator's preferred admin panel language
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminRole'
+          description: The roles assigned to the administrator
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the account was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the account was last updated
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    adminBearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Strapi Admin Panel Documentation
+  url: https://docs.strapi.io/cms/features/admin-panel
