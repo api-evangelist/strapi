@@ -7,6 +7,19 @@ description: >-
   introduces a Document Service API with flattened response format, improved TypeScript support, and an enhanced content
   delivery API for building fast, decoupled frontends.
 url: https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/apis.yml
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://strapi.io/assets/strapi-logo-dark.svg
 tags:
 - CMS
@@ -21,78 +34,12 @@ created: '2025-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-- aid: strapi:strapi-rest-api
-  name: Strapi REST API
-  description: >-
-    The Strapi REST API provides automatically generated endpoints for accessing and managing content-types created
-    within the Strapi headless CMS. Supports full CRUD operations with filtering, sorting, pagination, population of
-    relational fields, and internationalization. Content-types are private by default and require authenticated
-    requests or configured public permissions. The API also includes a media library Upload plugin for file
-    management.
-  humanURL: https://docs.strapi.io/cms/api/rest
-  baseURL: https://{host}
-  tags:
-  - CMS
-  - Content Management
-  - REST API
-  - Headless CMS
-  properties:
-  - type: OpenAPI
-    url: https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-rest-api-openapi.yml
-  - type: Documentation
-    url: https://docs.strapi.io/cms/api/rest
-  - type: Documentation
-    url: https://docs.strapi.io/cms/api/rest/parameters
-  - url: graphql/strapi-graphql.md
-    type: GraphQL
-- aid: strapi:strapi-admin-panel-api
-  name: Strapi Admin Panel API
-  description: >-
-    The Strapi Admin Panel API powers the back-office interface for managing content-types, content entries, media
-    assets, and administrator accounts. Provides endpoints for the Content-Type Builder, Content Manager, Media
-    Library, and role-based access control configuration. Supports three default roles (Super Admin, Editor, Author)
-    and includes management of API tokens, transfer tokens, and webhooks.
-  humanURL: https://docs.strapi.io/cms/features/admin-panel
-  baseURL: https://{host}
-  tags:
-  - Admin
-  - CMS
-  - Content Management
-  - RBAC
-  properties:
-  - type: OpenAPI
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-admin-panel-api-openapi.yml
-  - type: Documentation
-    url: https://docs.strapi.io/cms/features/admin-panel
-  - type: Documentation
-    url: https://docs.strapi.io/cms/features/rbac
-- aid: strapi:strapi-users-permissions-api
-  name: Strapi Users and Permissions API
-  description: >-
-    The Strapi Users and Permissions API provides a full JWT-based authentication system for protecting API endpoints,
-    along with an access-control list strategy for managing permissions between user groups. Supports user
-    registration, login, password reset, email confirmation, and social provider authentication via OAuth. The API
-    enables configuration of roles and permissions to control endpoint accessibility.
-  humanURL: https://docs.strapi.io/cms/features/users-permissions
-  baseURL: https://{host}
-  tags:
-  - Authentication
-  - CMS
-  - Permissions
-  - User Management
-  properties:
-  - type: OpenAPI
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-users-and-permissions-api-openapi.yml
-  - type: Documentation
-    url: https://docs.strapi.io/cms/features/users-permissions
 - aid: strapi:strapi-webhooks
   name: Strapi Webhooks
   description: >-
-    Strapi includes a built-in webhook system that notifies external services whenever content entries or media assets
-    are created, updated, deleted, published, or unpublished. Webhooks are configured through the admin panel and
-    include a custom X-Strapi-Event header identifying the event type.
+    Strapi includes a built-in webhook system that notifies external services whenever content entries
+    or media assets are created, updated, deleted, published, or unpublished. Webhooks are configured
+    through the admin panel and include a custom X-Strapi-Event header identifying the event type.
   humanURL: https://docs.strapi.io/cms/backend-customization/webhooks
   tags:
   - CMS
@@ -100,9 +47,327 @@ apis:
   - Webhooks
   properties:
   - type: AsyncAPI
-    url: https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/asyncapi/strapi-webhooks-asyncapi.yml
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/asyncapi/strapi-webhooks-asyncapi.yml
   - type: Documentation
     url: https://docs.strapi.io/cms/backend-customization/webhooks
+- aid: strapi:strapi-admin-authentication-api
+  name: Strapi Admin Authentication API
+  description: >-
+    Authentication endpoints for administrator accounts used to access the Strapi admin panel.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Admin Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-admin-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-admin-roles-api
+  name: Strapi Admin Roles API
+  description: >-
+    Endpoints for managing administrator roles (Super Admin, Editor, Author) and their associated permissions.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Admin Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-admin-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-admin-users-api
+  name: Strapi Admin Users API
+  description: >-
+    Endpoints for managing administrator user accounts that have access to the Strapi admin panel.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Admin Users
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-admin-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-api-tokens-api
+  name: Strapi API Tokens API
+  description: Endpoints for managing API tokens used to authenticate REST and GraphQL API requests.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - API Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-api-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-authentication-api
+  name: Strapi Authentication API
+  description: >-
+    Endpoints for user authentication including login, registration, and password management using JWT
+    tokens.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-content-entries-api
+  name: Strapi Content Entries API
+  description: >-
+    CRUD operations on content-type entries. Strapi auto-generates these endpoints for each content-type
+    defined in the application.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Content Entries
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-content-entries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-content-manager-api
+  name: Strapi Content Manager API
+  description: >-
+    Endpoints for managing content entries through the admin panel Content Manager interface.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Content Manager
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-content-manager-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-content-types-api
+  name: Strapi Content Types API
+  description: Endpoints for managing content-type definitions through the Content-Type Builder.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Content Types
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-content-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-permissions-api
+  name: Strapi Permissions API
+  description: Endpoints for viewing and configuring permissions assigned to roles.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-permissions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-roles-api
+  name: Strapi Roles API
+  description: Endpoints for managing user roles and their associated permissions.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-transfer-tokens-api
+  name: Strapi Transfer Tokens API
+  description: >-
+    Endpoints for managing transfer tokens used for data transfer operations between Strapi instances.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Transfer Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-transfer-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-upload-api
+  name: Strapi Upload API
+  description: File upload and media library management endpoints powered by the Upload plugin.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-upload-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-users-api
+  name: Strapi Users API
+  description: Endpoints for managing end-user accounts and profiles.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
+- aid: strapi:strapi-webhooks-api
+  name: Strapi Webhooks API
+  description: Endpoints for managing webhook configurations from the admin panel.
+  humanURL: https://docs.strapi.io/cms/api/rest
+  baseURL: https://{host}
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/strapi-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest
+  - type: Documentation
+    url: https://docs.strapi.io/cms/api/rest/parameters
+  - type: GraphQL
+    url: graphql/strapi-graphql.md
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/admin-panel
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/rbac
+  - type: Documentation
+    url: https://docs.strapi.io/cms/features/users-permissions
 common:
 - type: AgenticAccess
   url: agentic-access/strapi-agentic-access.yml
