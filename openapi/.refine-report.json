@@ -1,0 +1,40 @@
+{
+  "provider": "strapi",
+  "sources": [
+    "strapi-admin-authentication-api-openapi.yml",
+    "strapi-admin-roles-api-openapi.yml",
+    "strapi-admin-users-api-openapi.yml",
+    "strapi-api-tokens-api-openapi.yml",
+    "strapi-authentication-api-openapi.yml",
+    "strapi-content-entries-api-openapi.yml",
+    "strapi-content-manager-api-openapi.yml",
+    "strapi-content-types-api-openapi.yml",
+    "strapi-permissions-api-openapi.yml",
+    "strapi-roles-api-openapi.yml",
+    "strapi-transfer-tokens-api-openapi.yml",
+    "strapi-upload-api-openapi.yml",
+    "strapi-users-api-openapi.yml",
+    "strapi-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "strapi-admin-authentication-api-openapi.yml",
+    "strapi-admin-roles-api-openapi.yml",
+    "strapi-admin-users-api-openapi.yml",
+    "strapi-api-tokens-api-openapi.yml",
+    "strapi-authentication-api-openapi.yml",
+    "strapi-content-entries-api-openapi.yml",
+    "strapi-content-manager-api-openapi.yml",
+    "strapi-content-types-api-openapi.yml",
+    "strapi-permissions-api-openapi.yml",
+    "strapi-roles-api-openapi.yml",
+    "strapi-transfer-tokens-api-openapi.yml",
+    "strapi-upload-api-openapi.yml",
+    "strapi-users-api-openapi.yml",
+    "strapi-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

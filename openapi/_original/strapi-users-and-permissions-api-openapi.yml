@@ -1,0 +1,704 @@
+openapi: 3.1.0
+info:
+  title: Strapi Users and Permissions API
+  description: >-
+    The Strapi Users and Permissions API provides a full authentication
+    process based on JSON Web Tokens (JWT) to protect API endpoints, along
+    with an access-control list (ACL) strategy for managing permissions
+    between groups of users. It supports user registration, login, password
+    reset, email confirmation, and social provider authentication workflows.
+    End users and their account information are managed as a content-type,
+    and the API enables configuration of roles and permissions to control
+    which API endpoints are accessible to authenticated and public users.
+  version: '5.0.0'
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+externalDocs:
+  description: Strapi Users and Permissions Documentation
+  url: https://docs.strapi.io/cms/features/users-permissions
+servers:
+  - url: https://{host}
+    description: Strapi Server
+    variables:
+      host:
+        default: localhost:1337
+        description: The hostname and port of your Strapi instance
+tags:
+  - name: Authentication
+    description: >-
+      Endpoints for user authentication including login, registration,
+      and password management using JWT tokens.
+  - name: Permissions
+    description: >-
+      Endpoints for viewing and configuring permissions assigned to roles.
+  - name: Roles
+    description: >-
+      Endpoints for managing user roles and their associated permissions.
+  - name: Users
+    description: >-
+      Endpoints for managing end-user accounts and profiles.
+security:
+  - bearerAuth: []
+paths:
+  /api/auth/local:
+    post:
+      operationId: loginUser
+      summary: Login with local credentials
+      description: >-
+        Authenticates a user with their identifier (email or username) and
+        password. Returns a JWT token and the user profile on successful
+        authentication. The JWT token should be included in subsequent
+        requests as an Authorization Bearer header.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - identifier
+                - password
+              properties:
+                identifier:
+                  type: string
+                  description: >-
+                    The user's email address or username
+                password:
+                  type: string
+                  format: password
+                  description: >-
+                    The user's password
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/local/register:
+    post:
+      operationId: registerUser
+      summary: Register a new user
+      description: >-
+        Creates a new user account with the default Authenticated role.
+        Returns a JWT token and the newly created user profile. Registration
+        can be restricted or require email confirmation depending on the
+        plugin configuration.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                  description: >-
+                    The desired username for the new account
+                email:
+                  type: string
+                  format: email
+                  description: >-
+                    The email address for the new account
+                password:
+                  type: string
+                  format: password
+                  description: >-
+                    The password for the new account
+      responses:
+        '200':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/forgot-password:
+    post:
+      operationId: forgotPassword
+      summary: Request a password reset
+      description: >-
+        Sends a password reset email to the specified email address if an
+        account exists. The email contains a link with a reset code that
+        can be used with the reset-password endpoint.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: >-
+                    The email address associated with the user account
+      responses:
+        '200':
+          description: Password reset email sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    description: Indicates the request was processed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/reset-password:
+    post:
+      operationId: resetPassword
+      summary: Reset a user password
+      description: >-
+        Resets a user's password using the code received via the
+        forgot-password email. Both a new password and password confirmation
+        must be provided and must match.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+                - password
+                - passwordConfirmation
+              properties:
+                code:
+                  type: string
+                  description: >-
+                    The reset code received in the password reset email
+                password:
+                  type: string
+                  format: password
+                  description: >-
+                    The new password
+                passwordConfirmation:
+                  type: string
+                  format: password
+                  description: >-
+                    Confirmation of the new password (must match password)
+      responses:
+        '200':
+          description: Password reset successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/email-confirmation:
+    get:
+      operationId: confirmEmail
+      summary: Confirm a user email
+      description: >-
+        Confirms a user's email address using the confirmation token sent
+        via email during registration. This endpoint is typically accessed
+        by clicking the confirmation link in the email.
+      tags:
+        - Authentication
+      security: []
+      parameters:
+        - name: confirmation
+          in: query
+          required: true
+          description: >-
+            The email confirmation token
+          schema:
+            type: string
+      responses:
+        '302':
+          description: >-
+            Redirects to the configured confirmation redirect URL
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/send-email-confirmation:
+    post:
+      operationId: sendEmailConfirmation
+      summary: Resend email confirmation
+      description: >-
+        Resends the email confirmation link to the specified email address.
+        Useful when the original confirmation email was lost or expired.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: >-
+                    The email address to send the confirmation to
+      responses:
+        '200':
+          description: Confirmation email sent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    description: The email address the confirmation was sent to
+                  sent:
+                    type: boolean
+                    description: Whether the email was sent successfully
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/auth/change-password:
+    post:
+      operationId: changePassword
+      summary: Change user password
+      description: >-
+        Changes the password for the currently authenticated user. Requires
+        the current password for verification along with the new password
+        and confirmation.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - currentPassword
+                - password
+                - passwordConfirmation
+              properties:
+                currentPassword:
+                  type: string
+                  format: password
+                  description: >-
+                    The user's current password
+                password:
+                  type: string
+                  format: password
+                  description: >-
+                    The new password
+                passwordConfirmation:
+                  type: string
+                  format: password
+                  description: >-
+                    Confirmation of the new password (must match password)
+      responses:
+        '200':
+          description: Password changed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/auth/{provider}/callback:
+    get:
+      operationId: providerCallback
+      summary: Social provider authentication callback
+      description: >-
+        Callback endpoint used during social provider authentication (e.g.,
+        Google, GitHub, Facebook). After the user authenticates with the
+        provider, this endpoint processes the callback and returns a JWT
+        token and user profile.
+      tags:
+        - Authentication
+      security: []
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          description: >-
+            The name of the authentication provider (e.g., google, github,
+            facebook, twitter)
+          schema:
+            type: string
+        - name: access_token
+          in: query
+          description: >-
+            The access token from the authentication provider
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /api/users:
+    get:
+      operationId: listUsers
+      summary: List users
+      description: >-
+        Returns a list of all registered end-user accounts. Requires
+        appropriate permissions to access.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/users/{id}:
+    get:
+      operationId: getUser
+      summary: Get a user
+      description: >-
+        Returns a single end-user account by their ID.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: The user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateUser
+      summary: Update a user
+      description: >-
+        Updates an end-user account by their ID. Only the fields included
+        in the request body will be updated.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequest'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteUser
+      summary: Delete a user
+      description: >-
+        Deletes an end-user account by their ID. This action is irreversible.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/users/me:
+    get:
+      operationId: getAuthenticatedUser
+      summary: Get the authenticated user
+      description: >-
+        Returns the profile of the currently authenticated user based on the
+        JWT token provided in the Authorization header.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: The authenticated user profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/users-permissions/roles:
+    get:
+      operationId: listRoles
+      summary: List roles
+      description: >-
+        Returns a list of all roles defined in the Users and Permissions
+        plugin, including their associated permissions.
+      tags:
+        - Roles
+      responses:
+        '200':
+          description: A list of roles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/users-permissions/roles/{id}:
+    get:
+      operationId: getRole
+      summary: Get a role
+      description: >-
+        Returns a single role by its ID, including its associated permissions.
+      tags:
+        - Roles
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the role
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The role details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  role:
+                    $ref: '#/components/schemas/Role'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/users-permissions/permissions:
+    get:
+      operationId: listPermissions
+      summary: List permissions
+      description: >-
+        Returns the full list of available permissions grouped by plugin
+        and controller. Used to understand which actions can be assigned
+        to roles.
+      tags:
+        - Permissions
+      responses:
+        '200':
+          description: A list of available permissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  permissions:
+                    type: object
+                    description: >-
+                      Permissions grouped by plugin and controller action
+                    additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        JWT token obtained from the /api/auth/local endpoint. Include as
+        Authorization: Bearer {token}.
+  parameters:
+    UserId:
+      name: id
+      in: path
+      required: true
+      description: The unique ID of the user
+      schema:
+        type: string
+  schemas:
+    AuthResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: >-
+            The JSON Web Token for authenticating subsequent API requests
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the user
+        username:
+          type: string
+          description: The username of the user
+        email:
+          type: string
+          format: email
+          description: The email address of the user
+        provider:
+          type: string
+          description: >-
+            The authentication provider (e.g., local, google, github)
+        confirmed:
+          type: boolean
+          description: Whether the user's email has been confirmed
+        blocked:
+          type: boolean
+          description: Whether the user account is blocked
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the user was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the user was last updated
+        role:
+          $ref: '#/components/schemas/Role'
+    UserUpdateRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The updated username
+        email:
+          type: string
+          format: email
+          description: The updated email address
+        password:
+          type: string
+          format: password
+          description: A new password for the user
+        blocked:
+          type: boolean
+          description: Whether to block or unblock the user
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: >-
+            The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: >-
+            The permissions assigned to this role, grouped by plugin and
+            controller action
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

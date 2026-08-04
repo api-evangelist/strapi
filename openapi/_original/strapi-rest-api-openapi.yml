@@ -1,0 +1,697 @@
+openapi: 3.1.0
+info:
+  title: Strapi REST API
+  description: >-
+    The Strapi REST API provides endpoints for accessing and managing
+    content-types created within the Strapi headless CMS. When a new
+    content-type is created in Strapi, REST API endpoints are automatically
+    generated, supporting full CRUD operations including filtering, sorting,
+    pagination, and population of relational fields. Developers can use these
+    endpoints to deliver content to any frontend application, mobile app, or
+    third-party service. Content-types are private by default and require
+    either public role permissions or authenticated requests with proper
+    authorization.
+  version: '5.0.0'
+  contact:
+    name: Strapi Support
+    url: https://strapi.io/support
+  termsOfService: https://strapi.io/terms
+externalDocs:
+  description: Strapi REST API Documentation
+  url: https://docs.strapi.io/cms/api/rest
+servers:
+  - url: https://{host}
+    description: Strapi Server
+    variables:
+      host:
+        default: localhost:1337
+        description: The hostname and port of your Strapi instance
+tags:
+  - name: Content Entries
+    description: >-
+      CRUD operations on content-type entries. Strapi auto-generates these
+      endpoints for each content-type defined in the application.
+  - name: Upload
+    description: >-
+      File upload and media library management endpoints powered by the
+      Upload plugin.
+security:
+  - bearerAuth: []
+  - apiTokenAuth: []
+paths:
+  /api/{pluralApiId}:
+    get:
+      operationId: findEntries
+      summary: List content entries
+      description: >-
+        Returns a list of entries for the specified content-type. Results can
+        be filtered, sorted, paginated, and populated with relational data
+        using query parameters. By default, responses include only top-level
+        fields without populating relations, media fields, components, or
+        dynamic zones.
+      tags:
+        - Content Entries
+      parameters:
+        - $ref: '#/components/parameters/PluralApiId'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/PaginationPage'
+        - $ref: '#/components/parameters/PaginationPageSize'
+        - $ref: '#/components/parameters/PaginationStart'
+        - $ref: '#/components/parameters/PaginationLimit'
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Populate'
+        - $ref: '#/components/parameters/Filters'
+        - $ref: '#/components/parameters/Locale'
+        - $ref: '#/components/parameters/Status'
+      responses:
+        '200':
+          description: A list of content entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntryListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createEntry
+      summary: Create a content entry
+      description: >-
+        Creates a new entry for the specified content-type. The request body
+        must include a data object with the fields defined in the content-type
+        schema. Returns the newly created entry.
+      tags:
+        - Content Entries
+      parameters:
+        - $ref: '#/components/parameters/PluralApiId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntryRequest'
+      responses:
+        '201':
+          description: Entry created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrySingleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/{pluralApiId}/{documentId}:
+    get:
+      operationId: findOneEntry
+      summary: Get a content entry
+      description: >-
+        Returns a single entry for the specified content-type by its document
+        ID. Results can be populated with relational data using query
+        parameters.
+      tags:
+        - Content Entries
+      parameters:
+        - $ref: '#/components/parameters/PluralApiId'
+        - $ref: '#/components/parameters/DocumentId'
+        - $ref: '#/components/parameters/Fields'
+        - $ref: '#/components/parameters/Populate'
+        - $ref: '#/components/parameters/Locale'
+        - $ref: '#/components/parameters/Status'
+      responses:
+        '200':
+          description: A single content entry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrySingleResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateEntry
+      summary: Update a content entry
+      description: >-
+        Updates an existing entry for the specified content-type by its
+        document ID. Only the fields included in the request body will be
+        updated. Returns the updated entry.
+      tags:
+        - Content Entries
+      parameters:
+        - $ref: '#/components/parameters/PluralApiId'
+        - $ref: '#/components/parameters/DocumentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntryRequest'
+      responses:
+        '200':
+          description: Entry updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrySingleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteEntry
+      summary: Delete a content entry
+      description: >-
+        Deletes an existing entry for the specified content-type by its
+        document ID. Returns the deleted entry data.
+      tags:
+        - Content Entries
+      parameters:
+        - $ref: '#/components/parameters/PluralApiId'
+        - $ref: '#/components/parameters/DocumentId'
+      responses:
+        '200':
+          description: Entry deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrySingleResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/{pluralApiId}/{documentId}/actions/publish:
+    post:
+      operationId: publishEntry
+      summary: Publish a content entry
+      description: >-
+        Publishes a draft content entry, making it available through the
+        Content API. Only available when Draft and Publish is enabled on the
+        content-type.
+      tags:
+        - Content Entries
+      parameters:
+        - $ref: '#/components/parameters/PluralApiId'
+        - $ref: '#/components/parameters/DocumentId'
+      responses:
+        '200':
+          description: Entry published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrySingleResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/{pluralApiId}/{documentId}/actions/unpublish:
+    post:
+      operationId: unpublishEntry
+      summary: Unpublish a content entry
+      description: >-
+        Unpublishes a published content entry, reverting it to draft status.
+        Only available when Draft and Publish is enabled on the content-type.
+      tags:
+        - Content Entries
+      parameters:
+        - $ref: '#/components/parameters/PluralApiId'
+        - $ref: '#/components/parameters/DocumentId'
+      responses:
+        '200':
+          description: Entry unpublished successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntrySingleResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/upload:
+    post:
+      operationId: uploadFiles
+      summary: Upload files
+      description: >-
+        Uploads one or more files to the Strapi media library. Files can
+        optionally be linked to a content-type entry by providing ref, refId,
+        and field parameters. Uploaded files are placed in the API Uploads
+        folder by default.
+      tags:
+        - Upload
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - files
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                  description: The file(s) to upload
+                ref:
+                  type: string
+                  description: >-
+                    The API identifier of the content-type to link the file to
+                refId:
+                  type: string
+                  description: >-
+                    The document ID of the entry to link the file to
+                field:
+                  type: string
+                  description: >-
+                    The field name on the entry where the file should be linked
+                fileInfo:
+                  type: string
+                  description: >-
+                    JSON string containing file metadata such as name,
+                    alternativeText, and caption
+      responses:
+        '200':
+          description: Files uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UploadFile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/upload/files:
+    get:
+      operationId: listUploadFiles
+      summary: List uploaded files
+      description: >-
+        Returns a list of all files stored in the Strapi media library.
+      tags:
+        - Upload
+      responses:
+        '200':
+          description: A list of uploaded files
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UploadFile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /api/upload/files/{id}:
+    get:
+      operationId: getUploadFile
+      summary: Get an uploaded file
+      description: >-
+        Returns a single file from the Strapi media library by its ID.
+      tags:
+        - Upload
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the uploaded file
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The uploaded file details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadFile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteUploadFile
+      summary: Delete an uploaded file
+      description: >-
+        Deletes a file from the Strapi media library by its ID.
+      tags:
+        - Upload
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the uploaded file
+          schema:
+            type: string
+      responses:
+        '204':
+          description: File deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        JWT token obtained from the Users and Permissions authentication
+        endpoint. Include as Authorization: Bearer {token}.
+    apiTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        API token created in the Strapi admin panel under Settings >
+        Global settings > API Tokens. Include as Authorization: Bearer {token}.
+  parameters:
+    PluralApiId:
+      name: pluralApiId
+      in: path
+      required: true
+      description: >-
+        The plural API identifier of the content-type (e.g., articles,
+        categories, products)
+      schema:
+        type: string
+    DocumentId:
+      name: documentId
+      in: path
+      required: true
+      description: >-
+        The unique document ID of the content entry
+      schema:
+        type: string
+    Sort:
+      name: sort
+      in: query
+      description: >-
+        Sort results by one or more fields. Use field:asc or field:desc
+        notation. Multiple sort criteria can be provided as comma-separated
+        values or array notation (e.g., sort[0]=title:asc&sort[1]=date:desc).
+      schema:
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+    PaginationPage:
+      name: pagination[page]
+      in: query
+      description: >-
+        The page number for page-based pagination (starts at 1)
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PaginationPageSize:
+      name: pagination[pageSize]
+      in: query
+      description: >-
+        The number of entries per page for page-based pagination
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    PaginationStart:
+      name: pagination[start]
+      in: query
+      description: >-
+        The starting index for offset-based pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    PaginationLimit:
+      name: pagination[limit]
+      in: query
+      description: >-
+        The maximum number of entries to return for offset-based pagination
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    Fields:
+      name: fields
+      in: query
+      description: >-
+        Select specific fields to include in the response. Provide as
+        comma-separated values or array notation.
+      schema:
+        oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+    Populate:
+      name: populate
+      in: query
+      description: >-
+        Populate relational fields, media fields, components, or dynamic
+        zones. Use * to populate all first-level relations or specify
+        individual fields using dot notation.
+      schema:
+        oneOf:
+          - type: string
+          - type: object
+    Filters:
+      name: filters
+      in: query
+      description: >-
+        Filter entries using operators such as $eq, $ne, $lt, $lte, $gt,
+        $gte, $in, $notIn, $contains, $notContains, $startsWith, $endsWith,
+        $null, $notNull, $between, $and, $or, $not. Use bracket notation
+        for nested filters (e.g., filters[title][$eq]=Hello).
+      schema:
+        type: object
+    Locale:
+      name: locale
+      in: query
+      description: >-
+        Specify the locale for internationalized content-types. Returns
+        entries matching the given locale code.
+      schema:
+        type: string
+    Status:
+      name: status
+      in: query
+      description: >-
+        Filter entries by publication status. Only applicable when Draft
+        and Publish is enabled on the content-type.
+      schema:
+        type: string
+        enum:
+          - draft
+          - published
+  schemas:
+    EntryRequest:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: >-
+            An object containing the fields and values for the content entry.
+            The structure depends on the content-type schema definition.
+          additionalProperties: true
+    EntrySingleResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Entry'
+        meta:
+          type: object
+          description: >-
+            Metadata about the response
+    EntryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+        meta:
+          type: object
+          properties:
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+    Entry:
+      type: object
+      description: >-
+        A content entry object. In Strapi 5, attributes are directly
+        accessible at the first level of the data object (flattened format).
+      properties:
+        id:
+          type: integer
+          description: The unique integer ID of the entry
+        documentId:
+          type: string
+          description: The unique document identifier for the entry
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the entry was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the entry was last updated
+        publishedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: >-
+            The timestamp when the entry was published, or null if in draft
+            status
+        locale:
+          type: string
+          nullable: true
+          description: >-
+            The locale code of the entry, if internationalization is enabled
+      additionalProperties: true
+    Pagination:
+      type: object
+      description: >-
+        Pagination metadata returned with list responses
+      properties:
+        page:
+          type: integer
+          description: The current page number
+        pageSize:
+          type: integer
+          description: The number of entries per page
+        pageCount:
+          type: integer
+          description: The total number of pages
+        total:
+          type: integer
+          description: The total number of entries
+    UploadFile:
+      type: object
+      description: >-
+        A file object stored in the Strapi media library
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the file
+        name:
+          type: string
+          description: The original name of the file
+        alternativeText:
+          type: string
+          nullable: true
+          description: Alternative text for accessibility
+        caption:
+          type: string
+          nullable: true
+          description: A caption for the file
+        width:
+          type: integer
+          nullable: true
+          description: The width in pixels for image files
+        height:
+          type: integer
+          nullable: true
+          description: The height in pixels for image files
+        formats:
+          type: object
+          nullable: true
+          description: >-
+            Responsive image format variants (thumbnail, small, medium, large)
+        hash:
+          type: string
+          description: A unique hash identifier for the file
+        ext:
+          type: string
+          description: The file extension
+        mime:
+          type: string
+          description: The MIME type of the file
+        size:
+          type: number
+          description: The file size in kilobytes
+        url:
+          type: string
+          description: The URL path to access the file
+        previewUrl:
+          type: string
+          nullable: true
+          description: A preview URL for the file
+        provider:
+          type: string
+          description: The storage provider (e.g., local, aws-s3, cloudinary)
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the file was uploaded
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the file was last updated
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
