@@ -1,0 +1,920 @@
+{
+  "item": [
+    {
+      "id": "b4c4f1cd-433a-4eda-a206-6db7f4868482",
+      "name": "Admin Authentication",
+      "description": {
+        "content": "Authentication endpoints for administrator accounts used to access the Strapi admin panel.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dda6bb1e-8d8c-415b-83f2-41a932bca87d",
+          "name": "Login to admin panel",
+          "request": {
+            "name": "Login to admin panel",
+            "description": {
+              "content": "Authenticates an administrator with their email and password. Returns a JWT token for accessing admin panel API endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname and port of your Strapi instance",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b9fcd55-160d-473d-ab18-458d9b652db8",
+              "name": "Authentication successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"token\": \"string\",\n    \"user\": {\n      \"id\": 6325,\n      \"firstname\": \"string\",\n      \"lastname\": \"string\",\n      \"email\": \"48FjnEpI@hZSVclyUrUbJkiYmJJdrGIRWYuKZLlD.nzp\",\n      \"isActive\": false,\n      \"blocked\": false,\n      \"preferedLanguage\": \"string\",\n      \"roles\": [\n        {\n          \"id\": 6619,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 5079\n        },\n        {\n          \"id\": 5417,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 9035\n        }\n      ],\n      \"createdAt\": \"2008-08-21T06:36:01.084Z\",\n      \"updatedAt\": \"2002-07-08T13:11:28.548Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2110ccf3-53b6-474a-9044-61f51937043f",
+              "name": "Bad request - invalid input or validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7860,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d53f00fb-d053-4120-b635-a89d14217d9c",
+          "name": "Renew admin JWT token",
+          "request": {
+            "name": "Renew admin JWT token",
+            "description": {
+              "content": "Renews the admin JWT token using a valid refresh token to extend the admin session without requiring re-authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "renew-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname and port of your Strapi instance",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5fd8ded-1416-4651-ab63-4001252e996f",
+              "name": "Token renewed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "renew-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"token\": \"string\",\n    \"user\": {\n      \"id\": 6325,\n      \"firstname\": \"string\",\n      \"lastname\": \"string\",\n      \"email\": \"48FjnEpI@hZSVclyUrUbJkiYmJJdrGIRWYuKZLlD.nzp\",\n      \"isActive\": false,\n      \"blocked\": false,\n      \"preferedLanguage\": \"string\",\n      \"roles\": [\n        {\n          \"id\": 6619,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 5079\n        },\n        {\n          \"id\": 5417,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 9035\n        }\n      ],\n      \"createdAt\": \"2008-08-21T06:36:01.084Z\",\n      \"updatedAt\": \"2002-07-08T13:11:28.548Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "982c1781-0e20-4867-9052-089261426d87",
+              "name": "Bad request - invalid input or validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "renew-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7860,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffa5c764-6126-4025-ae00-ed9b44705014",
+          "name": "Request admin password reset",
+          "request": {
+            "name": "Request admin password reset",
+            "description": {
+              "content": "Sends a password reset email to the specified administrator email address.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "forgot-password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname and port of your Strapi instance",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e8c65701-3d22-409a-be21-fca7b215c69f",
+              "name": "Password reset email sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "forgot-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77028dc8-6f28-4276-b5a5-90f5d9b82a84",
+              "name": "Bad request - invalid input or validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "forgot-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7860,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dc869c5-3e46-400f-820c-94051552311e",
+          "name": "Reset admin password",
+          "request": {
+            "name": "Reset admin password",
+            "description": {
+              "content": "Resets an administrator's password using the code received via the forgot-password email.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "reset-password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname and port of your Strapi instance",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resetPasswordToken\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6421bbc8-55bc-4851-ba0b-55fd52e05fa2",
+              "name": "Password reset successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "reset-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resetPasswordToken\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"token\": \"string\",\n    \"user\": {\n      \"id\": 6325,\n      \"firstname\": \"string\",\n      \"lastname\": \"string\",\n      \"email\": \"48FjnEpI@hZSVclyUrUbJkiYmJJdrGIRWYuKZLlD.nzp\",\n      \"isActive\": false,\n      \"blocked\": false,\n      \"preferedLanguage\": \"string\",\n      \"roles\": [\n        {\n          \"id\": 6619,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 5079\n        },\n        {\n          \"id\": 5417,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 9035\n        }\n      ],\n      \"createdAt\": \"2008-08-21T06:36:01.084Z\",\n      \"updatedAt\": \"2002-07-08T13:11:28.548Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bf1b401-8204-4638-a233-5c6151a2bd51",
+              "name": "Bad request - invalid input or validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "reset-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resetPasswordToken\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7860,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8c7a2ce-88e8-481e-9fa3-a84f8fd3b06b",
+          "name": "Register the first administrator",
+          "request": {
+            "name": "Register the first administrator",
+            "description": {
+              "content": "Registers the initial Super Admin account during Strapi setup. This endpoint is only available when no administrator accounts exist in the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "register-admin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The hostname and port of your Strapi instance",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "027a616d-de38-496b-8c71-e13db96e76bb",
+              "name": "First admin registered successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "register-admin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"token\": \"string\",\n    \"user\": {\n      \"id\": 6325,\n      \"firstname\": \"string\",\n      \"lastname\": \"string\",\n      \"email\": \"48FjnEpI@hZSVclyUrUbJkiYmJJdrGIRWYuKZLlD.nzp\",\n      \"isActive\": false,\n      \"blocked\": false,\n      \"preferedLanguage\": \"string\",\n      \"roles\": [\n        {\n          \"id\": 6619,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 5079\n        },\n        {\n          \"id\": 5417,\n          \"name\": \"string\",\n          \"code\": \"string\",\n          \"description\": \"string\",\n          \"usersCount\": 9035\n        }\n      ],\n      \"createdAt\": \"2008-08-21T06:36:01.084Z\",\n      \"updatedAt\": \"2002-07-08T13:11:28.548Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a4dd588-2640-4a57-bca1-82e53a91509a",
+              "name": "Bad request - invalid input or validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "register-admin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The hostname and port of your Strapi instance",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstname\": \"<string>\",\n  \"lastname\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7860,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The hostname and port of your Strapi instance",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost:1337",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b5da0069-73d1-4f73-b00b-7e31d4fda722",
+    "name": "Strapi Admin Panel Admin Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Permissions API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/users-permissions/permissions"
+          },
+          "docs": "Returns the full list of available permissions grouped by plugin and controller. Used to understand which actions can be assigned to roles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

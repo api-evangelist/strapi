@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Content Types API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List content types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/content-type-builder/content-types"
+          },
+          "docs": "Returns a list of all content-types defined in the Strapi application, including their schemas, attributes, and configuration."
+        },
+        {
+          "info": {
+            "name": "Get a content type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/content-type-builder/content-types/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the content-type (e.g., api::article.article)"
+              }
+            ]
+          },
+          "docs": "Returns a single content-type definition by its UID, including its full schema with all attributes, relations, and configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

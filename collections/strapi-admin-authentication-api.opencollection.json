@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login to admin panel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates an administrator with their email and password. Returns a JWT token for accessing admin panel API endpoints."
+        },
+        {
+          "info": {
+            "name": "Renew admin JWT token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/renew-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renews the admin JWT token using a valid refresh token to extend the admin session without requiring re-authentication."
+        },
+        {
+          "info": {
+            "name": "Request admin password reset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/forgot-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a password reset email to the specified administrator email address."
+        },
+        {
+          "info": {
+            "name": "Reset admin password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/reset-password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resets an administrator's password using the code received via the forgot-password email."
+        },
+        {
+          "info": {
+            "name": "Register the first administrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/register-admin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers the initial Super Admin account during Strapi setup. This endpoint is only available when no administrator accounts exist in the system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

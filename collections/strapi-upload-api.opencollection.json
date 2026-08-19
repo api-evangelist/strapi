@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Upload API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/upload",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "files",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "ref",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "refId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "field",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "fileInfo",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads one or more files to the Strapi media library. Files can optionally be linked to a content-type entry by providing ref, refId, and field parameters. Uploaded files are placed in the API Uploads folder by default."
+        },
+        {
+          "info": {
+            "name": "List uploaded files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/upload/files"
+          },
+          "docs": "Returns a list of all files stored in the Strapi media library."
+        },
+        {
+          "info": {
+            "name": "Get an uploaded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/upload/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the uploaded file"
+              }
+            ]
+          },
+          "docs": "Returns a single file from the Strapi media library by its ID."
+        },
+        {
+          "info": {
+            "name": "Delete an uploaded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/api/upload/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the uploaded file"
+              }
+            ]
+          },
+          "docs": "Deletes a file from the Strapi media library by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

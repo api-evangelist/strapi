@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Content Manager API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content Manager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List collection type entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/content-manager/collection-types/:contentType",
+            "params": [
+              {
+                "name": "contentType",
+                "value": "",
+                "type": "path",
+                "description": "The UID of the collection type (e.g., api::article.article)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of entries for a collection type through the admin Content Manager interface."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

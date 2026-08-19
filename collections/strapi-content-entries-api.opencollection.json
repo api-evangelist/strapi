@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Content Entries API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content Entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List content entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/:pluralApiId",
+            "params": [
+              {
+                "name": "pluralApiId",
+                "value": "",
+                "type": "path",
+                "description": "The plural API identifier of the content-type (e.g., articles, categories, products)"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort results by one or more fields. Use field:asc or field:desc notation. Multiple sort criteria can be provided as comma-separated values or array notation (e.g., sort[0]=title:asc&sort[1]=date:desc)."
+              },
+              {
+                "name": "pagination[page]",
+                "value": "",
+                "type": "query",
+                "description": "The page number for page-based pagination (starts at 1)"
+              },
+              {
+                "name": "pagination[pageSize]",
+                "value": "",
+                "type": "query",
+                "description": "The number of entries per page for page-based pagination"
+              },
+              {
+                "name": "pagination[start]",
+                "value": "",
+                "type": "query",
+                "description": "The starting index for offset-based pagination"
+              },
+              {
+                "name": "pagination[limit]",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of entries to return for offset-based pagination"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select specific fields to include in the response. Provide as comma-separated values or array notation."
+              },
+              {
+                "name": "populate",
+                "value": "",
+                "type": "query",
+                "description": "Populate relational fields, media fields, components, or dynamic zones. Use * to populate all first-level relations or specify individual fields using dot notation."
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filter entries using operators such as $eq, $ne, $lt, $lte, $gt, $gte, $in, $notIn, $contains, $notContains, $startsWith, $endsWith, $null, $notNull, $between, $and, $or, $not. Use bracket notation for nested filters (e.g., filters[title][$eq]=Hello)."
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Specify the locale for internationalized content-types. Returns entries matching the given locale code."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter entries by publication status. Only applicable when Draft and Publish is enabled on the content-type."
+              }
+            ]
+          },
+          "docs": "Returns a list of entries for the specified content-type. Results can be filtered, sorted, paginated, and populated with relational data using query parameters. By default, responses include only top-level fields without populating relations, media fields, components, or dynamic zones."
+        },
+        {
+          "info": {
+            "name": "Create a content entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/:pluralApiId",
+            "params": [
+              {
+                "name": "pluralApiId",
+                "value": "",
+                "type": "path",
+                "description": "The plural API identifier of the content-type (e.g., articles, categories, products)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new entry for the specified content-type. The request body must include a data object with the fields defined in the content-type schema. Returns the newly created entry."
+        },
+        {
+          "info": {
+            "name": "Get a content entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/api/:pluralApiId/:documentId",
+            "params": [
+              {
+                "name": "pluralApiId",
+                "value": "",
+                "type": "path",
+                "description": "The plural API identifier of the content-type (e.g., articles, categories, products)"
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique document ID of the content entry"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Select specific fields to include in the response. Provide as comma-separated values or array notation."
+              },
+              {
+                "name": "populate",
+                "value": "",
+                "type": "query",
+                "description": "Populate relational fields, media fields, components, or dynamic zones. Use * to populate all first-level relations or specify individual fields using dot notation."
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "Specify the locale for internationalized content-types. Returns entries matching the given locale code."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter entries by publication status. Only applicable when Draft and Publish is enabled on the content-type."
+              }
+            ]
+          },
+          "docs": "Returns a single entry for the specified content-type by its document ID. Results can be populated with relational data using query parameters."
+        },
+        {
+          "info": {
+            "name": "Update a content entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/api/:pluralApiId/:documentId",
+            "params": [
+              {
+                "name": "pluralApiId",
+                "value": "",
+                "type": "path",
+                "description": "The plural API identifier of the content-type (e.g., articles, categories, products)"
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique document ID of the content entry"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing entry for the specified content-type by its document ID. Only the fields included in the request body will be updated. Returns the updated entry."
+        },
+        {
+          "info": {
+            "name": "Delete a content entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/api/:pluralApiId/:documentId",
+            "params": [
+              {
+                "name": "pluralApiId",
+                "value": "",
+                "type": "path",
+                "description": "The plural API identifier of the content-type (e.g., articles, categories, products)"
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique document ID of the content entry"
+              }
+            ]
+          },
+          "docs": "Deletes an existing entry for the specified content-type by its document ID. Returns the deleted entry data."
+        },
+        {
+          "info": {
+            "name": "Publish a content entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/:pluralApiId/:documentId/actions/publish",
+            "params": [
+              {
+                "name": "pluralApiId",
+                "value": "",
+                "type": "path",
+                "description": "The plural API identifier of the content-type (e.g., articles, categories, products)"
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique document ID of the content entry"
+              }
+            ]
+          },
+          "docs": "Publishes a draft content entry, making it available through the Content API. Only available when Draft and Publish is enabled on the content-type."
+        },
+        {
+          "info": {
+            "name": "Unpublish a content entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/api/:pluralApiId/:documentId/actions/unpublish",
+            "params": [
+              {
+                "name": "pluralApiId",
+                "value": "",
+                "type": "path",
+                "description": "The plural API identifier of the content-type (e.g., articles, categories, products)"
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique document ID of the content entry"
+              }
+            ]
+          },
+          "docs": "Unpublishes a published content entry, reverting it to draft status. Only available when Draft and Publish is enabled on the content-type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

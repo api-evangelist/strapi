@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Admin Roles API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List administrator roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/roles"
+          },
+          "docs": "Returns a list of all administrator roles. Default roles include Super Admin, Editor, and Author."
+        },
+        {
+          "info": {
+            "name": "Create an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom administrator role with specified permissions."
+        },
+        {
+          "info": {
+            "name": "Get an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator role"
+              }
+            ]
+          },
+          "docs": "Returns a single administrator role by its ID, including its associated permissions."
+        },
+        {
+          "info": {
+            "name": "Update an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/admin/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator role"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an administrator role's name, description, and permissions."
+        },
+        {
+          "info": {
+            "name": "Delete an administrator role",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator role"
+              }
+            ]
+          },
+          "docs": "Deletes an administrator role by its ID. Default roles cannot be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

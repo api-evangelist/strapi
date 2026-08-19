@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Admin Users API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List administrator users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all administrator accounts with their roles and metadata."
+        },
+        {
+          "info": {
+            "name": "Create an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new administrator account with specified roles. An invitation email is sent to the new administrator."
+        },
+        {
+          "info": {
+            "name": "Get an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator user"
+              }
+            ]
+          },
+          "docs": "Returns a single administrator account by its ID."
+        },
+        {
+          "info": {
+            "name": "Update an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an administrator account's details including name, email, password, active status, and role assignments."
+        },
+        {
+          "info": {
+            "name": "Delete an administrator user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the administrator user"
+              }
+            ]
+          },
+          "docs": "Deletes an administrator account by its ID. This action is irreversible."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

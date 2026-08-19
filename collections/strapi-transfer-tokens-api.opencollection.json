@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Strapi Admin Panel Admin Authentication Transfer Tokens API",
+    "version": "5.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfer Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List transfer tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/admin/transfer/tokens"
+          },
+          "docs": "Returns a list of all transfer tokens configured for data transfer operations between Strapi instances."
+        },
+        {
+          "info": {
+            "name": "Create a transfer token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/admin/transfer/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new transfer token for data transfer operations. The full token value is only returned once upon creation."
+        },
+        {
+          "info": {
+            "name": "Delete a transfer token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/admin/transfer/tokens/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the transfer token"
+              }
+            ]
+          },
+          "docs": "Deletes a transfer token by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
