@@ -26,6 +26,12 @@ tags:
 - Content Management
 - Headless CMS
 - Node.js
+- Open-Source
+tags_raw:
+- CMS
+- Content Management
+- Headless CMS
+- Node.js
 - Open Source
 type: Index
 access: 3rd-Party
@@ -42,6 +48,10 @@ apis:
     through the admin panel and include a custom X-Strapi-Event header identifying the event type.
   humanURL: https://docs.strapi.io/cms/backend-customization/webhooks
   tags:
+  - CMS
+  - Event
+  - Webhook
+  tags_raw:
   - CMS
   - Events
   - Webhooks
@@ -81,6 +91,8 @@ apis:
   humanURL: https://docs.strapi.io/cms/api/rest
   baseURL: https://{host}
   tags:
+  - Admin - Roles
+  tags_raw:
   - Admin Roles
   properties:
   - type: OpenAPI
@@ -330,6 +342,8 @@ apis:
   humanURL: https://docs.strapi.io/cms/api/rest
   baseURL: https://{host}
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -352,6 +366,8 @@ apis:
   humanURL: https://docs.strapi.io/cms/api/rest
   baseURL: https://{host}
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
