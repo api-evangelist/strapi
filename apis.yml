@@ -103,7 +103,7 @@ apis:
   humanURL: https://docs.strapi.io/cms/api/rest
   baseURL: https://{host}
   tags:
-  - Admin Roles
+  - Admin - Roles
   tags_raw:
   - Admin Roles
   properties:
