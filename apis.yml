@@ -35,6 +35,7 @@ accessModel:
   method: derived
 image: https://strapi.io/assets/strapi-logo-dark.svg
 tags:
+- Strapi
 - CMS
 - Content Management
 - Headless CMS
