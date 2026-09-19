@@ -40,8 +40,8 @@ tags:
 - Headless CMS
 - Node.js
 - Open-Source
-- Strapi
 tags_raw:
+- Strapi
 - CMS
 - Content Management
 - Headless CMS
@@ -105,7 +105,7 @@ apis:
   humanURL: https://docs.strapi.io/cms/api/rest
   baseURL: https://{host}
   tags:
-  - Admin - Roles
+  - Admin Roles
   tags_raw:
   - Admin Roles
   properties:
