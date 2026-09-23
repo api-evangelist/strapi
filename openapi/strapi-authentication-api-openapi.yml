@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Strapi Admin Panel Admin Authentication API
-  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  title: Strapi Users and Permissions Authentication API
+  description: The Strapi Users and Permissions API provides a full authentication process based on JSON Web Tokens (JWT) to protect API endpoints, along with an access-control list (ACL) strategy for managing permissions between groups of users.
   version: 5.0.0
   contact:
     name: Strapi Support
@@ -15,7 +15,7 @@ servers:
       default: localhost:1337
       description: The hostname and port of your Strapi instance
 security:
-- adminBearerAuth: []
+- bearerAuth: []
 tags:
 - name: Authentication
   description: Endpoints for user authentication including login, registration, and password management using JWT tokens.
@@ -294,47 +294,7 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    AuthResponse:
-      type: object
-      properties:
-        jwt:
-          type: string
-          description: The JSON Web Token for authenticating subsequent API requests
-        user:
-          $ref: '#/components/schemas/User'
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        description:
-          type: string
-          description: A description of the role's purpose
-        type:
-          type: string
-          description: The role type identifier (e.g., authenticated, public)
-        permissions:
-          type: object
-          description: The permissions assigned to this role, grouped by plugin and controller action
-          additionalProperties: true
     User:
       type: object
       properties:
@@ -387,12 +347,52 @@ components:
             details:
               type: object
               description: Additional error details
+    AuthResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: The JSON Web Token for authenticating subsequent API requests
+        user:
+          $ref: '#/components/schemas/User'
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: The permissions assigned to this role, grouped by plugin and controller action
+          additionalProperties: true
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
-    adminBearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+      description: 'JWT token obtained from the /api/auth/local endpoint. Include as Authorization: Bearer {token}.'
 externalDocs:
-  description: Strapi Admin Panel Documentation
-  url: https://docs.strapi.io/cms/features/admin-panel
+  description: Strapi Users and Permissions Documentation
+  url: https://docs.strapi.io/cms/features/users-permissions

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Strapi Admin Panel Admin Authentication Content Manager API
+  title: Strapi Admin Panel Content Manager API
   description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
   version: 5.0.0
   contact:
@@ -64,19 +64,6 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     AdminPagination:
       type: object
@@ -113,6 +100,19 @@ components:
             details:
               type: object
               description: Additional error details
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     adminBearerAuth:
       type: http

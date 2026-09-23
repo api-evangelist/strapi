@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Strapi Admin Panel Admin Authentication Content Types API
+  title: Strapi Admin Panel Content Types API
   description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
   version: 5.0.0
   contact:
@@ -89,6 +89,26 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
     ContentType:
       type: object
       properties:
@@ -125,26 +145,6 @@ components:
               type: object
               description: The attribute definitions for the content-type fields
               additionalProperties: true
-    Error:
-      type: object
-      properties:
-        data:
-          nullable: true
-        error:
-          type: object
-          properties:
-            status:
-              type: integer
-              description: The HTTP status code
-            name:
-              type: string
-              description: The error name
-            message:
-              type: string
-              description: A human-readable error message
-            details:
-              type: object
-              description: Additional error details
   securitySchemes:
     adminBearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Strapi Admin Panel Admin Authentication Admin Users API
+  title: Strapi Admin Panel Admin Users API
   description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
   version: 5.0.0
   contact:
@@ -155,31 +155,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     AdminUserCreateRequest:
       type: object
@@ -204,6 +179,62 @@ components:
           items:
             type: integer
           description: An array of role IDs to assign to the administrator
+    AdminUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the administrator
+        firstname:
+          type: string
+          description: The administrator's first name
+        lastname:
+          type: string
+          description: The administrator's last name
+        email:
+          type: string
+          format: email
+          description: The administrator's email address
+        isActive:
+          type: boolean
+          description: Whether the administrator account is active
+        blocked:
+          type: boolean
+          description: Whether the administrator account is blocked
+        preferedLanguage:
+          type: string
+          description: The administrator's preferred admin panel language
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminRole'
+          description: The roles assigned to the administrator
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the account was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: The timestamp when the account was last updated
+    AdminRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        code:
+          type: string
+          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
+        description:
+          type: string
+          description: A description of the role's purpose and access level
+        usersCount:
+          type: integer
+          description: The number of administrators assigned to this role
     Error:
       type: object
       properties:
@@ -264,62 +295,31 @@ components:
           items:
             type: integer
           description: Updated array of role IDs
-    AdminUser:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the administrator
-        firstname:
-          type: string
-          description: The administrator's first name
-        lastname:
-          type: string
-          description: The administrator's last name
-        email:
-          type: string
-          format: email
-          description: The administrator's email address
-        isActive:
-          type: boolean
-          description: Whether the administrator account is active
-        blocked:
-          type: boolean
-          description: Whether the administrator account is blocked
-        preferedLanguage:
-          type: string
-          description: The administrator's preferred admin panel language
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/AdminRole'
-          description: The roles assigned to the administrator
-        createdAt:
-          type: string
-          format: date-time
-          description: The timestamp when the account was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: The timestamp when the account was last updated
-    AdminRole:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        code:
-          type: string
-          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
-        description:
-          type: string
-          description: A description of the role's purpose and access level
-        usersCount:
-          type: integer
-          description: The number of administrators assigned to this role
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     AdminUserId:
       name: id

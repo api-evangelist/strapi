@@ -1,40 +1,50 @@
 {
   "provider": "strapi",
   "sources": [
-    "strapi-admin-authentication-api-openapi.yml",
-    "strapi-admin-roles-api-openapi.yml",
-    "strapi-admin-users-api-openapi.yml",
-    "strapi-api-tokens-api-openapi.yml",
-    "strapi-authentication-api-openapi.yml",
-    "strapi-content-entries-api-openapi.yml",
-    "strapi-content-manager-api-openapi.yml",
-    "strapi-content-types-api-openapi.yml",
-    "strapi-permissions-api-openapi.yml",
-    "strapi-roles-api-openapi.yml",
-    "strapi-transfer-tokens-api-openapi.yml",
-    "strapi-upload-api-openapi.yml",
-    "strapi-users-api-openapi.yml",
-    "strapi-webhooks-api-openapi.yml"
+    "_original/strapi-admin-panel-api-openapi.yml",
+    "_original/strapi-rest-api-openapi.yml",
+    "_original/strapi-users-and-permissions-api-openapi.yml"
   ],
   "outputs": [
+    "strapi-api-tokens-api-openapi.yml",
     "strapi-admin-authentication-api-openapi.yml",
     "strapi-admin-roles-api-openapi.yml",
     "strapi-admin-users-api-openapi.yml",
-    "strapi-api-tokens-api-openapi.yml",
-    "strapi-authentication-api-openapi.yml",
-    "strapi-content-entries-api-openapi.yml",
     "strapi-content-manager-api-openapi.yml",
     "strapi-content-types-api-openapi.yml",
+    "strapi-transfer-tokens-api-openapi.yml",
+    "strapi-webhooks-api-openapi.yml",
+    "strapi-content-entries-api-openapi.yml",
+    "strapi-upload-api-openapi.yml",
+    "strapi-authentication-api-openapi.yml",
     "strapi-permissions-api-openapi.yml",
     "strapi-roles-api-openapi.yml",
-    "strapi-transfer-tokens-api-openapi.yml",
-    "strapi-upload-api-openapi.yml",
-    "strapi-users-api-openapi.yml",
-    "strapi-webhooks-api-openapi.yml"
+    "strapi-users-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "strapi-admin-panel-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strapi-rest-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "strapi-users-and-permissions-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "strapi-admin-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-admin-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-admin-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-api-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-content-entries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-content-manager-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-content-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-permissions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-transfer-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-upload-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "strapi-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

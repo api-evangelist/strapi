@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Strapi Admin Panel Admin Authentication Upload API
-  description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
+  title: Strapi REST Upload API
+  description: The Strapi REST API provides endpoints for accessing and managing content-types created within the Strapi headless CMS.
   version: 5.0.0
   contact:
     name: Strapi Support
@@ -15,7 +15,8 @@ servers:
       default: localhost:1337
       description: The hostname and port of your Strapi instance
 security:
-- adminBearerAuth: []
+- bearerAuth: []
+- apiTokenAuth: []
 tags:
 - name: Upload
   description: File upload and media library management endpoints powered by the Upload plugin.
@@ -135,31 +136,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     UploadFile:
       type: object
@@ -241,12 +217,42 @@ components:
             details:
               type: object
               description: Additional error details
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
-    adminBearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: 'Admin JWT token obtained from the /admin/login endpoint. Include as Authorization: Bearer {token}.'
+      description: 'JWT token obtained from the Users and Permissions authentication endpoint. Include as Authorization: Bearer {token}.'
+    apiTokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API token created in the Strapi admin panel under Settings > Global settings > API Tokens. Include as Authorization: Bearer {token}.'
 externalDocs:
-  description: Strapi Admin Panel Documentation
-  url: https://docs.strapi.io/cms/features/admin-panel
+  description: Strapi REST API Documentation
+  url: https://docs.strapi.io/cms/api/rest

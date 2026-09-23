@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Strapi Admin Panel Admin Authentication API
   description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
@@ -196,35 +196,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    AdminAuthResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            token:
-              type: string
-              description: The JWT token for authenticating admin API requests
-            user:
-              $ref: '#/components/schemas/AdminUser'
-    AdminRole:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        code:
-          type: string
-          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
-        description:
-          type: string
-          description: A description of the role's purpose and access level
-        usersCount:
-          type: integer
-          description: The number of administrators assigned to this role
     AdminUser:
       type: object
       properties:
@@ -263,6 +234,24 @@ components:
           type: string
           format: date-time
           description: The timestamp when the account was last updated
+    AdminRole:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        code:
+          type: string
+          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
+        description:
+          type: string
+          description: A description of the role's purpose and access level
+        usersCount:
+          type: integer
+          description: The number of administrators assigned to this role
     Error:
       type: object
       properties:
@@ -283,6 +272,17 @@ components:
             details:
               type: object
               description: Additional error details
+    AdminAuthResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+              description: The JWT token for authenticating admin API requests
+            user:
+              $ref: '#/components/schemas/AdminUser'
   responses:
     BadRequest:
       description: Bad request - invalid input or validation error

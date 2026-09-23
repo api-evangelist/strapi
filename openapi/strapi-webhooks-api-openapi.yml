@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Strapi Admin Panel Admin Authentication Webhooks API
+  title: Strapi Admin Panel Webhooks API
   description: The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.
   version: 5.0.0
   contact:
@@ -147,6 +147,12 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Forbidden:
       description: Forbidden - insufficient permissions
       content:
@@ -155,12 +161,6 @@ components:
             $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid input or validation error
       content:
         application/json:
           schema:
@@ -198,6 +198,26 @@ components:
         isEnabled:
           type: boolean
           description: Whether the webhook is currently active
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
     WebhookRequest:
       type: object
       required:
@@ -225,26 +245,6 @@ components:
         isEnabled:
           type: boolean
           description: Whether the webhook should be active
-    Error:
-      type: object
-      properties:
-        data:
-          nullable: true
-        error:
-          type: object
-          properties:
-            status:
-              type: integer
-              description: The HTTP status code
-            name:
-              type: string
-              description: The error name
-            message:
-              type: string
-              description: A human-readable error message
-            details:
-              type: object
-              description: Additional error details
   securitySchemes:
     adminBearerAuth:
       type: http
