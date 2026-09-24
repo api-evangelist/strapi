@@ -1,1 +1,0 @@
-# Strapi GraphQL API

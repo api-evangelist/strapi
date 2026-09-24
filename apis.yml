@@ -40,7 +40,7 @@ tags:
 - Content Management
 - Headless CMS
 - Node.js
-- Open-Source
+- Open Source
 tags_raw:
 - Strapi
 - CMS
@@ -48,6 +48,7 @@ tags_raw:
 - Headless CMS
 - Node.js
 - Open Source
+- Open-Source
 type: Index
 access: 3rd-Party
 position: Consuming
@@ -91,8 +92,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -116,8 +115,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -139,8 +136,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -161,8 +156,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -185,8 +178,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -209,8 +200,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -232,8 +221,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -254,8 +241,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -276,8 +261,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -298,8 +281,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -321,8 +302,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -343,8 +322,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -367,8 +344,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
@@ -391,8 +366,6 @@ apis:
     url: https://docs.strapi.io/cms/api/rest
   - type: Documentation
     url: https://docs.strapi.io/cms/api/rest/parameters
-  - type: GraphQL
-    url: graphql/strapi-graphql.md
   - type: Documentation
     url: https://docs.strapi.io/cms/features/admin-panel
   - type: Documentation
