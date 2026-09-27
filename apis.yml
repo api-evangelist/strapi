@@ -8,16 +8,21 @@ description: >-
   delivery API for building fast, decoupled frontends.
 url: https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/apis.yml
 deliveryModel:
-  model: saas
-  open_source: false
+  model: unknown
+  license_evidence:
+    repo: strapi/strapi
+    spdx: NOASSERTION
+    stars: 73234
+  open_source: unknown
   commercial: true
   callable_host: false
-  label: Hosted service · you call their endpoint
-  confidence: medium
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
   source:
   - openapi
   - pricing
-  generated: '2026-08-28'
+  - repository-unlicensed
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium

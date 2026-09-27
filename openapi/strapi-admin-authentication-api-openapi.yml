@@ -234,24 +234,17 @@ components:
           type: string
           format: date-time
           description: The timestamp when the account was last updated
-    AdminRole:
+    AdminAuthResponse:
       type: object
       properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        code:
-          type: string
-          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
-        description:
-          type: string
-          description: A description of the role's purpose and access level
-        usersCount:
-          type: integer
-          description: The number of administrators assigned to this role
+        data:
+          type: object
+          properties:
+            token:
+              type: string
+              description: The JWT token for authenticating admin API requests
+            user:
+              $ref: '#/components/schemas/AdminUser'
     Error:
       type: object
       properties:
@@ -272,17 +265,24 @@ components:
             details:
               type: object
               description: Additional error details
-    AdminAuthResponse:
+    AdminRole:
       type: object
       properties:
-        data:
-          type: object
-          properties:
-            token:
-              type: string
-              description: The JWT token for authenticating admin API requests
-            user:
-              $ref: '#/components/schemas/AdminUser'
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        code:
+          type: string
+          description: The unique code identifier for the role (e.g., strapi-super-admin, strapi-editor, strapi-author)
+        description:
+          type: string
+          description: A description of the role's purpose and access level
+        usersCount:
+          type: integer
+          description: The number of administrators assigned to this role
   responses:
     BadRequest:
       description: Bad request - invalid input or validation error

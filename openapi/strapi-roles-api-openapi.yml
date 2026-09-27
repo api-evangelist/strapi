@@ -94,6 +94,25 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: The permissions assigned to this role, grouped by plugin and controller action
+          additionalProperties: true
     Error:
       type: object
       properties:
@@ -114,25 +133,6 @@ components:
             details:
               type: object
               description: Additional error details
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        description:
-          type: string
-          description: A description of the role's purpose
-        type:
-          type: string
-          description: The role type identifier (e.g., authenticated, public)
-        permissions:
-          type: object
-          description: The permissions assigned to this role, grouped by plugin and controller action
-          additionalProperties: true
   securitySchemes:
     bearerAuth:
       type: http

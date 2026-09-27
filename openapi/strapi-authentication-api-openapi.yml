@@ -295,6 +295,53 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: The permissions assigned to this role, grouped by plugin and controller action
+          additionalProperties: true
+    AuthResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: The JSON Web Token for authenticating subsequent API requests
+        user:
+          $ref: '#/components/schemas/User'
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
     User:
       type: object
       properties:
@@ -327,62 +374,15 @@ components:
           description: The timestamp when the user was last updated
         role:
           $ref: '#/components/schemas/Role'
-    Error:
-      type: object
-      properties:
-        data:
-          nullable: true
-        error:
-          type: object
-          properties:
-            status:
-              type: integer
-              description: The HTTP status code
-            name:
-              type: string
-              description: The error name
-            message:
-              type: string
-              description: A human-readable error message
-            details:
-              type: object
-              description: Additional error details
-    AuthResponse:
-      type: object
-      properties:
-        jwt:
-          type: string
-          description: The JSON Web Token for authenticating subsequent API requests
-        user:
-          $ref: '#/components/schemas/User'
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        description:
-          type: string
-          description: A description of the role's purpose
-        type:
-          type: string
-          description: The role type identifier (e.g., authenticated, public)
-        permissions:
-          type: object
-          description: The permissions assigned to this role, grouped by plugin and controller action
-          additionalProperties: true
   responses:
-    BadRequest:
-      description: Bad request - invalid input or validation error
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
+    BadRequest:
+      description: Bad request - invalid input or validation error
       content:
         application/json:
           schema:

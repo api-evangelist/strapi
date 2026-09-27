@@ -129,7 +129,51 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: The permissions assigned to this role, grouped by plugin and controller action
+          additionalProperties: true
     User:
       type: object
       properties:
@@ -162,6 +206,23 @@ components:
           description: The timestamp when the user was last updated
         role:
           $ref: '#/components/schemas/Role'
+    UserUpdateRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The updated username
+        email:
+          type: string
+          format: email
+          description: The updated email address
+        password:
+          type: string
+          format: password
+          description: A new password for the user
+        blocked:
+          type: boolean
+          description: Whether to block or unblock the user
     Error:
       type: object
       properties:
@@ -182,67 +243,6 @@ components:
             details:
               type: object
               description: Additional error details
-    UserUpdateRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          description: The updated username
-        email:
-          type: string
-          format: email
-          description: The updated email address
-        password:
-          type: string
-          format: password
-          description: A new password for the user
-        blocked:
-          type: boolean
-          description: Whether to block or unblock the user
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        description:
-          type: string
-          description: A description of the role's purpose
-        type:
-          type: string
-          description: The role type identifier (e.g., authenticated, public)
-        permissions:
-          type: object
-          description: The permissions assigned to this role, grouped by plugin and controller action
-          additionalProperties: true
-  responses:
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     UserId:
       name: id
