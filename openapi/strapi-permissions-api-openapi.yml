@@ -45,14 +45,14 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
+    Forbidden:
+      description: Forbidden - insufficient permissions
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - insufficient permissions
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
       content:
         application/json:
           schema:

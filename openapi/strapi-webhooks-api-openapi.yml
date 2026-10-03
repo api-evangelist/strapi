@@ -146,32 +146,34 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    WebhookRequest:
+      type: object
+      required:
+      - name
+      - url
+      - events
+      properties:
+        name:
+          type: string
+          description: The display name of the webhook
+        url:
+          type: string
+          format: uri
+          description: The URL where events will be sent
+        headers:
+          type: object
+          description: Custom HTTP headers to include with webhook requests
+          additionalProperties:
+            type: string
+        events:
+          type: array
+          items:
+            type: string
+          description: The event types that trigger this webhook
+        isEnabled:
+          type: boolean
+          description: Whether the webhook should be active
     Webhook:
       type: object
       properties:
@@ -218,33 +220,31 @@ components:
             details:
               type: object
               description: Additional error details
-    WebhookRequest:
-      type: object
-      required:
-      - name
-      - url
-      - events
-      properties:
-        name:
-          type: string
-          description: The display name of the webhook
-        url:
-          type: string
-          format: uri
-          description: The URL where events will be sent
-        headers:
-          type: object
-          description: Custom HTTP headers to include with webhook requests
-          additionalProperties:
-            type: string
-        events:
-          type: array
-          items:
-            type: string
-          description: The event types that trigger this webhook
-        isEnabled:
-          type: boolean
-          description: Whether the webhook should be active
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     adminBearerAuth:
       type: http

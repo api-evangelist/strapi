@@ -205,20 +205,8 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
       content:
         application/json:
           schema:
@@ -229,13 +217,44 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    Filters:
-      name: filters
-      in: query
-      description: Filter entries using operators such as $eq, $ne, $lt, $lte, $gt, $gte, $in, $notIn, $contains, $notContains, $startsWith, $endsWith, $null, $notNull, $between, $and, $or, $not. Use bracket notation for nested filters (e.g., filters[title][$eq]=Hello).
+    PluralApiId:
+      name: pluralApiId
+      in: path
+      required: true
+      description: The plural API identifier of the content-type (e.g., articles, categories, products)
       schema:
-        type: object
+        type: string
+    PaginationPageSize:
+      name: pagination[pageSize]
+      in: query
+      description: The number of entries per page for page-based pagination
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    Status:
+      name: status
+      in: query
+      description: Filter entries by publication status. Only applicable when Draft and Publish is enabled on the content-type.
+      schema:
+        type: string
+        enum:
+        - draft
+        - published
     DocumentId:
       name: documentId
       in: path
@@ -243,16 +262,6 @@ components:
       description: The unique document ID of the content entry
       schema:
         type: string
-    Fields:
-      name: fields
-      in: query
-      description: Select specific fields to include in the response. Provide as comma-separated values or array notation.
-      schema:
-        oneOf:
-        - type: string
-        - type: array
-          items:
-            type: string
     Sort:
       name: sort
       in: query
@@ -263,12 +272,24 @@ components:
         - type: array
           items:
             type: string
-    Locale:
-      name: locale
+    Populate:
+      name: populate
       in: query
-      description: Specify the locale for internationalized content-types. Returns entries matching the given locale code.
+      description: Populate relational fields, media fields, components, or dynamic zones. Use * to populate all first-level relations or specify individual fields using dot notation.
       schema:
-        type: string
+        oneOf:
+        - type: string
+        - type: object
+    Fields:
+      name: fields
+      in: query
+      description: Select specific fields to include in the response. Provide as comma-separated values or array notation.
+      schema:
+        oneOf:
+        - type: string
+        - type: array
+          items:
+            type: string
     PaginationStart:
       name: pagination[start]
       in: query
@@ -277,6 +298,12 @@ components:
         type: integer
         minimum: 0
         default: 0
+    Filters:
+      name: filters
+      in: query
+      description: Filter entries using operators such as $eq, $ne, $lt, $lte, $gt, $gte, $in, $notIn, $contains, $notContains, $startsWith, $endsWith, $null, $notNull, $between, $and, $or, $not. Use bracket notation for nested filters (e.g., filters[title][$eq]=Hello).
+      schema:
+        type: object
     PaginationLimit:
       name: pagination[limit]
       in: query
@@ -286,39 +313,12 @@ components:
         minimum: 1
         maximum: 100
         default: 25
-    PluralApiId:
-      name: pluralApiId
-      in: path
-      required: true
-      description: The plural API identifier of the content-type (e.g., articles, categories, products)
+    Locale:
+      name: locale
+      in: query
+      description: Specify the locale for internationalized content-types. Returns entries matching the given locale code.
       schema:
         type: string
-    Status:
-      name: status
-      in: query
-      description: Filter entries by publication status. Only applicable when Draft and Publish is enabled on the content-type.
-      schema:
-        type: string
-        enum:
-        - draft
-        - published
-    Populate:
-      name: populate
-      in: query
-      description: Populate relational fields, media fields, components, or dynamic zones. Use * to populate all first-level relations or specify individual fields using dot notation.
-      schema:
-        oneOf:
-        - type: string
-        - type: object
-    PaginationPageSize:
-      name: pagination[pageSize]
-      in: query
-      description: The number of entries per page for page-based pagination
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 25
     PaginationPage:
       name: pagination[page]
       in: query
@@ -328,14 +328,6 @@ components:
         minimum: 1
         default: 1
   schemas:
-    EntrySingleResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Entry'
-        meta:
-          type: object
-          description: Metadata about the response
     Error:
       type: object
       properties:
@@ -356,18 +348,23 @@ components:
             details:
               type: object
               description: Additional error details
-    EntryListResponse:
+    EntryRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          description: An object containing the fields and values for the content entry. The structure depends on the content-type schema definition.
+          additionalProperties: true
+    EntrySingleResponse:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entry'
+          $ref: '#/components/schemas/Entry'
         meta:
           type: object
-          properties:
-            pagination:
-              $ref: '#/components/schemas/Pagination'
+          description: Metadata about the response
     Pagination:
       type: object
       description: Pagination metadata returned with list responses
@@ -384,15 +381,6 @@ components:
         total:
           type: integer
           description: The total number of entries
-    EntryRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          description: An object containing the fields and values for the content entry. The structure depends on the content-type schema definition.
-          additionalProperties: true
     Entry:
       type: object
       description: A content entry object. In Strapi 5, attributes are directly accessible at the first level of the data object (flattened format).
@@ -421,6 +409,18 @@ components:
           nullable: true
           description: The locale code of the entry, if internationalization is enabled
       additionalProperties: true
+    EntryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entry'
+        meta:
+          type: object
+          properties:
+            pagination:
+              $ref: '#/components/schemas/Pagination'
   securitySchemes:
     bearerAuth:
       type: http

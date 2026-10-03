@@ -294,6 +294,19 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
 components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Role:
       type: object
@@ -322,26 +335,6 @@ components:
           description: The JSON Web Token for authenticating subsequent API requests
         user:
           $ref: '#/components/schemas/User'
-    Error:
-      type: object
-      properties:
-        data:
-          nullable: true
-        error:
-          type: object
-          properties:
-            status:
-              type: integer
-              description: The HTTP status code
-            name:
-              type: string
-              description: The error name
-            message:
-              type: string
-              description: A human-readable error message
-            details:
-              type: object
-              description: Additional error details
     User:
       type: object
       properties:
@@ -374,19 +367,26 @@ components:
           description: The timestamp when the user was last updated
         role:
           $ref: '#/components/schemas/Role'
-  responses:
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        data:
+          nullable: true
+        error:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: The HTTP status code
+            name:
+              type: string
+              description: The error name
+            message:
+              type: string
+              description: A human-readable error message
+            details:
+              type: object
+              description: Additional error details
   securitySchemes:
     bearerAuth:
       type: http
