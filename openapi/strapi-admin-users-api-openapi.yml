@@ -155,6 +155,39 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    AdminUserId:
+      name: id
+      in: path
+      required: true
+      description: The unique ID of the administrator user
+      schema:
+        type: string
   schemas:
     AdminUser:
       type: object
@@ -194,6 +227,29 @@ components:
           type: string
           format: date-time
           description: The timestamp when the account was last updated
+    AdminUserCreateRequest:
+      type: object
+      required:
+      - firstname
+      - lastname
+      - email
+      - roles
+      properties:
+        firstname:
+          type: string
+          description: The administrator's first name
+        lastname:
+          type: string
+          description: The administrator's last name
+        email:
+          type: string
+          format: email
+          description: The administrator's email address
+        roles:
+          type: array
+          items:
+            type: integer
+          description: An array of role IDs to assign to the administrator
     AdminRole:
       type: object
       properties:
@@ -212,21 +268,6 @@ components:
         usersCount:
           type: integer
           description: The number of administrators assigned to this role
-    AdminPagination:
-      type: object
-      properties:
-        page:
-          type: integer
-          description: The current page number
-        pageSize:
-          type: integer
-          description: The number of results per page
-        pageCount:
-          type: integer
-          description: The total number of pages
-        total:
-          type: integer
-          description: The total number of results
     AdminUserUpdateRequest:
       type: object
       properties:
@@ -252,29 +293,21 @@ components:
           items:
             type: integer
           description: Updated array of role IDs
-    AdminUserCreateRequest:
+    AdminPagination:
       type: object
-      required:
-      - firstname
-      - lastname
-      - email
-      - roles
       properties:
-        firstname:
-          type: string
-          description: The administrator's first name
-        lastname:
-          type: string
-          description: The administrator's last name
-        email:
-          type: string
-          format: email
-          description: The administrator's email address
-        roles:
-          type: array
-          items:
-            type: integer
-          description: An array of role IDs to assign to the administrator
+        page:
+          type: integer
+          description: The current page number
+        pageSize:
+          type: integer
+          description: The number of results per page
+        pageCount:
+          type: integer
+          description: The total number of pages
+        total:
+          type: integer
+          description: The total number of results
     Error:
       type: object
       properties:
@@ -295,39 +328,6 @@ components:
             details:
               type: object
               description: Additional error details
-  responses:
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    AdminUserId:
-      name: id
-      in: path
-      required: true
-      description: The unique ID of the administrator user
-      schema:
-        type: string
   securitySchemes:
     adminBearerAuth:
       type: http

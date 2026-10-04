@@ -146,7 +146,58 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not found - the requested resource does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid input or validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the webhook
+        name:
+          type: string
+          description: The display name of the webhook
+        url:
+          type: string
+          format: uri
+          description: The URL where events will be sent
+        headers:
+          type: object
+          description: Custom HTTP headers to include with webhook requests
+          additionalProperties:
+            type: string
+        events:
+          type: array
+          items:
+            type: string
+          description: The event types that trigger this webhook (e.g., entry.create, entry.update, entry.delete, entry.publish, entry.unpublish, media.create, media.update, media.delete)
+        isEnabled:
+          type: boolean
+          description: Whether the webhook is currently active
     WebhookRequest:
       type: object
       required:
@@ -174,32 +225,6 @@ components:
         isEnabled:
           type: boolean
           description: Whether the webhook should be active
-    Webhook:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the webhook
-        name:
-          type: string
-          description: The display name of the webhook
-        url:
-          type: string
-          format: uri
-          description: The URL where events will be sent
-        headers:
-          type: object
-          description: Custom HTTP headers to include with webhook requests
-          additionalProperties:
-            type: string
-        events:
-          type: array
-          items:
-            type: string
-          description: The event types that trigger this webhook (e.g., entry.create, entry.update, entry.delete, entry.publish, entry.unpublish, media.create, media.update, media.delete)
-        isEnabled:
-          type: boolean
-          description: Whether the webhook is currently active
     Error:
       type: object
       properties:
@@ -220,31 +245,6 @@ components:
             details:
               type: object
               description: Additional error details
-  responses:
-    BadRequest:
-      description: Bad request - invalid input or validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found - the requested resource does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Forbidden - insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - missing or invalid authentication
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     adminBearerAuth:
       type: http
