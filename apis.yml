@@ -378,6 +378,9 @@ apis:
   - type: Documentation
     url: https://docs.strapi.io/cms/features/users-permissions
 common:
+- type: CapabilityMap
+  url: capabilities/strapi-capability-edges.yml
+  name: Strapi Business Capability Map
 - type: AgenticAccess
   url: agentic-access/strapi-agentic-access.yml
 - type: TrustCenter

@@ -1,0 +1,42 @@
+slug: strapi
+provider: Strapi
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Admin Users
+  spec_file: strapi-admin-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /admin/users createAdminUser Create an administrator user; schemas AdminUser, AdminRole
+  reason: Administrator account lifecycle with role-based access control is identity & access management,
+    not HR employee records.
+- tag: Roles
+  spec_file: strapi-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /api/users-permissions/roles listRoles; "access-control list (ACL) strategy for managing
+    permissions between groups of users"
+  reason: Role retrieval within the users-and-permissions ACL model realises identity & access management.
+- tag: Webhooks
+  spec_file: strapi-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: POST /admin/webhooks createWebhook Create a webhook
+  reason: CRUD lifecycle over outbound webhook subscriptions matches Webhook & Event Subscription Management,
+    the one place the frame treats webhooks as a managed capability.
