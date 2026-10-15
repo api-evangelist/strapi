@@ -1,5 +1,30 @@
 generated: '2026-10-15'
 edges:
+- partner_name: n8n
+  partner: n8n
+  partner_match: aggregator
+  type: marketplace
+  marketplace: n8n-nodes-base
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/Strapi
+  category: null
+  contract_reference:
+    register: n8n built-in nodes (n8n-io/n8n packages/nodes-base)
+    spec_file: null
+    role: ipaas-connector:n8n-nodes-base
+    registered_name: Strapi
+    matched_domain: strapi.io
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    node_path: Strapi
+    trigger: false
+    builder: n8n (built-in node)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
 - partner_name: Abhinav Dhiman
   app: Strapi Plugin for ImageKit.io
   partner: imagekit
@@ -144,11 +169,11 @@ edges:
   detected: '2026-10-15'
 method: searched
 checked:
+- https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/
 - https://market-api.strapi.io/plugins
 - https://market-api.strapi.io/providers
 source:
-- https://market-api.strapi.io/plugins
-- https://market-api.strapi.io/providers
+- https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/
 marketplace_apps:
 - marketplace: own
   channel: partner-built
