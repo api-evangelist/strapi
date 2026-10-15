@@ -26,7 +26,7 @@
     node_path: Strapi
     trigger: false
     builder: n8n (built-in node)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: strapi-abhinav-dhiman
   label: Abhinav Dhiman
