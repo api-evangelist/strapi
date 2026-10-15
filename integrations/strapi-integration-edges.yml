@@ -1,0 +1,160 @@
+generated: '2026-10-15'
+edges:
+- partner_name: Abhinav Dhiman
+  app: Strapi Plugin for ImageKit.io
+  partner: imagekit
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://market.strapi.io/plugins/strapi-plugin-imagekit
+  category: Strapi plugin
+  contract_reference:
+    register: Strapi Market (market-api.strapi.io + npm)
+    spec_file: null
+    role: strapi-app
+    registered_name: Abhinav Dhiman
+    matched_domain: imagekit.io
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Strapi Plugin for ImageKit.io
+    signal_note: one edge per (builder, platform); listings are context, never read
+    detected_by: sweep-content-design.py
+    detected: '2026-10-15'
+    npm_package: strapi-plugin-imagekit
+    domain_source: npm package record (homepage / author.url / author.email)
+  detected_by: sweep-content-design.py
+  detected: '2026-10-15'
+- partner_name: Mateusz Ziarko
+  app: imgix
+  partner: imgix
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://market.strapi.io/plugins/strapi-plugin-imgix
+  category: Strapi plugin
+  contract_reference:
+    register: Strapi Market (market-api.strapi.io + npm)
+    spec_file: null
+    role: strapi-app
+    registered_name: Mateusz Ziarko
+    matched_domain: imgix.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - imgix
+    signal_note: one edge per (builder, platform); listings are context, never read
+    detected_by: sweep-content-design.py
+    detected: '2026-10-15'
+    npm_package: strapi-plugin-imgix
+    domain_source: npm package record (homepage / author.url / author.email)
+  detected_by: sweep-content-design.py
+  detected: '2026-10-15'
+- partner_name: David Václavek
+  app: Localazy
+  partner: localazy
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://market.strapi.io/plugins/@localazy-strapi-plugin
+  category: Strapi plugin
+  contract_reference:
+    register: Strapi Market (market-api.strapi.io + npm)
+    spec_file: null
+    role: strapi-app
+    registered_name: David Václavek
+    matched_domain: localazy.com
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Localazy
+    signal_note: one edge per (builder, platform); listings are context, never read
+    detected_by: sweep-content-design.py
+    detected: '2026-10-15'
+    npm_package: '@localazy/strapi-plugin'
+    domain_source: npm package record (homepage / author.url / author.email)
+  detected_by: sweep-content-design.py
+  detected: '2026-10-15'
+  publisher_verified:
+  - Strapi Verified
+- partner_name: Taofiq Aiyelabegan
+  app: Permit.io
+  partner: permit-io
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://market.strapi.io/plugins/@permitio-permit-strapi
+  category: Strapi plugin
+  contract_reference:
+    register: Strapi Market (market-api.strapi.io + npm)
+    spec_file: null
+    role: strapi-app
+    registered_name: Taofiq Aiyelabegan
+    matched_domain: permit.io
+    matched_by: domain
+    listings: 1
+    sample_apps:
+    - Permit.io
+    signal_note: one edge per (builder, platform); listings are context, never read
+    detected_by: sweep-content-design.py
+    detected: '2026-10-15'
+    npm_package: '@permitio/permit-strapi'
+    domain_source: npm package record (homepage / author.url / author.email)
+  detected_by: sweep-content-design.py
+  detected: '2026-10-15'
+- partner_name: Ali Tarik
+  app: Upstash Search
+  partner: upstash
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://market.strapi.io/plugins/@upstash-strapi-plugin-upstash-search
+  category: Strapi plugin
+  contract_reference:
+    register: Strapi Market (market-api.strapi.io + npm)
+    spec_file: null
+    role: strapi-app
+    registered_name: Ali Tarik
+    matched_domain: upstash.com
+    matched_by: domain+name-among-holders
+    listings: 1
+    sample_apps:
+    - Upstash Search
+    signal_note: one edge per (builder, platform); listings are context, never read
+    detected_by: sweep-content-design.py
+    detected: '2026-10-15'
+    npm_package: '@upstash/strapi-plugin-upstash-search'
+    domain_source: npm package record (homepage / author.url / author.email)
+  detected_by: sweep-content-design.py
+  detected: '2026-10-15'
+method: searched
+checked:
+- https://market-api.strapi.io/plugins
+- https://market-api.strapi.io/providers
+source:
+- https://market-api.strapi.io/plugins
+- https://market-api.strapi.io/providers
+marketplace_apps:
+- marketplace: own
+  channel: partner-built
+  app: strapi
+  url: https://market.strapi.io/
+  app_count: 320
+  adapter: sweep-content-design.py:market-api.strapi.io plugins + providers JSON + npm package records
+  listed: 5
+  note: 320 listings read; only domain-linked builders / vendors are written
