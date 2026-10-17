@@ -295,33 +295,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique ID of the role
-        name:
-          type: string
-          description: The display name of the role
-        description:
-          type: string
-          description: A description of the role's purpose
-        type:
-          type: string
-          description: The role type identifier (e.g., authenticated, public)
-        permissions:
-          type: object
-          description: The permissions assigned to this role, grouped by plugin and controller action
-          additionalProperties: true
-    AuthResponse:
-      type: object
-      properties:
-        jwt:
-          type: string
-          description: The JSON Web Token for authenticating subsequent API requests
-        user:
-          $ref: '#/components/schemas/User'
     Error:
       type: object
       properties:
@@ -342,6 +315,33 @@ components:
             details:
               type: object
               description: Additional error details
+    AuthResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: The JSON Web Token for authenticating subsequent API requests
+        user:
+          $ref: '#/components/schemas/User'
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique ID of the role
+        name:
+          type: string
+          description: The display name of the role
+        description:
+          type: string
+          description: A description of the role's purpose
+        type:
+          type: string
+          description: The role type identifier (e.g., authenticated, public)
+        permissions:
+          type: object
+          description: The permissions assigned to this role, grouped by plugin and controller action
+          additionalProperties: true
     User:
       type: object
       properties:
