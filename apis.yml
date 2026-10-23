@@ -378,6 +378,8 @@ apis:
   - type: Documentation
     url: https://docs.strapi.io/cms/features/users-permissions
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/strapi/overview
 - type: Plans
   url: plans/strapi-plans-pricing.yml
 - type: RateLimits
