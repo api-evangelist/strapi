@@ -1,524 +1,457 @@
 {
+  "info": {
+    "_postman_id": "a64ca316-e4eb-4b41-a811-84a11404f526",
+    "name": "Strapi Users and Permissions Roles API",
+    "description": "The Strapi Users and Permissions API provides a full authentication process based on JSON Web Tokens (JWT) to protect API endpoints, along with an access-control list (ACL) strategy for managing permissions between groups of users.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:21:00.000Z",
+    "updatedAt": "2026-10-22T01:21:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a64ca316-e4eb-4b41-a811-84a11404f526"
+  },
   "item": [
     {
-      "id": "51666de3-9b59-4b6a-a9c6-f86498d01b6d",
-      "name": "Roles",
-      "description": {
-        "content": "Endpoints for managing user roles and their associated permissions.",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "d24ca37c-bd30-4339-a311-179af74b9622",
-          "name": "List roles",
-          "request": {
-            "name": "List roles",
-            "description": {
-              "content": "Returns a list of all roles defined in the Users and Permissions plugin, including their associated permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "users-permissions",
-                "roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "users-permissions",
+          "item": [
             {
-              "id": "d8a70f23-7b8e-42ce-9eec-528234160c9c",
-              "name": "A list of roles",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users-permissions",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "roles",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get a role",
+                      "id": "6876d5c2-4b61-4909-a820-bd10ee070027",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users-permissions/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users-permissions",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fa7863c4-f258-4cdc-a372-dcfd803903b7",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the role"
+                            }
+                          ]
+                        },
+                        "description": "Returns a single role by its ID, including its associated permissions."
+                      },
+                      "response": [
+                        {
+                          "id": "c2154a68-4324-46fc-b702-7cf697b856ca",
+                          "name": "The role details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/users-permissions/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "users-permissions",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"role\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"type\": \"<string>\",\n    \"permissions\": {\n      \"Excepteur999\": -57419048,\n      \"adipisicing18_\": 87885547.40676203\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:01.000Z",
+                          "updatedAt": "2026-10-22T01:21:01.000Z",
+                          "uid": "35240-c2154a68-4324-46fc-b702-7cf697b856ca"
+                        },
+                        {
+                          "id": "ec7e6f60-7e05-4b49-8960-a33d91648e11",
+                          "name": "Unauthorized - missing or invalid authentication",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/users-permissions/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "users-permissions",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:01.000Z",
+                          "updatedAt": "2026-10-22T01:21:01.000Z",
+                          "uid": "35240-ec7e6f60-7e05-4b49-8960-a33d91648e11"
+                        },
+                        {
+                          "id": "67f9fbba-ca37-46f0-8226-cae1b3b2c9e8",
+                          "name": "Forbidden - insufficient permissions",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/users-permissions/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "users-permissions",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:01.000Z",
+                          "updatedAt": "2026-10-22T01:21:01.000Z",
+                          "uid": "35240-67f9fbba-ca37-46f0-8226-cae1b3b2c9e8"
+                        },
+                        {
+                          "id": "7252962b-1172-45fb-9e02-30f6cccab2ef",
+                          "name": "Not found - the requested resource does not exist",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/users-permissions/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "users-permissions",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:01.000Z",
+                          "updatedAt": "2026-10-22T01:21:01.000Z",
+                          "uid": "35240-7252962b-1172-45fb-9e02-30f6cccab2ef"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:21:01.000Z",
+                      "updatedAt": "2026-10-22T01:21:01.000Z",
+                      "uid": "35240-6876d5c2-4b61-4909-a820-bd10ee070027"
+                    }
+                  ],
+                  "id": "3e2564a2-e6ee-4d7d-8df6-ec8c4073e9c9",
+                  "createdAt": "2026-10-22T01:21:01.000Z",
+                  "updatedAt": "2026-10-22T01:21:01.000Z",
+                  "uid": "35240-3e2564a2-e6ee-4d7d-8df6-ec8c4073e9c9"
+                },
+                {
+                  "name": "List roles",
+                  "id": "b1a9fcaa-303c-4f21-bb75-e89d5b1e38d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/users-permissions/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "users-permissions",
+                        "roles"
+                      ]
+                    },
+                    "description": "Returns a list of all roles defined in the Users and Permissions plugin, including their associated permissions."
+                  },
+                  "response": [
+                    {
+                      "id": "3c7af0d7-de97-42a0-8b22-f8598a76bf0a",
+                      "name": "A list of roles",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users-permissions/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users-permissions",
+                            "roles"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"roles\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"<string>\",\n      \"permissions\": {\n        \"etc74\": true\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"<string>\",\n      \"permissions\": {\n        \"reprehenderit4\": -87938293.23986685\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T01:21:01.000Z",
+                      "updatedAt": "2026-10-22T01:21:01.000Z",
+                      "uid": "35240-3c7af0d7-de97-42a0-8b22-f8598a76bf0a"
+                    },
+                    {
+                      "id": "989a2b9a-64db-41a3-a0b2-088be3cf747f",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users-permissions/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users-permissions",
+                            "roles"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:01.000Z",
+                      "updatedAt": "2026-10-22T01:21:01.000Z",
+                      "uid": "35240-989a2b9a-64db-41a3-a0b2-088be3cf747f"
+                    },
+                    {
+                      "id": "5e3b10e6-345a-4bad-93a3-91206ec82dfa",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/users-permissions/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "users-permissions",
+                            "roles"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:01.000Z",
+                      "updatedAt": "2026-10-22T01:21:01.000Z",
+                      "uid": "35240-5e3b10e6-345a-4bad-93a3-91206ec82dfa"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:01.000Z",
+                  "updatedAt": "2026-10-22T01:21:01.000Z",
+                  "uid": "35240-b1a9fcaa-303c-4f21-bb75-e89d5b1e38d0"
                 }
               ],
-              "body": "{\n  \"roles\": [\n    {\n      \"id\": 4762,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"permissions\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"id\": 6360,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"permissions\": {\n        \"key_0\": true,\n        \"key_1\": \"string\",\n        \"key_2\": false,\n        \"key_3\": \"string\",\n        \"key_4\": \"string\"\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f72885c7-4eef-4d23-af2a-4699fc6ead98",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users-permissions",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7766,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a2ed0905-bd1d-4164-808c-aa31938ecbea",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users-permissions",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7766,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "c438704f-e2b1-47ed-9f6b-ad16ac528d49",
+              "createdAt": "2026-10-22T01:21:01.000Z",
+              "updatedAt": "2026-10-22T01:21:01.000Z",
+              "uid": "35240-c438704f-e2b1-47ed-9f6b-ad16ac528d49"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "be45c685-edaa-4366-86bc-4a6f4ad70a80",
-          "name": "Get a role",
-          "request": {
-            "name": "Get a role",
-            "description": {
-              "content": "Returns a single role by its ID, including its associated permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "users-permissions",
-                "roles",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The ID of the role"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "78aa08b9-b5f6-4701-b486-8c45a2f42c3f",
-              "name": "The role details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users-permissions",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"role\": {\n    \"id\": 5332,\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"type\": \"string\",\n    \"permissions\": {\n      \"key_0\": true\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ef9f39b3-9f56-4b4a-8796-2f3b82a4aeb6",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users-permissions",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7766,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "068bd0ac-b9f9-4860-81cb-338e54d688b5",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users-permissions",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7766,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "229d290f-a139-40f6-a793-1988f965999f",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "users-permissions",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 7766,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "6bb2bc19-3791-4888-a473-2f9e897a77e5",
+          "createdAt": "2026-10-22T01:21:01.000Z",
+          "updatedAt": "2026-10-22T01:21:01.000Z",
+          "uid": "35240-6bb2bc19-3791-4888-a473-2f9e897a77e5"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "260ec9b1-227f-4231-b02a-70711f047575",
+      "createdAt": "2026-10-22T01:21:01.000Z",
+      "updatedAt": "2026-10-22T01:21:01.000Z",
+      "uid": "35240-260ec9b1-227f-4231-b02a-70711f047575"
     }
   ],
   "auth": {
@@ -526,17 +459,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e3370adc-7af4-43d8-908e-5884bd38febd",
-    "name": "Strapi Admin Panel Admin Authentication Roles API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }

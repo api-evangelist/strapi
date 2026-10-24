@@ -1,1363 +1,1199 @@
 {
+  "info": {
+    "_postman_id": "aa2f003c-2ec8-4781-ba75-e3b288de5454",
+    "name": "Strapi Admin Panel Admin Roles API",
+    "description": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:20:04.000Z",
+    "updatedAt": "2026-10-22T01:20:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-aa2f003c-2ec8-4781-ba75-e3b288de5454"
+  },
   "item": [
     {
-      "id": "52117274-dbc0-4d25-ab41-4172a22c01b8",
-      "name": "Admin Roles",
-      "description": {
-        "content": "Endpoints for managing administrator roles (Super Admin, Editor, Author) and their associated permissions.",
-        "type": "text/plain"
-      },
+      "name": "admin",
       "item": [
         {
-          "id": "71fc7d1b-b1c9-4796-90fb-c70a228c9dba",
-          "name": "List administrator roles",
-          "request": {
-            "name": "List administrator roles",
-            "description": {
-              "content": "Returns a list of all administrator roles. Default roles include Super Admin, Editor, and Author.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "roles",
+          "item": [
             {
-              "id": "14bf0242-97eb-4e6e-bf2a-b79b811e8620",
-              "name": "A list of admin roles",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get an administrator role",
+                  "id": "9863608d-b38e-4960-b30c-c429770c2271",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9b96df79-f13f-4741-87a8-fc2ce729866e",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique ID of the administrator role"
+                        }
+                      ]
+                    },
+                    "description": "Returns a single administrator role by its ID, including its associated permissions."
+                  },
+                  "response": [
+                    {
+                      "id": "289cb40e-c9e8-4266-a693-749afffc99a1",
+                      "name": "The admin role details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"usersCount\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-289cb40e-c9e8-4266-a693-749afffc99a1"
+                    },
+                    {
+                      "id": "6869989b-1c45-4a2f-925f-6dc390ae047e",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-6869989b-1c45-4a2f-925f-6dc390ae047e"
+                    },
+                    {
+                      "id": "cd80d8c1-10c0-4f52-ad33-a90b29e72a1b",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-cd80d8c1-10c0-4f52-ad33-a90b29e72a1b"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-9863608d-b38e-4960-b30c-c429770c2271"
+                },
+                {
+                  "name": "Update an administrator role",
+                  "id": "b8880d9e-723d-462a-8bd4-9c5ece1534fd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5dbc6c02-f063-4517-9d08-19feda383ba4",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique ID of the administrator role"
+                        }
+                      ]
+                    },
+                    "description": "Updates an administrator role's name, description, and permissions."
+                  },
+                  "response": [
+                    {
+                      "id": "05498440-75fd-416f-beb3-9946332e7110",
+                      "name": "Admin role updated successfully",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"usersCount\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-05498440-75fd-416f-beb3-9946332e7110"
+                    },
+                    {
+                      "id": "7830d797-df97-4a7e-b79f-49f21c6c8572",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-7830d797-df97-4a7e-b79f-49f21c6c8572"
+                    },
+                    {
+                      "id": "95c56218-6cb3-445a-b574-431bd922d196",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-95c56218-6cb3-445a-b574-431bd922d196"
+                    },
+                    {
+                      "id": "8173b7ed-f9e1-4804-a4ba-9061ea337961",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-8173b7ed-f9e1-4804-a4ba-9061ea337961"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-b8880d9e-723d-462a-8bd4-9c5ece1534fd"
+                },
+                {
+                  "name": "Delete an administrator role",
+                  "id": "0cea322e-44ed-4200-ac48-a15428b6235b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4b6a7998-4615-4f38-92f8-5abf7f95e7e0",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The unique ID of the administrator role"
+                        }
+                      ]
+                    },
+                    "description": "Deletes an administrator role by its ID. Default roles cannot be deleted."
+                  },
+                  "response": [
+                    {
+                      "id": "70a2621e-10a6-4684-bff2-c1b00b61c1df",
+                      "name": "Admin role deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-70a2621e-10a6-4684-bff2-c1b00b61c1df"
+                    },
+                    {
+                      "id": "4c0ae765-2650-447f-8feb-12e8ca516a15",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-4c0ae765-2650-447f-8feb-12e8ca516a15"
+                    },
+                    {
+                      "id": "a010a006-f6a8-4228-83e8-e493e4c8fd66",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-a010a006-f6a8-4228-83e8-e493e4c8fd66"
+                    },
+                    {
+                      "id": "7e8c4f98-7ad3-43de-9416-fa4f215d4264",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:05.000Z",
+                      "updatedAt": "2026-10-22T01:20:05.000Z",
+                      "uid": "35240-7e8c4f98-7ad3-43de-9416-fa4f215d4264"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-0cea322e-44ed-4200-ac48-a15428b6235b"
+                }
+              ],
+              "id": "e255038c-245a-407b-9b2e-2763e246b815",
+              "createdAt": "2026-10-22T01:20:05.000Z",
+              "updatedAt": "2026-10-22T01:20:05.000Z",
+              "uid": "35240-e255038c-245a-407b-9b2e-2763e246b815"
+            },
+            {
+              "name": "List administrator roles",
+              "id": "3f92027b-632f-4606-9b58-cd86ef953a9c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": 2749,\n      \"name\": \"string\",\n      \"code\": \"string\",\n      \"description\": \"string\",\n      \"usersCount\": 8768\n    },\n    {\n      \"id\": 3521,\n      \"name\": \"string\",\n      \"code\": \"string\",\n      \"description\": \"string\",\n      \"usersCount\": 4282\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e0fdac79-bdeb-4618-9609-69dc4d01a153",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ce3cfdd7-b091-409b-89ad-7c4629b6065b",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "admin",
-                    "roles"
-                  ],
+                  "raw": "{{baseUrl}}/admin/roles",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6f75197f-a3c9-423a-8fae-58b48b0b773a",
-          "name": "Create an administrator role",
-          "request": {
-            "name": "Create an administrator role",
-            "description": {
-              "content": "Creates a new custom administrator role with specified permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "9e494040-e9eb-497c-b824-e892a4c45254",
-              "name": "Admin role created successfully",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "admin",
                     "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "Returns a list of all administrator roles. Default roles include Super Admin, Editor, and Author."
+              },
+              "response": [
+                {
+                  "id": "5ac9cf4e-3be7-4fe1-bca4-82c71d01e058",
+                  "name": "A list of admin roles",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"code\": \"<string>\",\n      \"description\": \"<string>\",\n      \"usersCount\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"code\": \"<string>\",\n      \"description\": \"<string>\",\n      \"usersCount\": \"<integer>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-5ac9cf4e-3be7-4fe1-bca4-82c71d01e058"
+                },
+                {
+                  "id": "9d640f9b-8f6f-4712-abe6-00b45bb0e8a3",
+                  "name": "Unauthorized - missing or invalid authentication",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-9d640f9b-8f6f-4712-abe6-00b45bb0e8a3"
+                },
+                {
+                  "id": "d77619c5-d13d-4905-b275-bf70fb8191e3",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-d77619c5-d13d-4905-b275-bf70fb8191e3"
+                }
+              ],
+              "createdAt": "2026-10-22T01:20:05.000Z",
+              "updatedAt": "2026-10-22T01:20:05.000Z",
+              "uid": "35240-3f92027b-632f-4606-9b58-cd86ef953a9c"
+            },
+            {
+              "name": "Create an administrator role",
+              "id": "8f3c7956-fb8b-4404-814e-4b71a6b1a85a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 7700,\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"usersCount\": 2045\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e4902c3c-de7c-484b-8221-e6a4e8cdb8c6",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/admin/roles",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "admin",
                     "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Creates a new custom administrator role with specified permissions."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8f34f038-964e-414b-8d74-2e0ba85acc6f",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "84cbfd16-06f5-4ec4-9eff-315335216a14",
+                  "name": "Admin role created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"code\": \"<string>\",\n  \"description\": \"<string>\",\n  \"usersCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-84cbfd16-06f5-4ec4-9eff-315335216a14"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3ae82b8f-f761-4469-81e1-b5065ffce8e2",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "329dc743-71d1-42c4-923c-3c26917ff242",
+                  "name": "Bad request - invalid input or validation error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-329dc743-71d1-42c4-923c-3c26917ff242"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "b8830861-e732-439e-a1cf-5e04721fca89",
+                  "name": "Unauthorized - missing or invalid authentication",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-b8830861-e732-439e-a1cf-5e04721fca89"
+                },
+                {
+                  "id": "6de39e6c-a06e-4f4f-9872-cf82d9c10678",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "roles"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:05.000Z",
+                  "updatedAt": "2026-10-22T01:20:05.000Z",
+                  "uid": "35240-6de39e6c-a06e-4f4f-9872-cf82d9c10678"
                 }
               ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:20:05.000Z",
+              "updatedAt": "2026-10-22T01:20:05.000Z",
+              "uid": "35240-8f3c7956-fb8b-4404-814e-4b71a6b1a85a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8c427ad9-22fe-471d-b044-1cc3e588ba0f",
-          "name": "Get an administrator role",
-          "request": {
-            "name": "Get an administrator role",
-            "description": {
-              "content": "Returns a single administrator role by its ID, including its associated permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "roles",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The unique ID of the administrator role"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "633a619a-3e67-44fc-b4ba-6c1b7e468f77",
-              "name": "The admin role details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 7700,\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"usersCount\": 2045\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0a3d10d4-c1b6-40ca-8ac4-63fafa349c81",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dc46841e-cf50-41c9-b892-bf5017d94bec",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a11b273a-c230-40ad-b308-f42649ca426e",
-          "name": "Update an administrator role",
-          "request": {
-            "name": "Update an administrator role",
-            "description": {
-              "content": "Updates an administrator role's name, description, and permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "roles",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The unique ID of the administrator role"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "c70f3c86-bbf0-46c3-94dc-c7ae416fbb74",
-              "name": "Admin role updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 7700,\n  \"name\": \"string\",\n  \"code\": \"string\",\n  \"description\": \"string\",\n  \"usersCount\": 2045\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "322703a6-77ba-4e7f-bd39-1329788420cc",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5ecba62b-c5cf-4474-9d01-c00a2d582830",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "66b2bb4c-d700-46ab-ad90-00327588e931",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"permissions\": [\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"subject\": \"<string>\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "232f020e-8f15-4e20-9ee6-6901659a9b9c",
-          "name": "Delete an administrator role",
-          "request": {
-            "name": "Delete an administrator role",
-            "description": {
-              "content": "Deletes an administrator role by its ID. Default roles cannot be deleted.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "roles",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The unique ID of the administrator role"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "c09c0741-5d85-4dc3-8c7f-e6756e4ddc5c",
-              "name": "Admin role deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "68e5d5ca-9a46-4f92-bf01-0b3573f766a8",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ed41d9d1-3629-48a1-a569-f22d46ad8b92",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7797b39a-7c7a-4019-8cc9-19704a0c16d2",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "roles",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique ID of the administrator role"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 5157,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "5f6afb84-247e-4c10-a9b4-6112449c9fa7",
+          "createdAt": "2026-10-22T01:20:05.000Z",
+          "updatedAt": "2026-10-22T01:20:05.000Z",
+          "uid": "35240-5f6afb84-247e-4c10-a9b4-6112449c9fa7"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "7a9995c3-b6a5-48fb-af1d-892cf1f8caea",
+      "createdAt": "2026-10-22T01:20:05.000Z",
+      "updatedAt": "2026-10-22T01:20:05.000Z",
+      "uid": "35240-7a9995c3-b6a5-48fb-af1d-892cf1f8caea"
     }
   ],
   "auth": {
@@ -1365,17 +1201,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "382bab6a-211e-4774-8fe4-b150b1ea5b0c",
-    "name": "Strapi Admin Panel Admin Authentication Admin Roles API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }

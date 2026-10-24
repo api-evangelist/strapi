@@ -1,757 +1,677 @@
 {
+  "info": {
+    "_postman_id": "0d909120-6f10-4918-ace1-9a44c1728988",
+    "name": "Strapi Admin Panel Transfer Tokens API",
+    "description": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:21:07.000Z",
+    "updatedAt": "2026-10-22T01:21:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0d909120-6f10-4918-ace1-9a44c1728988"
+  },
   "item": [
     {
-      "id": "e636ac6a-c24e-44df-8bbf-6b7c8c58ae83",
-      "name": "Transfer Tokens",
-      "description": {
-        "content": "Endpoints for managing transfer tokens used for data transfer operations between Strapi instances.",
-        "type": "text/plain"
-      },
+      "name": "admin",
       "item": [
         {
-          "id": "8d33b8f0-857d-4180-8c45-5b21dc5c16e2",
-          "name": "List transfer tokens",
-          "request": {
-            "name": "List transfer tokens",
-            "description": {
-              "content": "Returns a list of all transfer tokens configured for data transfer operations between Strapi instances.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "transfer",
-                "tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "transfer",
+          "item": [
             {
-              "id": "7c8bca2e-2bb8-43f6-b888-8f8759a90cad",
-              "name": "A list of transfer tokens",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "tokens",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete a transfer token",
+                      "id": "5290c46e-5ce2-439e-a066-0a6cb40531c8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c4872ce0-eca1-4590-9559-6bdb3308bb00",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the transfer token"
+                            }
+                          ]
+                        },
+                        "description": "Deletes a transfer token by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "36bb1194-8762-4753-94f2-ee369cf8730a",
+                          "name": "Transfer token deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/transfer/tokens/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "transfer",
+                                "tokens",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:21:07.000Z",
+                          "updatedAt": "2026-10-22T01:21:07.000Z",
+                          "uid": "35240-36bb1194-8762-4753-94f2-ee369cf8730a"
+                        },
+                        {
+                          "id": "2b0b8e8b-7980-4572-9096-1ca22b857912",
+                          "name": "Unauthorized - missing or invalid authentication",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/transfer/tokens/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "transfer",
+                                "tokens",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:07.000Z",
+                          "updatedAt": "2026-10-22T01:21:07.000Z",
+                          "uid": "35240-2b0b8e8b-7980-4572-9096-1ca22b857912"
+                        },
+                        {
+                          "id": "58f82650-6460-471d-be2d-a54da6275644",
+                          "name": "Not found - the requested resource does not exist",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/transfer/tokens/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "transfer",
+                                "tokens",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:07.000Z",
+                          "updatedAt": "2026-10-22T01:21:07.000Z",
+                          "uid": "35240-58f82650-6460-471d-be2d-a54da6275644"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-5290c46e-5ce2-439e-a066-0a6cb40531c8"
+                    }
+                  ],
+                  "id": "85da38a8-9aa8-4987-a352-e4cbdd3dc0b7",
+                  "createdAt": "2026-10-22T01:21:07.000Z",
+                  "updatedAt": "2026-10-22T01:21:07.000Z",
+                  "uid": "35240-85da38a8-9aa8-4987-a352-e4cbdd3dc0b7"
+                },
+                {
+                  "name": "List transfer tokens",
+                  "id": "c926563f-0201-452b-87ac-b7cb8d857c6f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/transfer/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "transfer",
+                        "tokens"
+                      ]
+                    },
+                    "description": "Returns a list of all transfer tokens configured for data transfer operations between Strapi instances."
+                  },
+                  "response": [
+                    {
+                      "id": "faa176cd-c626-4c1a-9f5e-89a47eb3c05d",
+                      "name": "A list of transfer tokens",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"accessKey\": \"<string>\",\n      \"lastUsedAt\": \"<dateTime>\",\n      \"expiresAt\": \"<dateTime>\",\n      \"lifespan\": \"<integer>\",\n      \"permissions\": [\n        \"pull\",\n        \"pull\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"accessKey\": \"<string>\",\n      \"lastUsedAt\": \"<dateTime>\",\n      \"expiresAt\": \"<dateTime>\",\n      \"lifespan\": \"<integer>\",\n      \"permissions\": [\n        \"push\",\n        \"push\"\n      ],\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-faa176cd-c626-4c1a-9f5e-89a47eb3c05d"
+                    },
+                    {
+                      "id": "96960cd9-511b-4efc-91d6-82ac69801148",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-96960cd9-511b-4efc-91d6-82ac69801148"
+                    },
+                    {
+                      "id": "52db5e77-5b86-48e7-a297-3b9f81eca13f",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-52db5e77-5b86-48e7-a297-3b9f81eca13f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:07.000Z",
+                  "updatedAt": "2026-10-22T01:21:07.000Z",
+                  "uid": "35240-c926563f-0201-452b-87ac-b7cb8d857c6f"
+                },
+                {
+                  "name": "Create a transfer token",
+                  "id": "ee140287-2ab2-4f29-8ada-dfb6f1669759",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"pull\",\n    \"push\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/transfer/tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "transfer",
+                        "tokens"
+                      ]
+                    },
+                    "description": "Creates a new transfer token for data transfer operations. The full token value is only returned once upon creation."
+                  },
+                  "response": [
+                    {
+                      "id": "7ae47e7d-8e3b-4659-aca4-51ced24729e7",
+                      "name": "Transfer token created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"pull\",\n    \"push\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"accessKey\": \"<string>\",\n  \"lastUsedAt\": \"<dateTime>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"push\",\n    \"pull\"\n  ],\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-7ae47e7d-8e3b-4659-aca4-51ced24729e7"
+                    },
+                    {
+                      "id": "2db1f13d-09b8-44ae-9bd5-baa4b6efe5a3",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"pull\",\n    \"push\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-2db1f13d-09b8-44ae-9bd5-baa4b6efe5a3"
+                    },
+                    {
+                      "id": "d93de398-7c00-414e-bc57-7fd1e4e65906",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"pull\",\n    \"push\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-d93de398-7c00-414e-bc57-7fd1e4e65906"
+                    },
+                    {
+                      "id": "ff4977a3-36fe-4f71-b427-9fcdc08fbc6c",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"pull\",\n    \"push\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/transfer/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "transfer",
+                            "tokens"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:07.000Z",
+                      "updatedAt": "2026-10-22T01:21:07.000Z",
+                      "uid": "35240-ff4977a3-36fe-4f71-b427-9fcdc08fbc6c"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:07.000Z",
+                  "updatedAt": "2026-10-22T01:21:07.000Z",
+                  "uid": "35240-ee140287-2ab2-4f29-8ada-dfb6f1669759"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": 8455,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"accessKey\": \"string\",\n      \"lastUsedAt\": \"1969-08-23T16:02:47.121Z\",\n      \"expiresAt\": \"1968-08-10T03:35:21.265Z\",\n      \"lifespan\": 6919,\n      \"permissions\": [\n        \"push\",\n        \"push\"\n      ],\n      \"createdAt\": \"1948-11-29T00:51:33.401Z\",\n      \"updatedAt\": \"1946-12-03T10:31:26.857Z\"\n    },\n    {\n      \"id\": 2037,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"accessKey\": \"string\",\n      \"lastUsedAt\": \"2015-03-16T03:49:37.745Z\",\n      \"expiresAt\": \"1987-09-22T22:31:52.458Z\",\n      \"lifespan\": 2434,\n      \"permissions\": [\n        \"push\",\n        \"pull\"\n      ],\n      \"createdAt\": \"2001-05-22T19:06:14.382Z\",\n      \"updatedAt\": \"1963-06-03T10:29:30.323Z\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a2afb30e-7869-41c6-8b33-ae79aa9cc4da",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 3657,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3313f2c9-9e8c-45c4-95d1-ca6edb6d973e",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 3657,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "f52c8f12-8222-4fba-a29a-2d6f01a3efdb",
+              "createdAt": "2026-10-22T01:21:07.000Z",
+              "updatedAt": "2026-10-22T01:21:07.000Z",
+              "uid": "35240-f52c8f12-8222-4fba-a29a-2d6f01a3efdb"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "53cecbe5-b8a6-4c1d-9f73-2c98b677dd77",
-          "name": "Create a transfer token",
-          "request": {
-            "name": "Create a transfer token",
-            "description": {
-              "content": "Creates a new transfer token for data transfer operations. The full token value is only returned once upon creation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "transfer",
-                "tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "c3fcc114-b006-4af1-bf17-e5c5ddb213ca",
-              "name": "Transfer token created successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 5637,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"accessKey\": \"string\",\n  \"lastUsedAt\": \"2016-01-07T17:08:01.512Z\",\n  \"expiresAt\": \"1992-05-07T02:27:25.493Z\",\n  \"lifespan\": 5219,\n  \"permissions\": [\n    \"push\",\n    \"pull\"\n  ],\n  \"createdAt\": \"1968-07-26T11:43:08.106Z\",\n  \"updatedAt\": \"2017-02-08T20:56:18.652Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "edb6dcd6-e35e-40bb-b281-3a1e506f9e0f",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 3657,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "46933a01-7bfc-4d4a-81c5-d2d8af55bbed",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 3657,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e0966dd1-87c1-4606-b538-d6ac211b29cd",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 3657,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5f4b4363-9d6a-4121-bef1-1d8aad974fb2",
-          "name": "Delete a transfer token",
-          "request": {
-            "name": "Delete a transfer token",
-            "description": {
-              "content": "Deletes a transfer token by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "transfer",
-                "tokens",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The ID of the transfer token"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "783e152a-b96b-4eae-815c-e5694aa9e7eb",
-              "name": "Transfer token deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the transfer token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "b553d5a6-f581-4f80-8562-99bf15f69262",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the transfer token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 3657,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5d3cad7b-8eea-43f1-a463-565465951af0",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "transfer",
-                    "tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the transfer token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 3657,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "2c14601b-5063-4f15-b3b8-c4c998a90987",
+          "createdAt": "2026-10-22T01:21:07.000Z",
+          "updatedAt": "2026-10-22T01:21:07.000Z",
+          "uid": "35240-2c14601b-5063-4f15-b3b8-c4c998a90987"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "2f520cd2-1fb7-4916-82bd-f1c9acd2e3de",
+      "createdAt": "2026-10-22T01:21:07.000Z",
+      "updatedAt": "2026-10-22T01:21:07.000Z",
+      "uid": "35240-2f520cd2-1fb7-4916-82bd-f1c9acd2e3de"
     }
   ],
   "auth": {
@@ -759,17 +679,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "cc6778a0-08fd-4d04-9f40-e61839937a27",
-    "name": "Strapi Admin Panel Admin Authentication Transfer Tokens API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }

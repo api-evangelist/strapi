@@ -1,464 +1,407 @@
 {
+  "info": {
+    "_postman_id": "256170de-278b-499e-9f0a-ee6a31cca5a7",
+    "name": "Strapi Admin Panel Content Types API",
+    "description": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:20:47.000Z",
+    "updatedAt": "2026-10-22T01:20:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-256170de-278b-499e-9f0a-ee6a31cca5a7"
+  },
   "item": [
     {
-      "id": "f9fce735-4f88-4454-97b8-201be9b8c281",
-      "name": "Content Types",
-      "description": {
-        "content": "Endpoints for managing content-type definitions through the Content-Type Builder.",
-        "type": "text/plain"
-      },
+      "name": "admin",
       "item": [
         {
-          "id": "f4236793-f4ba-4313-ac00-8aac861b238a",
-          "name": "List content types",
-          "request": {
-            "name": "List content types",
-            "description": {
-              "content": "Returns a list of all content-types defined in the Strapi application, including their schemas, attributes, and configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "content-type-builder",
-                "content-types"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "content-type-builder",
+          "item": [
             {
-              "id": "c0e63b01-817c-430e-be35-bf275834e6b1",
-              "name": "A list of content types",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-type-builder",
-                    "content-types"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "content-types",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{uid}",
+                  "item": [
+                    {
+                      "name": "Get a content type",
+                      "id": "8b733233-e7ab-4ae1-8ec5-ff17b21e3902",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/content-type-builder/content-types/:uid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "content-type-builder",
+                            "content-types",
+                            ":uid"
+                          ],
+                          "variable": [
+                            {
+                              "id": "90980145-1ef6-4c03-ba5a-9dd9f2059432",
+                              "key": "uid",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the content-type (e.g., api::article.article)"
+                            }
+                          ]
+                        },
+                        "description": "Returns a single content-type definition by its UID, including its full schema with all attributes, relations, and configuration."
+                      },
+                      "response": [
+                        {
+                          "id": "7c1a9460-82e5-4dab-a4d5-a30d80d022e1",
+                          "name": "The content type definition",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/content-type-builder/content-types/:uid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "content-type-builder",
+                                "content-types",
+                                ":uid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "uid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"uid\": \"<string>\",\n  \"plugin\": \"<string>\",\n  \"apiID\": \"<string>\",\n  \"schema\": {\n    \"displayName\": \"<string>\",\n    \"singularName\": \"<string>\",\n    \"pluralName\": \"<string>\",\n    \"kind\": \"singleType\",\n    \"attributes\": {\n      \"magna_63a\": -46555173\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:48.000Z",
+                          "updatedAt": "2026-10-22T01:20:48.000Z",
+                          "uid": "35240-7c1a9460-82e5-4dab-a4d5-a30d80d022e1"
+                        },
+                        {
+                          "id": "b8e5fb4a-a415-4d6b-9105-81109b0cafe5",
+                          "name": "Unauthorized - missing or invalid authentication",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/content-type-builder/content-types/:uid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "content-type-builder",
+                                "content-types",
+                                ":uid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "uid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:48.000Z",
+                          "updatedAt": "2026-10-22T01:20:48.000Z",
+                          "uid": "35240-b8e5fb4a-a415-4d6b-9105-81109b0cafe5"
+                        },
+                        {
+                          "id": "6211640c-68e8-4326-b12a-924d6bd188d4",
+                          "name": "Not found - the requested resource does not exist",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/content-type-builder/content-types/:uid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "content-type-builder",
+                                "content-types",
+                                ":uid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "uid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:48.000Z",
+                          "updatedAt": "2026-10-22T01:20:48.000Z",
+                          "uid": "35240-6211640c-68e8-4326-b12a-924d6bd188d4"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:20:48.000Z",
+                      "updatedAt": "2026-10-22T01:20:48.000Z",
+                      "uid": "35240-8b733233-e7ab-4ae1-8ec5-ff17b21e3902"
+                    }
+                  ],
+                  "id": "8e8c4e03-487a-4a11-bc41-3a5bff24af4d",
+                  "createdAt": "2026-10-22T01:20:48.000Z",
+                  "updatedAt": "2026-10-22T01:20:48.000Z",
+                  "uid": "35240-8e8c4e03-487a-4a11-bc41-3a5bff24af4d"
+                },
+                {
+                  "name": "List content types",
+                  "id": "1ce0df51-92a9-4851-923a-12996d795db7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/content-type-builder/content-types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "content-type-builder",
+                        "content-types"
+                      ]
+                    },
+                    "description": "Returns a list of all content-types defined in the Strapi application, including their schemas, attributes, and configuration."
+                  },
+                  "response": [
+                    {
+                      "id": "e980ff57-032d-423f-b4a1-1d122f9bb6f4",
+                      "name": "A list of content types",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/content-type-builder/content-types",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "content-type-builder",
+                            "content-types"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"uid\": \"<string>\",\n      \"plugin\": \"<string>\",\n      \"apiID\": \"<string>\",\n      \"schema\": {\n        \"displayName\": \"<string>\",\n        \"singularName\": \"<string>\",\n        \"pluralName\": \"<string>\",\n        \"kind\": \"collectionType\",\n        \"attributes\": {\n          \"et2_9\": \"elit Duis sunt id quis\",\n          \"nisib7\": \"quis non\",\n          \"cupidatat_83\": 65329348\n        }\n      }\n    },\n    {\n      \"uid\": \"<string>\",\n      \"plugin\": \"<string>\",\n      \"apiID\": \"<string>\",\n      \"schema\": {\n        \"displayName\": \"<string>\",\n        \"singularName\": \"<string>\",\n        \"pluralName\": \"<string>\",\n        \"kind\": \"singleType\",\n        \"attributes\": {\n          \"veniama2\": -82434278,\n          \"aliquip_ca\": true\n        }\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T01:20:48.000Z",
+                      "updatedAt": "2026-10-22T01:20:48.000Z",
+                      "uid": "35240-e980ff57-032d-423f-b4a1-1d122f9bb6f4"
+                    },
+                    {
+                      "id": "a94aa4b8-1193-4c1c-837d-f987334a6b78",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/content-type-builder/content-types",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "content-type-builder",
+                            "content-types"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:48.000Z",
+                      "updatedAt": "2026-10-22T01:20:48.000Z",
+                      "uid": "35240-a94aa4b8-1193-4c1c-837d-f987334a6b78"
+                    },
+                    {
+                      "id": "7e219705-fda5-4508-9486-45d315709831",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/content-type-builder/content-types",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "content-type-builder",
+                            "content-types"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:48.000Z",
+                      "updatedAt": "2026-10-22T01:20:48.000Z",
+                      "uid": "35240-7e219705-fda5-4508-9486-45d315709831"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:48.000Z",
+                  "updatedAt": "2026-10-22T01:20:48.000Z",
+                  "uid": "35240-1ce0df51-92a9-4851-923a-12996d795db7"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"uid\": \"string\",\n      \"plugin\": \"string\",\n      \"apiID\": \"string\",\n      \"schema\": {\n        \"displayName\": \"string\",\n        \"singularName\": \"string\",\n        \"pluralName\": \"string\",\n        \"kind\": \"collectionType\",\n        \"attributes\": {\n          \"key_0\": 5693,\n          \"key_1\": false\n        }\n      }\n    },\n    {\n      \"uid\": \"string\",\n      \"plugin\": \"string\",\n      \"apiID\": \"string\",\n      \"schema\": {\n        \"displayName\": \"string\",\n        \"singularName\": \"string\",\n        \"pluralName\": \"string\",\n        \"kind\": \"collectionType\",\n        \"attributes\": {\n          \"key_0\": 7502.334384287963\n        }\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fb381721-c60f-417b-a40d-f5ada6c22a68",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-type-builder",
-                    "content-types"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2677,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c63ef93f-d202-4f8c-a9f2-916a14e6a40e",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-type-builder",
-                    "content-types"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2677,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "8358fc73-9828-4e7a-8598-7e492fe628f8",
+              "createdAt": "2026-10-22T01:20:48.000Z",
+              "updatedAt": "2026-10-22T01:20:48.000Z",
+              "uid": "35240-8358fc73-9828-4e7a-8598-7e492fe628f8"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "60f83d2f-41ab-4440-bd78-bc49d7d69e7b",
-          "name": "Get a content type",
-          "request": {
-            "name": "Get a content type",
-            "description": {
-              "content": "Returns a single content-type definition by its UID, including its full schema with all attributes, relations, and configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "content-type-builder",
-                "content-types",
-                ":uid"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "uid",
-                  "description": "(Required) The unique identifier of the content-type (e.g., api::article.article)"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "0d1c1058-335b-4325-b5bd-f69b5f763bbb",
-              "name": "The content type definition",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-type-builder",
-                    "content-types",
-                    ":uid"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "uid",
-                      "description": "(Required) The unique identifier of the content-type (e.g., api::article.article)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"uid\": \"string\",\n  \"plugin\": \"string\",\n  \"apiID\": \"string\",\n  \"schema\": {\n    \"displayName\": \"string\",\n    \"singularName\": \"string\",\n    \"pluralName\": \"string\",\n    \"kind\": \"collectionType\",\n    \"attributes\": {\n      \"key_0\": 2708.6830509600068\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "da6baad6-1ff3-4aeb-b40d-c839d8b2911f",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-type-builder",
-                    "content-types",
-                    ":uid"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "uid",
-                      "description": "(Required) The unique identifier of the content-type (e.g., api::article.article)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2677,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bc120f29-d36d-461b-90dd-7cd0dfe4b671",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-type-builder",
-                    "content-types",
-                    ":uid"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "uid",
-                      "description": "(Required) The unique identifier of the content-type (e.g., api::article.article)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2677,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "6090ee67-6d83-4ee5-b559-bd081dcf0c62",
+          "createdAt": "2026-10-22T01:20:48.000Z",
+          "updatedAt": "2026-10-22T01:20:48.000Z",
+          "uid": "35240-6090ee67-6d83-4ee5-b559-bd081dcf0c62"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "1a695cf8-93c8-4dfe-adb9-c084f7f89234",
+      "createdAt": "2026-10-22T01:20:48.000Z",
+      "updatedAt": "2026-10-22T01:20:48.000Z",
+      "uid": "35240-1a695cf8-93c8-4dfe-adb9-c084f7f89234"
     }
   ],
   "auth": {
@@ -466,17 +409,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "dd6b9fa6-3100-46ec-bdca-15eb11b7622a",
-    "name": "Strapi Admin Panel Admin Authentication Content Types API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }

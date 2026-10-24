@@ -1,1304 +1,1150 @@
 {
+  "info": {
+    "_postman_id": "5e822616-d21e-461f-aa58-1f793ea76df3",
+    "name": "Strapi Admin Panel API Tokens API",
+    "description": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:20:22.000Z",
+    "updatedAt": "2026-10-22T01:20:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5e822616-d21e-461f-aa58-1f793ea76df3"
+  },
   "item": [
     {
-      "id": "eb7dd3f2-fc9b-4702-af1c-bbd1c084d2b3",
-      "name": "API Tokens",
-      "description": {
-        "content": "Endpoints for managing API tokens used to authenticate REST and GraphQL API requests.",
-        "type": "text/plain"
-      },
+      "name": "admin",
       "item": [
         {
-          "id": "73c0bb0c-78e7-4012-b781-858b4a13c15a",
-          "name": "List API tokens",
-          "request": {
-            "name": "List API tokens",
-            "description": {
-              "content": "Returns a list of all API tokens configured in the Strapi admin panel. API tokens allow authenticating REST and GraphQL API requests without managing user accounts.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "api-tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "api-tokens",
+          "item": [
             {
-              "id": "9cd3a9cb-afa9-45be-b58a-a8d527cac098",
-              "name": "A list of API tokens",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get an API token",
+                  "id": "c749d7ac-0b5b-4823-a53a-6de21c9dee07",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ca895976-116d-4611-9c37-379b7bb5a2e4",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the API token"
+                        }
+                      ]
+                    },
+                    "description": "Returns a single API token's metadata by its ID. The full token value is not returned."
+                  },
+                  "response": [
+                    {
+                      "id": "e24618e8-bc2b-4d3a-adae-bf16fad1e0fe",
+                      "name": "The API token details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"full-access\",\n  \"accessKey\": \"<string>\",\n  \"lastUsedAt\": \"<dateTime>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"lifespan\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-e24618e8-bc2b-4d3a-adae-bf16fad1e0fe"
+                    },
+                    {
+                      "id": "dbdc6b23-e752-4ca6-a393-34e7dcbdff02",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-dbdc6b23-e752-4ca6-a393-34e7dcbdff02"
+                    },
+                    {
+                      "id": "9a9adbda-6a33-46fc-8f8b-6f6f6a61e545",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-9a9adbda-6a33-46fc-8f8b-6f6f6a61e545"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-c749d7ac-0b5b-4823-a53a-6de21c9dee07"
+                },
+                {
+                  "name": "Update an API token",
+                  "id": "0fd17634-47f6-4127-b2fe-e0ceaab6158a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2a51bec5-7d83-4ec2-95c5-e0b32e98a861",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the API token"
+                        }
+                      ]
+                    },
+                    "description": "Updates an API token's name, description, type, or permissions."
+                  },
+                  "response": [
+                    {
+                      "id": "2f5cc7f3-766e-4711-8561-5755955a5e6d",
+                      "name": "API token updated successfully",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"full-access\",\n  \"accessKey\": \"<string>\",\n  \"lastUsedAt\": \"<dateTime>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"lifespan\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-2f5cc7f3-766e-4711-8561-5755955a5e6d"
+                    },
+                    {
+                      "id": "053c27e1-f443-4f34-973b-1921f110785e",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-053c27e1-f443-4f34-973b-1921f110785e"
+                    },
+                    {
+                      "id": "bea3c8fc-0db2-46d4-bf88-6e194d4b88dd",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-bea3c8fc-0db2-46d4-bf88-6e194d4b88dd"
+                    },
+                    {
+                      "id": "4114790b-94e2-470b-8c8d-2de6c9ba346a",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-4114790b-94e2-470b-8c8d-2de6c9ba346a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-0fd17634-47f6-4127-b2fe-e0ceaab6158a"
+                },
+                {
+                  "name": "Delete an API token",
+                  "id": "f9dedc5f-bf00-4a83-ba23-7fcf4ba36a2e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2e22246e-15a5-4da9-abeb-193e9b0cb544",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the API token"
+                        }
+                      ]
+                    },
+                    "description": "Deletes an API token by its ID. Any requests using this token will fail after deletion."
+                  },
+                  "response": [
+                    {
+                      "id": "207a5f7c-00f5-4cd1-8c08-fbf775ba4751",
+                      "name": "API token deleted successfully",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-207a5f7c-00f5-4cd1-8c08-fbf775ba4751"
+                    },
+                    {
+                      "id": "0f44a883-323b-4444-adbb-391abe2ccc19",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-0f44a883-323b-4444-adbb-391abe2ccc19"
+                    },
+                    {
+                      "id": "387e6dac-13d5-41fa-8a75-d82f9f99953f",
+                      "name": "Not found - the requested resource does not exist",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/api-tokens/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "api-tokens",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:23.000Z",
+                      "updatedAt": "2026-10-22T01:20:23.000Z",
+                      "uid": "35240-387e6dac-13d5-41fa-8a75-d82f9f99953f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-f9dedc5f-bf00-4a83-ba23-7fcf4ba36a2e"
+                }
+              ],
+              "id": "ae93fd59-4bf0-48de-861c-700b70978761",
+              "createdAt": "2026-10-22T01:20:23.000Z",
+              "updatedAt": "2026-10-22T01:20:23.000Z",
+              "uid": "35240-ae93fd59-4bf0-48de-861c-700b70978761"
+            },
+            {
+              "name": "List API tokens",
+              "id": "40916f7a-0552-405e-b17c-c5bafdca33b8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": 8469,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"full-access\",\n      \"accessKey\": \"string\",\n      \"lastUsedAt\": \"1952-06-21T08:09:34.675Z\",\n      \"expiresAt\": \"1968-05-26T03:43:03.079Z\",\n      \"lifespan\": 7357,\n      \"createdAt\": \"1948-11-29T03:08:22.331Z\",\n      \"updatedAt\": \"1975-07-09T10:57:35.226Z\"\n    },\n    {\n      \"id\": 8949,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"custom\",\n      \"accessKey\": \"string\",\n      \"lastUsedAt\": \"2004-06-17T20:06:49.504Z\",\n      \"expiresAt\": \"2000-01-04T11:11:35.635Z\",\n      \"lifespan\": 4572,\n      \"createdAt\": \"1967-06-25T18:11:57.846Z\",\n      \"updatedAt\": \"2016-01-04T12:18:40.154Z\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "979346e0-f103-4565-8db6-44087f78fef3",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ce06dcaf-a47e-4625-8fd0-955025a40fb4",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens"
-                  ],
+                  "raw": "{{baseUrl}}/admin/api-tokens",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bcc2b721-29a7-43cc-988b-2733ce5ca44a",
-          "name": "Create an API token",
-          "request": {
-            "name": "Create an API token",
-            "description": {
-              "content": "Creates a new API token with specified permissions. The full token value is only returned once upon creation and cannot be retrieved again.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "api-tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "ee6cd48a-df90-4e31-86aa-a64cb3aa2aa1",
-              "name": "API token created successfully",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "admin",
                     "api-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "Returns a list of all API tokens configured in the Strapi admin panel. API tokens allow authenticating REST and GraphQL API requests without managing user accounts."
+              },
+              "response": [
+                {
+                  "id": "b7dba117-13a6-4830-aa23-cfe4020441e4",
+                  "name": "A list of API tokens",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens"
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"custom\",\n      \"accessKey\": \"<string>\",\n      \"lastUsedAt\": \"<dateTime>\",\n      \"expiresAt\": \"<dateTime>\",\n      \"lifespan\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"custom\",\n      \"accessKey\": \"<string>\",\n      \"lastUsedAt\": \"<dateTime>\",\n      \"expiresAt\": \"<dateTime>\",\n      \"lifespan\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-b7dba117-13a6-4830-aa23-cfe4020441e4"
+                },
+                {
+                  "id": "7be2a9e6-f14e-48a5-a92c-eec240785f39",
+                  "name": "Unauthorized - missing or invalid authentication",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-7be2a9e6-f14e-48a5-a92c-eec240785f39"
+                },
+                {
+                  "id": "e92b5e08-9f76-457a-892b-8bef89ab2629",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-e92b5e08-9f76-457a-892b-8bef89ab2629"
+                }
+              ],
+              "createdAt": "2026-10-22T01:20:23.000Z",
+              "updatedAt": "2026-10-22T01:20:23.000Z",
+              "uid": "35240-40916f7a-0552-405e-b17c-c5bafdca33b8"
+            },
+            {
+              "name": "Create an API token",
+              "id": "52f151d2-caf8-430c-9438-d871b2f0d012",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 7225,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"full-access\",\n  \"accessKey\": \"string\",\n  \"lastUsedAt\": \"1989-09-19T10:26:16.811Z\",\n  \"expiresAt\": \"1968-06-22T00:27:15.233Z\",\n  \"lifespan\": 3994,\n  \"createdAt\": \"1999-06-14T20:18:36.857Z\",\n  \"updatedAt\": \"1964-12-16T22:15:52.758Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e5f4c484-d03e-4945-8d52-c05da4815ed5",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/admin/api-tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "admin",
                     "api-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Creates a new API token with specified permissions. The full token value is only returned once upon creation and cannot be retrieved again."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ebc8e66b-be5a-450a-9709-89bc16a2037c",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "3df24960-aef0-40e5-848c-7d09fb547688",
+                  "name": "API token created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"type\": \"full-access\",\n  \"accessKey\": \"<string>\",\n  \"lastUsedAt\": \"<dateTime>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"lifespan\": \"<integer>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-3df24960-aef0-40e5-848c-7d09fb547688"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "90cb90be-46d3-49eb-aa31-0d7ca21a1522",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "id": "02339e63-eec1-4483-bd57-46b096a0dc0d",
+                  "name": "Bad request - invalid input or validation error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
-                  ]
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-02339e63-eec1-4483-bd57-46b096a0dc0d"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "b075905f-1416-493f-9050-5b939a866090",
+                  "name": "Unauthorized - missing or invalid authentication",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-b075905f-1416-493f-9050-5b939a866090"
+                },
+                {
+                  "id": "dca543a7-c39c-428d-afcc-9f86dfb9d2a2",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"custom\",\n  \"description\": \"<string>\",\n  \"lifespan\": null,\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/admin/api-tokens",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "admin",
+                        "api-tokens"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:20:23.000Z",
+                  "updatedAt": "2026-10-22T01:20:23.000Z",
+                  "uid": "35240-dca543a7-c39c-428d-afcc-9f86dfb9d2a2"
                 }
               ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:20:23.000Z",
+              "updatedAt": "2026-10-22T01:20:23.000Z",
+              "uid": "35240-52f151d2-caf8-430c-9438-d871b2f0d012"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8841fd39-c297-4e4d-ace2-bd439dcd4345",
-          "name": "Get an API token",
-          "request": {
-            "name": "Get an API token",
-            "description": {
-              "content": "Returns a single API token's metadata by its ID. The full token value is not returned.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "api-tokens",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The ID of the API token"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "52156607-6f5d-4ac3-a316-daf236bfba60",
-              "name": "The API token details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 7225,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"full-access\",\n  \"accessKey\": \"string\",\n  \"lastUsedAt\": \"1989-09-19T10:26:16.811Z\",\n  \"expiresAt\": \"1968-06-22T00:27:15.233Z\",\n  \"lifespan\": 3994,\n  \"createdAt\": \"1999-06-14T20:18:36.857Z\",\n  \"updatedAt\": \"1964-12-16T22:15:52.758Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dedc05e0-6d93-45d3-b2a6-dea24f22f860",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "fa6c86c3-def3-48ae-827b-2d6d4b1897ab",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "3f4f6bf4-42cb-45ef-b8a7-7faf9c98dfa6",
-          "name": "Update an API token",
-          "request": {
-            "name": "Update an API token",
-            "description": {
-              "content": "Updates an API token's name, description, type, or permissions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "api-tokens",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The ID of the API token"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "9a047de0-a5fa-4d98-9929-f60a6d7c4071",
-              "name": "API token updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 7225,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"full-access\",\n  \"accessKey\": \"string\",\n  \"lastUsedAt\": \"1989-09-19T10:26:16.811Z\",\n  \"expiresAt\": \"1968-06-22T00:27:15.233Z\",\n  \"lifespan\": 3994,\n  \"createdAt\": \"1999-06-14T20:18:36.857Z\",\n  \"updatedAt\": \"1964-12-16T22:15:52.758Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9af8f8c2-2870-4e40-a8ec-864c8ed36db4",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dfa39108-df78-4d72-b7f3-0dfc574c0f86",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4cce7352-89a5-45f8-81ce-62509faf2c16",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"lifespan\": \"<integer>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ee2e01ae-4212-48d9-889f-86845e2d727d",
-          "name": "Delete an API token",
-          "request": {
-            "name": "Delete an API token",
-            "description": {
-              "content": "Deletes an API token by its ID. Any requests using this token will fail after deletion.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "api-tokens",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The ID of the API token"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a4319f28-12ce-4c96-bfd3-6eccb7563994",
-              "name": "API token deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "f2e5885c-ba76-46fe-a065-9e1a7c63066c",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d5bf1562-df64-4b08-bb73-d5a9fc4fc231",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "api-tokens",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the API token"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 9869,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "6a281253-0a45-403b-b95e-3a3984ef7d1a",
+          "createdAt": "2026-10-22T01:20:23.000Z",
+          "updatedAt": "2026-10-22T01:20:23.000Z",
+          "uid": "35240-6a281253-0a45-403b-b95e-3a3984ef7d1a"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "8e479c4b-4e64-46fb-a24e-3caf6635382f",
+      "createdAt": "2026-10-22T01:20:23.000Z",
+      "updatedAt": "2026-10-22T01:20:23.000Z",
+      "uid": "35240-8e479c4b-4e64-46fb-a24e-3caf6635382f"
     }
   ],
   "auth": {
@@ -1306,17 +1152,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "1d375616-eca4-4b97-9106-9ffd7fde6f74",
-    "name": "Strapi Admin Panel Admin Authentication API Tokens API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }

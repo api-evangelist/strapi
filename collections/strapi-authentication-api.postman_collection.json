@@ -1,1507 +1,1448 @@
 {
+  "info": {
+    "_postman_id": "7949e59f-b87e-4af6-9d75-d4f11b5b2099",
+    "name": "Strapi Users and Permissions Authentication API",
+    "description": "The Strapi Users and Permissions API provides a full authentication process based on JSON Web Tokens (JWT) to protect API endpoints, along with an access-control list (ACL) strategy for managing permissions between groups of users.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:20:28.000Z",
+    "updatedAt": "2026-10-22T01:20:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7949e59f-b87e-4af6-9d75-d4f11b5b2099"
+  },
   "item": [
     {
-      "id": "c5f81e0b-dceb-4cf7-8a56-ec56c3661902",
-      "name": "Authentication",
-      "description": {
-        "content": "Endpoints for user authentication including login, registration, and password management using JWT tokens.",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "da8d54ee-859f-4590-8880-f4094a8fca32",
-          "name": "Login with local credentials",
-          "request": {
-            "name": "Login with local credentials",
-            "description": {
-              "content": "Authenticates a user with their identifier (email or username) and password. Returns a JWT token and the user profile on successful authentication. The JWT token should be included in subsequent requests as an Authorization Bearer header.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                "local"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"identifier\": \"<string>\",\n  \"password\": \"<password>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "auth",
+          "item": [
             {
-              "id": "cb0cd460-9f8f-42b3-93cd-59c033a95432",
-              "name": "Authentication successful",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "local"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "local",
+              "item": [
+                {
+                  "name": "register",
+                  "item": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                      "name": "Register a new user",
+                      "id": "f195864f-84a1-4020-80c3-b3c86af83009",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/local/register",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "local",
+                            "register"
+                          ]
+                        },
+                        "description": "Creates a new user account with the default Authenticated role. Returns a JWT token and the newly created user profile. Registration can be restricted or require email confirmation depending on the plugin configuration."
+                      },
+                      "response": [
+                        {
+                          "id": "4667bfa4-8666-4caa-bf56-3af0443f4d0d",
+                          "name": "Registration successful",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/auth/local/register",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "auth",
+                                "local",
+                                "register"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"jwt\": \"<string>\",\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"email\": \"<email>\",\n    \"provider\": \"<string>\",\n    \"confirmed\": \"<boolean>\",\n    \"blocked\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"role\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"<string>\",\n      \"permissions\": {\n        \"voluptate_9\": -26731783,\n        \"ut6\": \"fugiat et dolore amet\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:29.000Z",
+                          "updatedAt": "2026-10-22T01:20:29.000Z",
+                          "uid": "35240-4667bfa4-8666-4caa-bf56-3af0443f4d0d"
+                        },
+                        {
+                          "id": "ab9bbfa2-d1af-45cf-be9b-d318d42403ba",
+                          "name": "Bad request - invalid input or validation error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/auth/local/register",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "auth",
+                                "local",
+                                "register"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:29.000Z",
+                          "updatedAt": "2026-10-22T01:20:29.000Z",
+                          "uid": "35240-ab9bbfa2-d1af-45cf-be9b-d318d42403ba"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-f195864f-84a1-4020-80c3-b3c86af83009"
                     }
-                  ]
+                  ],
+                  "id": "7b442ca6-3401-4dce-9ccf-427d8025ce1d",
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-7b442ca6-3401-4dce-9ccf-427d8025ce1d"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                {
+                  "name": "Login with local credentials",
+                  "id": "8656a097-7fb7-4a38-a4b9-5a47e21ee821",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"identifier\": \"<string>\",\n  \"password\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"jwt\": \"string\",\n  \"user\": {\n    \"id\": 2867,\n    \"username\": \"string\",\n    \"email\": \"yeVikPZQ@Q.ba\",\n    \"provider\": \"string\",\n    \"confirmed\": true,\n    \"blocked\": true,\n    \"createdAt\": \"1981-03-21T15:31:32.056Z\",\n    \"updatedAt\": \"2008-07-07T01:36:06.674Z\",\n    \"role\": {\n      \"id\": 9952,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"permissions\": {\n        \"key_0\": 758\n      }\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2141c9c1-0681-4aea-8b82-3c2e9ea6e5c3",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "local"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"identifier\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/local",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "local"
+                      ]
+                    },
+                    "description": "Authenticates a user with their identifier (email or username) and password. Returns a JWT token and the user profile on successful authentication. The JWT token should be included in subsequent requests as an Authorization Bearer header."
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"identifier\": \"<string>\",\n  \"password\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "576ecada-35e0-4521-abaa-46823e3d82ef",
-          "name": "Register a new user",
-          "request": {
-            "name": "Register a new user",
-            "description": {
-              "content": "Creates a new user account with the default Authenticated role. Returns a JWT token and the newly created user profile. Registration can be restricted or require email confirmation depending on the plugin configuration.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                "local",
-                "register"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "b2816098-c591-45d7-ac2d-830f21bd4535",
-              "name": "Registration successful",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "local",
-                    "register"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "response": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                      "id": "264639ea-c4dd-4ffc-8af4-a37cbee568e6",
+                      "name": "Authentication successful",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"identifier\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/local",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "local"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jwt\": \"<string>\",\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"email\": \"<email>\",\n    \"provider\": \"<string>\",\n    \"confirmed\": \"<boolean>\",\n    \"blocked\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"role\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"<string>\",\n      \"permissions\": {\n        \"voluptate_9\": -26731783,\n        \"ut6\": \"fugiat et dolore amet\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-264639ea-c4dd-4ffc-8af4-a37cbee568e6"
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    {
+                      "id": "2dabc7ef-1d10-47fb-af4c-2a52bd1dd3a9",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"identifier\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/local",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "local"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-2dabc7ef-1d10-47fb-af4c-2a52bd1dd3a9"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-8656a097-7fb7-4a38-a4b9-5a47e21ee821"
+                }
+              ],
+              "id": "325d8d2e-ffcd-4593-8be9-700a4cd208d1",
+              "createdAt": "2026-10-22T01:20:29.000Z",
+              "updatedAt": "2026-10-22T01:20:29.000Z",
+              "uid": "35240-325d8d2e-ffcd-4593-8be9-700a4cd208d1"
+            },
+            {
+              "name": "forgot-password",
+              "item": [
+                {
+                  "name": "Request a password reset",
+                  "id": "f08de95f-621c-4bf4-9309-a37079914f31",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"jwt\": \"string\",\n  \"user\": {\n    \"id\": 2867,\n    \"username\": \"string\",\n    \"email\": \"yeVikPZQ@Q.ba\",\n    \"provider\": \"string\",\n    \"confirmed\": true,\n    \"blocked\": true,\n    \"createdAt\": \"1981-03-21T15:31:32.056Z\",\n    \"updatedAt\": \"2008-07-07T01:36:06.674Z\",\n    \"role\": {\n      \"id\": 9952,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"permissions\": {\n        \"key_0\": 758\n      }\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d53fb988-7beb-4967-b449-09ab6c00c715",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "local",
-                    "register"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/forgot-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "forgot-password"
+                      ]
+                    },
+                    "description": "Sends a password reset email to the specified email address if an account exists. The email contains a link with a reset code that can be used with the reset-password endpoint."
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"username\": \"<string>\",\n  \"email\": \"<email>\",\n  \"password\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ab8c0348-2e7c-4edc-8796-63be248d88b9",
-          "name": "Request a password reset",
-          "request": {
-            "name": "Request a password reset",
-            "description": {
-              "content": "Sends a password reset email to the specified email address if an account exists. The email contains a link with a reset code that can be used with the reset-password endpoint.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                "forgot-password"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "948080f4-c9b5-4779-8ad1-5af817615f69",
-              "name": "Password reset email sent",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "forgot-password"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "response": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                      "id": "c5b878b1-07de-4616-b621-eab9c61e7f19",
+                      "name": "Password reset email sent",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/forgot-password",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "forgot-password"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"ok\": \"<boolean>\"\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-c5b878b1-07de-4616-b621-eab9c61e7f19"
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    {
+                      "id": "528c3644-0cce-4fc1-abf3-610a952746a0",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/forgot-password",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "forgot-password"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-528c3644-0cce-4fc1-abf3-610a952746a0"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-f08de95f-621c-4bf4-9309-a37079914f31"
+                }
+              ],
+              "id": "00bb0af5-bc4f-462f-9be3-90e6331adabd",
+              "createdAt": "2026-10-22T01:20:29.000Z",
+              "updatedAt": "2026-10-22T01:20:29.000Z",
+              "uid": "35240-00bb0af5-bc4f-462f-9be3-90e6331adabd"
+            },
+            {
+              "name": "reset-password",
+              "item": [
+                {
+                  "name": "Reset a user password",
+                  "id": "982e2dd6-0fe3-4364-aefa-09312f0b3913",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"ok\": true\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e8d380a4-7b9d-4c84-bad1-81e0dfe31823",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "forgot-password"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"code\": \"<string>\",\n  \"password\": \"<string>\",\n  \"passwordConfirmation\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/reset-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "reset-password"
+                      ]
+                    },
+                    "description": "Resets a user's password using the code received via the forgot-password email. Both a new password and password confirmation must be provided and must match."
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "5ab15baa-b735-4b79-a70d-1022857f5737",
-          "name": "Reset a user password",
-          "request": {
-            "name": "Reset a user password",
-            "description": {
-              "content": "Resets a user's password using the code received via the forgot-password email. Both a new password and password confirmation must be provided and must match.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                "reset-password"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"code\": \"<string>\",\n  \"password\": \"<password>\",\n  \"passwordConfirmation\": \"<password>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "6148484a-0b03-4a3e-a286-95211fc4520a",
-              "name": "Password reset successful",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "reset-password"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "response": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                      "id": "9e5401c2-8126-43e4-9ae8-af804c6e8659",
+                      "name": "Password reset successful",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"password\": \"<string>\",\n  \"passwordConfirmation\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/reset-password",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "reset-password"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jwt\": \"<string>\",\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"email\": \"<email>\",\n    \"provider\": \"<string>\",\n    \"confirmed\": \"<boolean>\",\n    \"blocked\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"role\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"<string>\",\n      \"permissions\": {\n        \"voluptate_9\": -26731783,\n        \"ut6\": \"fugiat et dolore amet\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-9e5401c2-8126-43e4-9ae8-af804c6e8659"
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    {
+                      "id": "b20c640a-ac66-4771-86bf-966cec44c5b2",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"password\": \"<string>\",\n  \"passwordConfirmation\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/reset-password",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "reset-password"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-b20c640a-ac66-4771-86bf-966cec44c5b2"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-982e2dd6-0fe3-4364-aefa-09312f0b3913"
+                }
+              ],
+              "id": "f4d0e3b8-a5ee-4578-b0dd-72cfda4b4e9a",
+              "createdAt": "2026-10-22T01:20:29.000Z",
+              "updatedAt": "2026-10-22T01:20:29.000Z",
+              "uid": "35240-f4d0e3b8-a5ee-4578-b0dd-72cfda4b4e9a"
+            },
+            {
+              "name": "email-confirmation",
+              "item": [
+                {
+                  "name": "Confirm a user email",
+                  "id": "522845bc-19d9-441e-8449-916bc1593889",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\",\n  \"password\": \"<password>\",\n  \"passwordConfirmation\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"jwt\": \"string\",\n  \"user\": {\n    \"id\": 2867,\n    \"username\": \"string\",\n    \"email\": \"yeVikPZQ@Q.ba\",\n    \"provider\": \"string\",\n    \"confirmed\": true,\n    \"blocked\": true,\n    \"createdAt\": \"1981-03-21T15:31:32.056Z\",\n    \"updatedAt\": \"2008-07-07T01:36:06.674Z\",\n    \"role\": {\n      \"id\": 9952,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"permissions\": {\n        \"key_0\": 758\n      }\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "73b91a4c-a0cf-41d9-8a9f-15848337531e",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "reset-password"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/email-confirmation?confirmation=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "email-confirmation"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The email confirmation token",
+                          "key": "confirmation",
+                          "value": "<string>"
+                        }
+                      ]
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "description": "Confirms a user's email address using the confirmation token sent via email during registration. This endpoint is typically accessed by clicking the confirmation link in the email."
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\",\n  \"password\": \"<password>\",\n  \"passwordConfirmation\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4d7dcfe5-8a1c-4fec-8617-1dc91097adbe",
-          "name": "Confirm a user email",
-          "request": {
-            "name": "Confirm a user email",
-            "description": {
-              "content": "Confirms a user's email address using the confirmation token sent via email during registration. This endpoint is typically accessed by clicking the confirmation link in the email.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                "email-confirmation"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "confirmation",
-                  "value": "<string>",
-                  "description": "(Required) The email confirmation token"
-                }
-              ],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ab17ef48-8894-471c-839e-ad17701cda64",
-              "name": "Redirects to the configured confirmation redirect URL",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "email-confirmation"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "response": [
                     {
-                      "key": "confirmation",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                      "id": "b6d5bc82-b4f4-4ce9-9df2-5e7060855e61",
+                      "name": "Redirects to the configured confirmation redirect URL",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/email-confirmation?confirmation=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "email-confirmation"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The email confirmation token",
+                              "key": "confirmation",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Found",
+                      "code": 302,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-b6d5bc82-b4f4-4ce9-9df2-5e7060855e61"
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Found",
-              "code": 302,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                    {
+                      "id": "8138e50f-31d9-45c8-b4f4-ed1a1932679f",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/email-confirmation?confirmation=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "email-confirmation"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The email confirmation token",
+                              "key": "confirmation",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-8138e50f-31d9-45c8-b4f4-ed1a1932679f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-522845bc-19d9-441e-8449-916bc1593889"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "73f3597c-1ee5-46d8-b8a8-1b8fcd34eeb5",
+              "createdAt": "2026-10-22T01:20:29.000Z",
+              "updatedAt": "2026-10-22T01:20:29.000Z",
+              "uid": "35240-73f3597c-1ee5-46d8-b8a8-1b8fcd34eeb5"
             },
             {
-              "id": "3a5b2305-39e7-4ca7-b79c-9cab6e32f918",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "email-confirmation"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "confirmation",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+              "name": "send-email-confirmation",
+              "item": [
+                {
+                  "name": "Resend email confirmation",
+                  "id": "8181a6bc-e0ff-4263-bc49-4f0764c5cc82",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6e460ba9-14b3-40e3-8acf-f2db3f1b179a",
-          "name": "Resend email confirmation",
-          "request": {
-            "name": "Resend email confirmation",
-            "description": {
-              "content": "Resends the email confirmation link to the specified email address. Useful when the original confirmation email was lost or expired.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                "send-email-confirmation"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "184418e6-d806-4e24-abe0-f62540c1ce77",
-              "name": "Confirmation email sent",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "send-email-confirmation"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"email\": \"string\",\n  \"sent\": true\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e9597367-866f-4eca-a7d5-06f3f15f428d",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "send-email-confirmation"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/send-email-confirmation",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "send-email-confirmation"
+                      ]
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "description": "Resends the email confirmation link to the specified email address. Useful when the original confirmation email was lost or expired."
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9765e441-0978-4d67-84c5-7208e9de3c44",
-          "name": "Change user password",
-          "request": {
-            "name": "Change user password",
-            "description": {
-              "content": "Changes the password for the currently authenticated user. Requires the current password for verification along with the new password and confirmation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                "change-password"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"currentPassword\": \"<password>\",\n  \"password\": \"<password>\",\n  \"passwordConfirmation\": \"<password>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "54a0e58a-40a5-4cd9-b1b3-9aadd4d184cc",
-              "name": "Password changed successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "change-password"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+                  "response": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
+                      "id": "d39bb5ee-3369-4218-932e-e2416c444a95",
+                      "name": "Confirmation email sent",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/send-email-confirmation",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "send-email-confirmation"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"email\": \"<string>\",\n  \"sent\": \"<boolean>\"\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-d39bb5ee-3369-4218-932e-e2416c444a95"
                     },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"currentPassword\": \"<password>\",\n  \"password\": \"<password>\",\n  \"passwordConfirmation\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                    {
+                      "id": "42667ba8-6d5c-424b-b91e-70620d6f9507",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<email>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/send-email-confirmation",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "send-email-confirmation"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-42667ba8-6d5c-424b-b91e-70620d6f9507"
                     }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  ],
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-8181a6bc-e0ff-4263-bc49-4f0764c5cc82"
                 }
               ],
-              "body": "{\n  \"jwt\": \"string\",\n  \"user\": {\n    \"id\": 2867,\n    \"username\": \"string\",\n    \"email\": \"yeVikPZQ@Q.ba\",\n    \"provider\": \"string\",\n    \"confirmed\": true,\n    \"blocked\": true,\n    \"createdAt\": \"1981-03-21T15:31:32.056Z\",\n    \"updatedAt\": \"2008-07-07T01:36:06.674Z\",\n    \"role\": {\n      \"id\": 9952,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"permissions\": {\n        \"key_0\": 758\n      }\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "ea42042e-3b04-4dc9-9855-2d231acdf3c7",
+              "createdAt": "2026-10-22T01:20:29.000Z",
+              "updatedAt": "2026-10-22T01:20:29.000Z",
+              "uid": "35240-ea42042e-3b04-4dc9-9855-2d231acdf3c7"
             },
             {
-              "id": "679dcc18-99b1-4ad9-a490-29f22d1a1fd5",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "change-password"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"currentPassword\": \"<password>\",\n  \"password\": \"<password>\",\n  \"passwordConfirmation\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "name": "change-password",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Change user password",
+                  "id": "9fce2f0d-3cfc-4fdc-bd27-ec3841366f28",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"currentPassword\": \"<string>\",\n  \"password\": \"<string>\",\n  \"passwordConfirmation\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/auth/change-password",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "change-password"
+                      ]
+                    },
+                    "description": "Changes the password for the currently authenticated user. Requires the current password for verification along with the new password and confirmation."
+                  },
+                  "response": [
+                    {
+                      "id": "f54ea2f2-8b91-4d78-ade8-9ee9206b9194",
+                      "name": "Password changed successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"currentPassword\": \"<string>\",\n  \"password\": \"<string>\",\n  \"passwordConfirmation\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/change-password",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "change-password"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jwt\": \"<string>\",\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"email\": \"<email>\",\n    \"provider\": \"<string>\",\n    \"confirmed\": \"<boolean>\",\n    \"blocked\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"role\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"<string>\",\n      \"permissions\": {\n        \"voluptate_9\": -26731783,\n        \"ut6\": \"fugiat et dolore amet\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-f54ea2f2-8b91-4d78-ade8-9ee9206b9194"
+                    },
+                    {
+                      "id": "cd5e48e2-f1ec-412e-abbf-13435102176b",
+                      "name": "Bad request - invalid input or validation error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"currentPassword\": \"<string>\",\n  \"password\": \"<string>\",\n  \"passwordConfirmation\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/change-password",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "change-password"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-cd5e48e2-f1ec-412e-abbf-13435102176b"
+                    },
+                    {
+                      "id": "b579510d-1cbf-43f4-8cf4-6ce54516d366",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"currentPassword\": \"<string>\",\n  \"password\": \"<string>\",\n  \"passwordConfirmation\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/change-password",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "change-password"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-b579510d-1cbf-43f4-8cf4-6ce54516d366"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-9fce2f0d-3cfc-4fdc-bd27-ec3841366f28"
                 }
               ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "d7da27f7-03a2-4db5-9f21-9e2402537a31",
+              "createdAt": "2026-10-22T01:20:29.000Z",
+              "updatedAt": "2026-10-22T01:20:29.000Z",
+              "uid": "35240-d7da27f7-03a2-4db5-9f21-9e2402537a31"
             },
             {
-              "id": "8019bc26-84f3-4fd6-9795-041ec64bec2a",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    "change-password"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"currentPassword\": \"<password>\",\n  \"password\": \"<password>\",\n  \"passwordConfirmation\": \"<password>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "name": "{provider}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d799f261-e912-460c-97fa-78f17605a9e2",
-          "name": "Social provider authentication callback",
-          "request": {
-            "name": "Social provider authentication callback",
-            "description": {
-              "content": "Callback endpoint used during social provider authentication (e.g., Google, GitHub, Facebook). After the user authenticates with the provider, this endpoint processes the callback and returns a JWT token and user profile.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "auth",
-                ":provider",
-                "callback"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "access_token",
-                  "value": "<string>",
-                  "description": "The access token from the authentication provider"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "provider",
-                  "description": "(Required) The name of the authentication provider (e.g., google, github, facebook, twitter)"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "1693c679-9264-4db5-87ce-48f5113d8811",
-              "name": "Authentication successful",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    ":provider",
-                    "callback"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "callback",
+                  "item": [
                     {
-                      "key": "access_token",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "provider",
-                      "description": "(Required) The name of the authentication provider (e.g., google, github, facebook, twitter)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"jwt\": \"string\",\n  \"user\": {\n    \"id\": 2867,\n    \"username\": \"string\",\n    \"email\": \"yeVikPZQ@Q.ba\",\n    \"provider\": \"string\",\n    \"confirmed\": true,\n    \"blocked\": true,\n    \"createdAt\": \"1981-03-21T15:31:32.056Z\",\n    \"updatedAt\": \"2008-07-07T01:36:06.674Z\",\n    \"role\": {\n      \"id\": 9952,\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"permissions\": {\n        \"key_0\": 758\n      }\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9f516479-fb0d-4272-8a21-bc5dc0e71473",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "auth",
-                    ":provider",
-                    "callback"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "access_token",
-                      "value": "<string>"
+                      "name": "Social provider authentication callback",
+                      "id": "efcce017-4ed8-4bfc-850e-d2be0c0d2cb9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/auth/:provider/callback?access_token=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            ":provider",
+                            "callback"
+                          ],
+                          "query": [
+                            {
+                              "description": "The access token from the authentication provider",
+                              "key": "access_token",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "1707cbc9-7fa6-4700-8e50-b1d7fd8866b2",
+                              "key": "provider",
+                              "value": "<string>",
+                              "description": "(Required) The name of the authentication provider (e.g., google, github, facebook, twitter)"
+                            }
+                          ]
+                        },
+                        "description": "Callback endpoint used during social provider authentication (e.g., Google, GitHub, Facebook). After the user authenticates with the provider, this endpoint processes the callback and returns a JWT token and user profile."
+                      },
+                      "response": [
+                        {
+                          "id": "0a43ea57-5d6e-417d-a080-4ad12d62894f",
+                          "name": "Authentication successful",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/auth/:provider/callback?access_token=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "auth",
+                                ":provider",
+                                "callback"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The access token from the authentication provider",
+                                  "key": "access_token",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "provider"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"jwt\": \"<string>\",\n  \"user\": {\n    \"id\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"email\": \"<email>\",\n    \"provider\": \"<string>\",\n    \"confirmed\": \"<boolean>\",\n    \"blocked\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\",\n    \"role\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"type\": \"<string>\",\n      \"permissions\": {\n        \"voluptate_9\": -26731783,\n        \"ut6\": \"fugiat et dolore amet\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:29.000Z",
+                          "updatedAt": "2026-10-22T01:20:29.000Z",
+                          "uid": "35240-0a43ea57-5d6e-417d-a080-4ad12d62894f"
+                        },
+                        {
+                          "id": "c0f02a02-afc0-475b-b34c-dd3d7c9ecc1d",
+                          "name": "Bad request - invalid input or validation error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/auth/:provider/callback?access_token=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "auth",
+                                ":provider",
+                                "callback"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The access token from the authentication provider",
+                                  "key": "access_token",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "provider"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:29.000Z",
+                          "updatedAt": "2026-10-22T01:20:29.000Z",
+                          "uid": "35240-c0f02a02-afc0-475b-b34c-dd3d7c9ecc1d"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:20:29.000Z",
+                      "updatedAt": "2026-10-22T01:20:29.000Z",
+                      "uid": "35240-efcce017-4ed8-4bfc-850e-d2be0c0d2cb9"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "provider",
-                      "description": "(Required) The name of the authentication provider (e.g., google, github, facebook, twitter)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "7712a1ba-a097-4947-b49a-700f0ed97cbc",
+                  "createdAt": "2026-10-22T01:20:29.000Z",
+                  "updatedAt": "2026-10-22T01:20:29.000Z",
+                  "uid": "35240-7712a1ba-a097-4947-b49a-700f0ed97cbc"
                 }
               ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 2247,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "189867d2-2b7b-4403-8e02-28e93e0f169d",
+              "createdAt": "2026-10-22T01:20:29.000Z",
+              "updatedAt": "2026-10-22T01:20:29.000Z",
+              "uid": "35240-189867d2-2b7b-4403-8e02-28e93e0f169d"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "2dc15674-799c-4acc-91a3-325b2dbe38a8",
+          "createdAt": "2026-10-22T01:20:29.000Z",
+          "updatedAt": "2026-10-22T01:20:29.000Z",
+          "uid": "35240-2dc15674-799c-4acc-91a3-325b2dbe38a8"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "609eae02-f60d-4cd2-a198-9d318fd74cf1",
+      "createdAt": "2026-10-22T01:20:29.000Z",
+      "updatedAt": "2026-10-22T01:20:29.000Z",
+      "uid": "35240-609eae02-f60d-4cd2-a198-9d318fd74cf1"
     }
   ],
   "auth": {
@@ -1509,17 +1450,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "5fcee8f2-849c-4677-8767-23b582548efd",
-    "name": "Strapi Admin Panel Admin Authentication API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }

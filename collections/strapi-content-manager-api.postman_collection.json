@@ -1,304 +1,290 @@
 {
+  "info": {
+    "_postman_id": "db708976-77ae-4d4e-882b-e2fd35365f31",
+    "name": "Strapi Admin Panel Content Manager API",
+    "description": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:20:40.000Z",
+    "updatedAt": "2026-10-22T01:20:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-db708976-77ae-4d4e-882b-e2fd35365f31"
+  },
   "item": [
     {
-      "id": "22a6bf5c-ce68-4a83-b0fc-8ed9c4172d68",
-      "name": "Content Manager",
-      "description": {
-        "content": "Endpoints for managing content entries through the admin panel Content Manager interface.",
-        "type": "text/plain"
-      },
+      "name": "admin",
       "item": [
         {
-          "id": "92d975f5-4966-4caf-b27c-f7ec3879a230",
-          "name": "List collection type entries",
-          "request": {
-            "name": "List collection type entries",
-            "description": {
-              "content": "Returns a paginated list of entries for a collection type through the admin Content Manager interface.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "admin",
-                "content-manager",
-                "collection-types",
-                ":contentType"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<integer>",
-                  "description": "The page number"
-                },
-                {
-                  "disabled": false,
-                  "key": "pageSize",
-                  "value": "<integer>",
-                  "description": "The number of results per page"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "contentType",
-                  "description": "(Required) The UID of the collection type (e.g., api::article.article)"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "content-manager",
+          "item": [
             {
-              "id": "d04a2dd1-f426-4b77-8b5c-056f2a45a092",
-              "name": "A list of collection entries",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-manager",
-                    "collection-types",
-                    ":contentType"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageSize",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "contentType",
-                      "description": "(Required) The UID of the collection type (e.g., api::article.article)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "collection-types",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{contentType}",
+                  "item": [
+                    {
+                      "name": "List collection type entries",
+                      "id": "8f92fe01-68bc-4116-857e-3a6af80c054b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/admin/content-manager/collection-types/:contentType?page=<integer>&pageSize=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "admin",
+                            "content-manager",
+                            "collection-types",
+                            ":contentType"
+                          ],
+                          "query": [
+                            {
+                              "description": "The page number",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The number of results per page",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "74bb04f1-2b3f-468a-9916-60407ba9753f",
+                              "key": "contentType",
+                              "value": "<string>",
+                              "description": "(Required) The UID of the collection type (e.g., api::article.article)"
+                            }
+                          ]
+                        },
+                        "description": "Returns a paginated list of entries for a collection type through the admin Content Manager interface."
+                      },
+                      "response": [
+                        {
+                          "id": "b9c51a2f-4b8e-4fd8-9641-3a5864a4935b",
+                          "name": "A list of collection entries",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/content-manager/collection-types/:contentType?page=<integer>&pageSize=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "content-manager",
+                                "collection-types",
+                                ":contentType"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The page number",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The number of results per page",
+                                  "key": "pageSize",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "contentType"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"results\": [\n    {\n      \"dolore_955\": 53973577.03625968,\n      \"ipsumc5\": true\n    },\n    {\n      \"minim_640\": true,\n      \"aliquipdc6\": 95953682\n    }\n  ],\n  \"pagination\": {\n    \"page\": \"<integer>\",\n    \"pageSize\": \"<integer>\",\n    \"pageCount\": \"<integer>\",\n    \"total\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:41.000Z",
+                          "updatedAt": "2026-10-22T01:20:41.000Z",
+                          "uid": "35240-b9c51a2f-4b8e-4fd8-9641-3a5864a4935b"
+                        },
+                        {
+                          "id": "f91e1e14-2166-4d37-b343-48e01ec76b8b",
+                          "name": "Unauthorized - missing or invalid authentication",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/content-manager/collection-types/:contentType?page=<integer>&pageSize=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "content-manager",
+                                "collection-types",
+                                ":contentType"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The page number",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The number of results per page",
+                                  "key": "pageSize",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "contentType"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:41.000Z",
+                          "updatedAt": "2026-10-22T01:20:41.000Z",
+                          "uid": "35240-f91e1e14-2166-4d37-b343-48e01ec76b8b"
+                        },
+                        {
+                          "id": "c44f4f57-e862-4a87-9fb0-c7978ab4f562",
+                          "name": "Forbidden - insufficient permissions",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/admin/content-manager/collection-types/:contentType?page=<integer>&pageSize=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "admin",
+                                "content-manager",
+                                "collection-types",
+                                ":contentType"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The page number",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The number of results per page",
+                                  "key": "pageSize",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "contentType"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:20:41.000Z",
+                          "updatedAt": "2026-10-22T01:20:41.000Z",
+                          "uid": "35240-c44f4f57-e862-4a87-9fb0-c7978ab4f562"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:20:41.000Z",
+                      "updatedAt": "2026-10-22T01:20:41.000Z",
+                      "uid": "35240-8f92fe01-68bc-4116-857e-3a6af80c054b"
+                    }
+                  ],
+                  "id": "61ef018e-62f5-4864-bcd8-382ba5ea3d35",
+                  "createdAt": "2026-10-22T01:20:41.000Z",
+                  "updatedAt": "2026-10-22T01:20:41.000Z",
+                  "uid": "35240-61ef018e-62f5-4864-bcd8-382ba5ea3d35"
                 }
               ],
-              "body": "{\n  \"results\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": 1645,\n      \"key_1\": 4768.5896670516295,\n      \"key_2\": 6161.491115779016,\n      \"key_3\": true,\n      \"key_4\": false\n    }\n  ],\n  \"pagination\": {\n    \"page\": 5281,\n    \"pageSize\": 5609,\n    \"pageCount\": 9188,\n    \"total\": 7188\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ae791305-0406-48dd-8a91-fb9e4d523df4",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-manager",
-                    "collection-types",
-                    ":contentType"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageSize",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "contentType",
-                      "description": "(Required) The UID of the collection type (e.g., api::article.article)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 6934,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "78143af2-2f77-44df-8996-0fd87ffc30a9",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "admin",
-                    "content-manager",
-                    "collection-types",
-                    ":contentType"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "pageSize",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "contentType",
-                      "description": "(Required) The UID of the collection type (e.g., api::article.article)"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 6934,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "43b49822-03ae-4122-be62-fb24037ee926",
+              "createdAt": "2026-10-22T01:20:41.000Z",
+              "updatedAt": "2026-10-22T01:20:41.000Z",
+              "uid": "35240-43b49822-03ae-4122-be62-fb24037ee926"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "e1fe8bc1-f113-47d3-8e9f-cff43aaa8bd0",
+          "createdAt": "2026-10-22T01:20:41.000Z",
+          "updatedAt": "2026-10-22T01:20:41.000Z",
+          "uid": "35240-e1fe8bc1-f113-47d3-8e9f-cff43aaa8bd0"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "4ee3574a-b822-4d1c-80af-b31b11f5fc84",
+      "createdAt": "2026-10-22T01:20:41.000Z",
+      "updatedAt": "2026-10-22T01:20:41.000Z",
+      "uid": "35240-4ee3574a-b822-4d1c-80af-b31b11f5fc84"
     }
   ],
   "auth": {
@@ -306,17 +292,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "30140ea9-1685-4582-8c53-76d816e39de4",
-    "name": "Strapi Admin Panel Admin Authentication Content Manager API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }

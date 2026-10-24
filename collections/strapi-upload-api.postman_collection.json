@@ -1,1174 +1,989 @@
 {
+  "info": {
+    "_postman_id": "0ad6b2df-7f64-49ef-acb9-ff44efebcf24",
+    "name": "Strapi REST Upload API",
+    "description": "The Strapi REST API provides endpoints for accessing and managing content-types created within the Strapi headless CMS.\n\nContact Support:\n Name: Strapi Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:21:15.000Z",
+    "updatedAt": "2026-10-22T01:21:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0ad6b2df-7f64-49ef-acb9-ff44efebcf24"
+  },
   "item": [
     {
-      "id": "4ce17666-8d02-4e46-9c8d-73898bab96b9",
-      "name": "Upload",
-      "description": {
-        "content": "File upload and media library management endpoints powered by the Upload plugin.",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "ff0fbb42-eea9-4937-a94c-c96262f851d2",
-          "name": "Upload files",
-          "request": {
-            "name": "Upload files",
-            "description": {
-              "content": "Uploads one or more files to the Strapi media library. Files can optionally be linked to a content-type entry by providing ref, refId, and field parameters. Uploaded files are placed in the API Uploads folder by default.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "upload"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "multipart/form-data"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "files",
-                  "value": "[\"<binary>\",\"<binary>\"]",
-                  "type": "text",
-                  "description": "(Required) The file(s) to upload"
-                },
-                {
-                  "key": "ref",
-                  "value": "<string>",
-                  "type": "text",
-                  "description": "The API identifier of the content-type to link the file to"
-                },
-                {
-                  "key": "refId",
-                  "value": "<string>",
-                  "type": "text",
-                  "description": "The document ID of the entry to link the file to"
-                },
-                {
-                  "key": "field",
-                  "value": "<string>",
-                  "type": "text",
-                  "description": "The field name on the entry where the file should be linked"
-                },
-                {
-                  "key": "fileInfo",
-                  "value": "<string>",
-                  "type": "text",
-                  "description": "JSON string containing file metadata such as name, alternativeText, and caption"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "upload",
+          "item": [
             {
-              "id": "3d31bfdf-a71d-4e24-98ab-426c02be66d6",
-              "name": "Files uploaded successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "files",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
                     {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                      "name": "Get an uploaded file",
+                      "id": "b13f82ee-43e6-4c40-9289-40052cbcfa70",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/upload/files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "upload",
+                            "files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "049311dc-2595-483d-9e3d-bb7fc44344c5",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the uploaded file"
+                            }
+                          ]
+                        },
+                        "description": "Returns a single file from the Strapi media library by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "6658b921-b1b3-4835-a9e5-a12b41d1124d",
+                          "name": "The uploaded file details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/upload/files/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "upload",
+                                "files",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"alternativeText\": \"<string>\",\n  \"caption\": \"<string>\",\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"formats\": {},\n  \"hash\": \"<string>\",\n  \"ext\": \"<string>\",\n  \"mime\": \"<string>\",\n  \"size\": \"<number>\",\n  \"url\": \"<string>\",\n  \"previewUrl\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-10-22T01:21:16.000Z",
+                          "updatedAt": "2026-10-22T01:21:16.000Z",
+                          "uid": "35240-6658b921-b1b3-4835-a9e5-a12b41d1124d"
+                        },
+                        {
+                          "id": "e1a3b870-8c41-48ba-9b2f-b775e6a52d7a",
+                          "name": "Unauthorized - missing or invalid authentication",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/upload/files/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "upload",
+                                "files",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:16.000Z",
+                          "updatedAt": "2026-10-22T01:21:16.000Z",
+                          "uid": "35240-e1a3b870-8c41-48ba-9b2f-b775e6a52d7a"
+                        },
+                        {
+                          "id": "939369f9-dd18-462a-b376-3be905e7ff23",
+                          "name": "Not found - the requested resource does not exist",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/upload/files/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "upload",
+                                "files",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:16.000Z",
+                          "updatedAt": "2026-10-22T01:21:16.000Z",
+                          "uid": "35240-939369f9-dd18-462a-b376-3be905e7ff23"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:21:16.000Z",
+                      "updatedAt": "2026-10-22T01:21:16.000Z",
+                      "uid": "35240-b13f82ee-43e6-4c40-9289-40052cbcfa70"
+                    },
+                    {
+                      "name": "Delete an uploaded file",
+                      "id": "0ea91a5b-716d-447c-a1a4-32c1a74d8ca9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/upload/files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "upload",
+                            "files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4b8ddc12-56ae-4b13-91a3-ca86ff4af5fa",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the uploaded file"
+                            }
+                          ]
+                        },
+                        "description": "Deletes a file from the Strapi media library by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "8e761ed8-402e-41a8-a36a-5d784e34e855",
+                          "name": "File deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/upload/files/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "upload",
+                                "files",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T01:21:16.000Z",
+                          "updatedAt": "2026-10-22T01:21:16.000Z",
+                          "uid": "35240-8e761ed8-402e-41a8-a36a-5d784e34e855"
+                        },
+                        {
+                          "id": "251ddacb-9e65-4dc6-b017-8dfe8521726b",
+                          "name": "Unauthorized - missing or invalid authentication",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/upload/files/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "upload",
+                                "files",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:16.000Z",
+                          "updatedAt": "2026-10-22T01:21:16.000Z",
+                          "uid": "35240-251ddacb-9e65-4dc6-b017-8dfe8521726b"
+                        },
+                        {
+                          "id": "fad7654d-e383-4ae4-a900-2610ec90c02b",
+                          "name": "Not found - the requested resource does not exist",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/upload/files/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "upload",
+                                "files",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T01:21:16.000Z",
+                          "updatedAt": "2026-10-22T01:21:16.000Z",
+                          "uid": "35240-fad7654d-e383-4ae4-a900-2610ec90c02b"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:21:16.000Z",
+                      "updatedAt": "2026-10-22T01:21:16.000Z",
+                      "uid": "35240-0ea91a5b-716d-447c-a1a4-32c1a74d8ca9"
                     }
-                  ]
+                  ],
+                  "id": "89ad94aa-f82d-4df5-8842-71c810bedf73",
+                  "createdAt": "2026-10-22T01:21:16.000Z",
+                  "updatedAt": "2026-10-22T01:21:16.000Z",
+                  "uid": "35240-89ad94aa-f82d-4df5-8842-71c810bedf73"
                 },
+                {
+                  "name": "List uploaded files",
+                  "id": "4cec9508-0b27-433e-a0dc-d7a6f2a5b388",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/upload/files",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "upload",
+                        "files"
+                      ]
+                    },
+                    "description": "Returns a list of all files stored in the Strapi media library."
+                  },
+                  "response": [
+                    {
+                      "id": "9542cbd3-f056-4a28-9015-6583994415d4",
+                      "name": "A list of uploaded files",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/upload/files",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "upload",
+                            "files"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"alternativeText\": \"<string>\",\n    \"caption\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"formats\": {},\n    \"hash\": \"<string>\",\n    \"ext\": \"<string>\",\n    \"mime\": \"<string>\",\n    \"size\": \"<number>\",\n    \"url\": \"<string>\",\n    \"previewUrl\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"alternativeText\": \"<string>\",\n    \"caption\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"formats\": {},\n    \"hash\": \"<string>\",\n    \"ext\": \"<string>\",\n    \"mime\": \"<string>\",\n    \"size\": \"<number>\",\n    \"url\": \"<string>\",\n    \"previewUrl\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-10-22T01:21:16.000Z",
+                      "updatedAt": "2026-10-22T01:21:16.000Z",
+                      "uid": "35240-9542cbd3-f056-4a28-9015-6583994415d4"
+                    },
+                    {
+                      "id": "48231e21-4775-44e2-883c-8315c49b4829",
+                      "name": "Unauthorized - missing or invalid authentication",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/upload/files",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "upload",
+                            "files"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:16.000Z",
+                      "updatedAt": "2026-10-22T01:21:16.000Z",
+                      "uid": "35240-48231e21-4775-44e2-883c-8315c49b4829"
+                    },
+                    {
+                      "id": "4dc5ede0-2442-4119-9cf5-0790c25bd445",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/upload/files",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "upload",
+                            "files"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                      "createdAt": "2026-10-22T01:21:16.000Z",
+                      "updatedAt": "2026-10-22T01:21:16.000Z",
+                      "uid": "35240-4dc5ede0-2442-4119-9cf5-0790c25bd445"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:21:16.000Z",
+                  "updatedAt": "2026-10-22T01:21:16.000Z",
+                  "uid": "35240-4cec9508-0b27-433e-a0dc-d7a6f2a5b388"
+                }
+              ],
+              "id": "1fb58a54-42d1-4ccb-aabe-571f223e842c",
+              "createdAt": "2026-10-22T01:21:16.000Z",
+              "updatedAt": "2026-10-22T01:21:16.000Z",
+              "uid": "35240-1fb58a54-42d1-4ccb-aabe-571f223e842c"
+            },
+            {
+              "name": "Upload files",
+              "id": "dc20e3d8-55a6-4457-b61a-2124635a13f0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "formdata",
                   "formdata": [
                     {
-                      "description": {
-                        "content": "(Required) The file(s) to upload",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The file(s) to upload",
                       "key": "files",
-                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "value": "<binary>,<binary>",
                       "type": "text"
                     },
                     {
-                      "description": {
-                        "content": "The API identifier of the content-type to link the file to",
-                        "type": "text/plain"
-                      },
+                      "description": "The API identifier of the content-type to link the file to",
                       "key": "ref",
                       "value": "<string>",
                       "type": "text"
                     },
                     {
-                      "description": {
-                        "content": "The document ID of the entry to link the file to",
-                        "type": "text/plain"
-                      },
+                      "description": "The document ID of the entry to link the file to",
                       "key": "refId",
                       "value": "<string>",
                       "type": "text"
                     },
                     {
-                      "description": {
-                        "content": "The field name on the entry where the file should be linked",
-                        "type": "text/plain"
-                      },
+                      "description": "The field name on the entry where the file should be linked",
                       "key": "field",
                       "value": "<string>",
                       "type": "text"
                     },
                     {
-                      "description": {
-                        "content": "JSON string containing file metadata such as name, alternativeText, and caption",
-                        "type": "text/plain"
-                      },
+                      "description": "JSON string containing file metadata such as name, alternativeText, and caption",
                       "key": "fileInfo",
                       "value": "<string>",
                       "type": "text"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": 8550,\n    \"name\": \"string\",\n    \"alternativeText\": \"string\",\n    \"caption\": \"string\",\n    \"width\": 6890,\n    \"height\": 7558,\n    \"formats\": {},\n    \"hash\": \"string\",\n    \"ext\": \"string\",\n    \"mime\": \"string\",\n    \"size\": 8964.37814525284,\n    \"url\": \"string\",\n    \"previewUrl\": \"string\",\n    \"provider\": \"string\",\n    \"createdAt\": \"1993-12-25T13:36:10.427Z\",\n    \"updatedAt\": \"2007-11-30T15:30:44.966Z\"\n  },\n  {\n    \"id\": 8903,\n    \"name\": \"string\",\n    \"alternativeText\": \"string\",\n    \"caption\": \"string\",\n    \"width\": 6524,\n    \"height\": 6132,\n    \"formats\": {},\n    \"hash\": \"string\",\n    \"ext\": \"string\",\n    \"mime\": \"string\",\n    \"size\": 2315.391564424635,\n    \"url\": \"string\",\n    \"previewUrl\": \"string\",\n    \"provider\": \"string\",\n    \"createdAt\": \"2022-10-20T01:44:22.106Z\",\n    \"updatedAt\": \"1992-07-28T21:43:57.165Z\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dfd9d08b-df3f-45a6-acd2-05606bc8eee4",
-              "name": "Bad request - invalid input or validation error",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/upload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "upload"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) The file(s) to upload",
-                        "type": "text/plain"
-                      },
-                      "key": "files",
-                      "value": "[\"<binary>\",\"<binary>\"]",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The API identifier of the content-type to link the file to",
-                        "type": "text/plain"
-                      },
-                      "key": "ref",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The document ID of the entry to link the file to",
-                        "type": "text/plain"
-                      },
-                      "key": "refId",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The field name on the entry where the file should be linked",
-                        "type": "text/plain"
-                      },
-                      "key": "field",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "JSON string containing file metadata such as name, alternativeText, and caption",
-                        "type": "text/plain"
-                      },
-                      "key": "fileInfo",
-                      "value": "<string>",
-                      "type": "text"
-                    }
-                  ]
-                }
+                "description": "Uploads one or more files to the Strapi media library. Files can optionally be linked to a content-type entry by providing ref, refId, and field parameters. Uploaded files are placed in the API Uploads folder by default."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "225b315f-7a86-47be-95c0-a931e3a5c00f",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                  "id": "5903901a-62be-4701-b47f-b11134a9cc7e",
+                  "name": "Files uploaded successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file(s) to upload",
+                          "key": "files",
+                          "value": "<binary>,<binary>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The API identifier of the content-type to link the file to",
+                          "key": "ref",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The document ID of the entry to link the file to",
+                          "key": "refId",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The field name on the entry where the file should be linked",
+                          "key": "field",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "JSON string containing file metadata such as name, alternativeText, and caption",
+                          "key": "fileInfo",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/upload",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "upload"
+                      ]
                     }
-                  ]
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"alternativeText\": \"<string>\",\n    \"caption\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"formats\": {},\n    \"hash\": \"<string>\",\n    \"ext\": \"<string>\",\n    \"mime\": \"<string>\",\n    \"size\": \"<number>\",\n    \"url\": \"<string>\",\n    \"previewUrl\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"alternativeText\": \"<string>\",\n    \"caption\": \"<string>\",\n    \"width\": \"<integer>\",\n    \"height\": \"<integer>\",\n    \"formats\": {},\n    \"hash\": \"<string>\",\n    \"ext\": \"<string>\",\n    \"mime\": \"<string>\",\n    \"size\": \"<number>\",\n    \"url\": \"<string>\",\n    \"previewUrl\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n]",
+                  "createdAt": "2026-10-22T01:21:16.000Z",
+                  "updatedAt": "2026-10-22T01:21:16.000Z",
+                  "uid": "35240-5903901a-62be-4701-b47f-b11134a9cc7e"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) The file(s) to upload",
-                        "type": "text/plain"
-                      },
-                      "key": "files",
-                      "value": "[\"<binary>\",\"<binary>\"]",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The API identifier of the content-type to link the file to",
-                        "type": "text/plain"
-                      },
-                      "key": "ref",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The document ID of the entry to link the file to",
-                        "type": "text/plain"
-                      },
-                      "key": "refId",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The field name on the entry where the file should be linked",
-                        "type": "text/plain"
-                      },
-                      "key": "field",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "JSON string containing file metadata such as name, alternativeText, and caption",
-                        "type": "text/plain"
-                      },
-                      "key": "fileInfo",
-                      "value": "<string>",
-                      "type": "text"
-                    }
-                  ]
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a830b022-07f3-4038-9ef3-5026a1990a7b",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
+                  "id": "fecde9b8-f266-4a44-8cad-95969b594114",
+                  "name": "Bad request - invalid input or validation error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file(s) to upload",
+                          "key": "files",
+                          "value": "<binary>,<binary>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The API identifier of the content-type to link the file to",
+                          "key": "ref",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The document ID of the entry to link the file to",
+                          "key": "refId",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The field name on the entry where the file should be linked",
+                          "key": "field",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "JSON string containing file metadata such as name, alternativeText, and caption",
+                          "key": "fileInfo",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/upload",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "upload"
+                      ]
                     }
-                  ]
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:21:16.000Z",
+                  "updatedAt": "2026-10-22T01:21:16.000Z",
+                  "uid": "35240-fecde9b8-f266-4a44-8cad-95969b594114"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "(Required) The file(s) to upload",
-                        "type": "text/plain"
-                      },
-                      "key": "files",
-                      "value": "[\"<binary>\",\"<binary>\"]",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The API identifier of the content-type to link the file to",
-                        "type": "text/plain"
-                      },
-                      "key": "ref",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The document ID of the entry to link the file to",
-                        "type": "text/plain"
-                      },
-                      "key": "refId",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "The field name on the entry where the file should be linked",
-                        "type": "text/plain"
-                      },
-                      "key": "field",
-                      "value": "<string>",
-                      "type": "text"
-                    },
-                    {
-                      "description": {
-                        "content": "JSON string containing file metadata such as name, alternativeText, and caption",
-                        "type": "text/plain"
-                      },
-                      "key": "fileInfo",
-                      "value": "<string>",
-                      "type": "text"
-                    }
-                  ]
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "2f2d2bac-7ab7-4c22-86fc-ae75f995f8b8",
+                  "name": "Unauthorized - missing or invalid authentication",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file(s) to upload",
+                          "key": "files",
+                          "value": "<binary>,<binary>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The API identifier of the content-type to link the file to",
+                          "key": "ref",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The document ID of the entry to link the file to",
+                          "key": "refId",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The field name on the entry where the file should be linked",
+                          "key": "field",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "JSON string containing file metadata such as name, alternativeText, and caption",
+                          "key": "fileInfo",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/upload",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "upload"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:21:16.000Z",
+                  "updatedAt": "2026-10-22T01:21:16.000Z",
+                  "uid": "35240-2f2d2bac-7ab7-4c22-86fc-ae75f995f8b8"
+                },
+                {
+                  "id": "2078c042-4090-4a4a-941e-98b618650faa",
+                  "name": "Forbidden - insufficient permissions",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file(s) to upload",
+                          "key": "files",
+                          "value": "<binary>,<binary>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The API identifier of the content-type to link the file to",
+                          "key": "ref",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The document ID of the entry to link the file to",
+                          "key": "refId",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The field name on the entry where the file should be linked",
+                          "key": "field",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "JSON string containing file metadata such as name, alternativeText, and caption",
+                          "key": "fileInfo",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/upload",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "upload"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"nullable\": true\n  },\n  \"error\": {\n    \"status\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"message\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                  "createdAt": "2026-10-22T01:21:16.000Z",
+                  "updatedAt": "2026-10-22T01:21:16.000Z",
+                  "uid": "35240-2078c042-4090-4a4a-941e-98b618650faa"
                 }
               ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T01:21:16.000Z",
+              "updatedAt": "2026-10-22T01:21:16.000Z",
+              "uid": "35240-dc20e3d8-55a6-4457-b61a-2124635a13f0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "72597893-cc20-4e70-86ec-a6e4816b6fc0",
-          "name": "List uploaded files",
-          "request": {
-            "name": "List uploaded files",
-            "description": {
-              "content": "Returns a list of all files stored in the Strapi media library.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "upload",
-                "files"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b5359466-f516-411e-8c5a-9650284e0844",
-              "name": "A list of uploaded files",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": 8550,\n    \"name\": \"string\",\n    \"alternativeText\": \"string\",\n    \"caption\": \"string\",\n    \"width\": 6890,\n    \"height\": 7558,\n    \"formats\": {},\n    \"hash\": \"string\",\n    \"ext\": \"string\",\n    \"mime\": \"string\",\n    \"size\": 8964.37814525284,\n    \"url\": \"string\",\n    \"previewUrl\": \"string\",\n    \"provider\": \"string\",\n    \"createdAt\": \"1993-12-25T13:36:10.427Z\",\n    \"updatedAt\": \"2007-11-30T15:30:44.966Z\"\n  },\n  {\n    \"id\": 8903,\n    \"name\": \"string\",\n    \"alternativeText\": \"string\",\n    \"caption\": \"string\",\n    \"width\": 6524,\n    \"height\": 6132,\n    \"formats\": {},\n    \"hash\": \"string\",\n    \"ext\": \"string\",\n    \"mime\": \"string\",\n    \"size\": 2315.391564424635,\n    \"url\": \"string\",\n    \"previewUrl\": \"string\",\n    \"provider\": \"string\",\n    \"createdAt\": \"2022-10-20T01:44:22.106Z\",\n    \"updatedAt\": \"1992-07-28T21:43:57.165Z\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "74619e2b-3fff-461a-afda-523b58daa25f",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6d7f9004-2a6f-434d-b000-2a813451f86e",
-              "name": "Forbidden - insufficient permissions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "edd093e5-3b93-42ed-8ffe-fc17d9b8af23",
-          "name": "Get an uploaded file",
-          "request": {
-            "name": "Get an uploaded file",
-            "description": {
-              "content": "Returns a single file from the Strapi media library by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "upload",
-                "files",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The ID of the uploaded file"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "dfa7b72b-8913-4faf-a512-7a80d692e047",
-              "name": "The uploaded file details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the uploaded file"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": 7802,\n  \"name\": \"string\",\n  \"alternativeText\": \"string\",\n  \"caption\": \"string\",\n  \"width\": 5661,\n  \"height\": 5448,\n  \"formats\": {},\n  \"hash\": \"string\",\n  \"ext\": \"string\",\n  \"mime\": \"string\",\n  \"size\": 9883.508205251834,\n  \"url\": \"string\",\n  \"previewUrl\": \"string\",\n  \"provider\": \"string\",\n  \"createdAt\": \"1987-12-06T08:11:04.197Z\",\n  \"updatedAt\": \"1998-12-13T22:20:22.164Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c87b1407-f9c5-4502-8b1d-a3d430000e14",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the uploaded file"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8e906786-bb50-48c9-9df4-ec93b3815d0e",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the uploaded file"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "89974abe-98a1-4ac7-ba1e-44ee02251ec9",
-          "name": "Delete an uploaded file",
-          "request": {
-            "name": "Delete an uploaded file",
-            "description": {
-              "content": "Deletes a file from the Strapi media library by its ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "upload",
-                "files",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The ID of the uploaded file"
-                },
-                {
-                  "description": "The hostname and port of your Strapi instance",
-                  "type": "any",
-                  "value": "{{host}}",
-                  "key": "host"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "73c344c4-1bfc-414e-9b6b-9fbeabe33892",
-              "name": "File deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the uploaded file"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "de25f36a-1d14-4ccd-9e11-0c301a4f6101",
-              "name": "Unauthorized - missing or invalid authentication",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the uploaded file"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "aa13f0b6-c1fd-4822-8c94-e334e8f9f248",
-              "name": "Not found - the requested resource does not exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "upload",
-                    "files",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The ID of the uploaded file"
-                    },
-                    {
-                      "description": "The hostname and port of your Strapi instance",
-                      "type": "any",
-                      "value": "{{host}}",
-                      "key": "host"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {},\n  \"error\": {\n    \"status\": 1165,\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "e07d91af-aa9a-40c6-b083-9e165e509ade",
+          "createdAt": "2026-10-22T01:21:16.000Z",
+          "updatedAt": "2026-10-22T01:21:16.000Z",
+          "uid": "35240-e07d91af-aa9a-40c6-b083-9e165e509ade"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "description": {
-        "content": "The hostname and port of your Strapi instance",
-        "type": "text/plain"
-      },
-      "type": "any",
-      "value": "localhost:1337",
-      "key": "host"
-    },
-    {
-      "type": "string",
-      "value": "https://{{host}}",
-      "key": "baseUrl"
+      "id": "aeddf508-3cfe-4f2f-be94-2668cae24130",
+      "createdAt": "2026-10-22T01:21:16.000Z",
+      "updatedAt": "2026-10-22T01:21:16.000Z",
+      "uid": "35240-aeddf508-3cfe-4f2f-be94-2668cae24130"
     }
   ],
   "auth": {
@@ -1176,17 +991,19 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "21814010-57f5-46f1-bca0-e4db63378f15",
-    "name": "Strapi Admin Panel Admin Authentication Upload API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Strapi Admin Panel API powers the back-office interface used to manage content-types, content entries, media assets, and administrator accounts. It provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. The API supports three default administrator roles (Super Admin, Editor, and Author) with granular permission management, allowing organizations to control which administrative functions each role can access.\n\nContact Support:\n Name: Strapi Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "host",
+      "value": "localhost:1337"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{host}}"
     }
-  }
+  ]
 }
