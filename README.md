@@ -1,4 +1,4 @@
-# Strapi (strapi)
+# Strapi
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,151 +66,214 @@
 
 Strapi is an open-source, headless CMS built with Node.js that gives developers full control over their content API. It provides a customizable admin panel for content management, automatically generates REST and GraphQL APIs for every content-type, and supports flexible database options including SQLite, PostgreSQL, MySQL, and MongoDB. Strapi v5 introduces a Document Service API with flattened response format, improved TypeScript support, and an enhanced content delivery API for building fast, decoupled frontends.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/apis.yml)
+**Areas:** Strapi · CMS · Content Management · Headless CMS · Node.js · Open Source
 
-## Scope
+## Strapi on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Strapi is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/strapi/](https://apis.io/providers/strapi/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (15)
 
-- CMS
-- Content Management
-- Headless CMS
-- Node.js
-- Open Source
+- [Strapi Webhooks](https://apis.io/apis/strapi/strapi-webhooks/) — Strapi includes a built-in webhook system that notifies external services whenever content entries or media assets are created, updated, deleted, published,…
+- [Strapi Admin Authentication API](https://apis.io/apis/strapi/strapi-admin-authentication-api/) — Authentication endpoints for administrator accounts used to access the Strapi admin panel.
+- [Strapi Admin Roles API](https://apis.io/apis/strapi/strapi-admin-roles-api/) — Endpoints for managing administrator roles (Super Admin, Editor, Author) and their associated permissions.
+- [Strapi Admin Users API](https://apis.io/apis/strapi/strapi-admin-users-api/) — Endpoints for managing administrator user accounts that have access to the Strapi admin panel.
+- [Strapi API Tokens API](https://apis.io/apis/strapi/strapi-api-tokens-api/) — Endpoints for managing API tokens used to authenticate REST and GraphQL API requests.
+- [Strapi Authentication API](https://apis.io/apis/strapi/strapi-authentication-api/) — Endpoints for user authentication including login, registration, and password management using JWT tokens.
+- [Strapi Content Entries API](https://apis.io/apis/strapi/strapi-content-entries-api/) — CRUD operations on content-type entries. Strapi auto-generates these endpoints for each content-type defined in the application.
+- [Strapi Content Manager API](https://apis.io/apis/strapi/strapi-content-manager-api/) — Endpoints for managing content entries through the admin panel Content Manager interface.
+- [Strapi Content Types API](https://apis.io/apis/strapi/strapi-content-types-api/) — Endpoints for managing content-type definitions through the Content-Type Builder.
+- [Strapi Permissions API](https://apis.io/apis/strapi/strapi-permissions-api/) — Endpoints for viewing and configuring permissions assigned to roles.
+- [Strapi Roles API](https://apis.io/apis/strapi/strapi-roles-api/) — Endpoints for managing user roles and their associated permissions.
+- [Strapi Transfer Tokens API](https://apis.io/apis/strapi/strapi-transfer-tokens-api/) — Endpoints for managing transfer tokens used for data transfer operations between Strapi instances.
+- [Strapi Upload API](https://apis.io/apis/strapi/strapi-upload-api/) — File upload and media library management endpoints powered by the Upload plugin.
+- [Strapi Users API](https://apis.io/apis/strapi/strapi-users-api/) — Endpoints for managing end-user accounts and profiles.
+- [Strapi Webhooks API](https://apis.io/apis/strapi/strapi-webhooks-api/) — Endpoints for managing webhook configurations from the admin panel.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-01-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Strapi REST API
+Event-driven and webhook contracts.
 
-The Strapi REST API provides automatically generated endpoints for accessing and managing content-types created within the Strapi headless CMS. Supports full CRUD operations with filtering, sorting, pagination, population of relational fields, and internationalization. Content-types are private by default and require authenticated requests or configured public permissions. The API also includes a media library Upload plugin for file management.
+- [Strapi Webhooks](https://apis.io/asyncapis/strapi/strapi-webhooks-asyncapi/)
 
-- **Human URL:** [https://docs.strapi.io/cms/api/rest](https://docs.strapi.io/cms/api/rest)
-- **Base URL:** `https://{host}`
+#### Event channels (1)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- CMS
-- Content Management
-- REST API
-- Headless CMS
+- [/webhook](https://apis.io/channels/strapi/webhook/)
 
-#### Properties
+#### GraphQL (1)
 
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://docs.strapi.io/cms/api/rest)
-- [Documentation](https://docs.strapi.io/cms/api/rest/parameters)
-- [Postman Collection](collections/strapi-admin-panel-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-admin-panel-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-users-and-permissions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-users-and-permissions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+GraphQL schemas.
 
-### Strapi Admin Panel API
+- [Moved to /providers/strapi/](https://apis.io/graphqls/strapi/strapi-graphql/)
 
-The Strapi Admin Panel API powers the back-office interface for managing content-types, content entries, media assets, and administrator accounts. Provides endpoints for the Content-Type Builder, Content Manager, Media Library, and role-based access control configuration. Supports three default roles (Super Admin, Editor, Author) and includes management of API tokens, transfer tokens, and webhooks.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.strapi.io/cms/features/admin-panel](https://docs.strapi.io/cms/features/admin-panel)
-- **Base URL:** `https://{host}`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [strapi](https://apis.io/servers/strapi/strapi/)
 
-- Admin
-- CMS
-- Content Management
-- RBAC
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-admin-panel-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://docs.strapi.io/cms/features/admin-panel)
-- [Documentation](https://docs.strapi.io/cms/features/rbac)
-- [Postman Collection](collections/strapi-admin-panel-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-admin-panel-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-users-and-permissions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-users-and-permissions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Strapi Agentic Access](https://apis.io/agentic-access/strapi/strapi-agentic-access/)
 
-### Strapi Users and Permissions API
+#### JSON Schema (1)
 
-The Strapi Users and Permissions API provides a full JWT-based authentication system for protecting API endpoints, along with an access-control list strategy for managing permissions between user groups. Supports user registration, login, password reset, email confirmation, and social provider authentication via OAuth. The API enables configuration of roles and permissions to control endpoint accessibility.
+The data models the API reads and writes.
 
-- **Human URL:** [https://docs.strapi.io/cms/features/users-permissions](https://docs.strapi.io/cms/features/users-permissions)
-- **Base URL:** `https://{host}`
+- [Strapi Content Entry](https://apis.io/schemas/strapi/strapi-content-entry/)
 
-#### Tags
+#### JSON Structure (1)
 
-- Authentication
-- CMS
-- Permissions
-- User Management
+Data models expressed in JSON Structure.
 
-#### Properties
+- [Strapi Content Entry Structure](https://apis.io/json-structure/strapi/strapi-content-entry-structure/)
 
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-users-and-permissions-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://docs.strapi.io/cms/features/users-permissions)
-- [Postman Collection](collections/strapi-admin-panel-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-admin-panel-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-users-and-permissions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-users-and-permissions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON-LD (1)
 
-### Strapi Webhooks
+Linked-data contexts for the provider's vocabulary.
 
-Strapi includes a built-in webhook system that notifies external services whenever content entries or media assets are created, updated, deleted, published, or unpublished. Webhooks are configured through the admin panel and include a custom X-Strapi-Event header identifying the event type.
+- [Strapi Context](https://apis.io/jsonld/strapi/strapi-context/)
 
-- **Human URL:** [https://docs.strapi.io/cms/backend-customization/webhooks](https://docs.strapi.io/cms/backend-customization/webhooks)
+#### Vocabulary (1)
 
-#### Tags
+The provider's domain terms, defined.
 
-- CMS
-- Events
-- Webhooks
+- [Strapi Vocabulary](https://apis.io/vocabularies/strapi/strapi-vocabulary/)
 
-#### Properties
+#### Examples (4)
 
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/asyncapi/strapi-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Documentation](https://docs.strapi.io/cms/backend-customization/webhooks)
-- [Postman Collection](collections/strapi-admin-panel-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-admin-panel-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/strapi-users-and-permissions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/strapi-users-and-permissions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Example requests and responses.
 
-## Common Properties
+- [Strapi Admin Login Example](https://apis.io/examples/strapi/strapi-admin-login-example/)
+- [Strapi Create Entry Example](https://apis.io/examples/strapi/strapi-create-entry-example/)
+- [Strapi Find Entries Example](https://apis.io/examples/strapi/strapi-find-entries-example/)
+- [Strapi Register User Example](https://apis.io/examples/strapi/strapi-register-user-example/)
 
-- [LinkedIn](https://www.linkedin.com/company/strapi)
+#### Collections (17)
+
+Postman and Open Collection request collections.
+
+- [Strapi Admin Panel Admin Authentication API](https://apis.io/collections/strapi/open-strapi-admin-authentication-api/)
+- [Strapi Admin Panel API](https://apis.io/collections/strapi/open-strapi-admin-panel-api/)
+- [Strapi Admin Panel Admin Authentication Admin Roles API](https://apis.io/collections/strapi/open-strapi-admin-roles-api/)
+- [Strapi Admin Panel Admin Authentication Admin Users API](https://apis.io/collections/strapi/open-strapi-admin-users-api/)
+- [Strapi Admin Panel Admin Authentication API Tokens API](https://apis.io/collections/strapi/open-strapi-api-tokens-api/)
+- [Strapi Admin Panel Admin Authentication API](https://apis.io/collections/strapi/open-strapi-authentication-api/)
+- [Strapi Admin Panel Admin Authentication Content Entries API](https://apis.io/collections/strapi/open-strapi-content-entries-api/)
+- [Strapi Admin Panel Admin Authentication Content Manager API](https://apis.io/collections/strapi/open-strapi-content-manager-api/)
+- [Strapi Admin Panel Admin Authentication Content Types API](https://apis.io/collections/strapi/open-strapi-content-types-api/)
+- [Strapi Admin Panel Admin Authentication Permissions API](https://apis.io/collections/strapi/open-strapi-permissions-api/)
+- [Strapi REST API](https://apis.io/collections/strapi/open-strapi-rest-api/)
+- [Strapi Admin Panel Admin Authentication Roles API](https://apis.io/collections/strapi/open-strapi-roles-api/)
+- [Strapi Admin Panel Admin Authentication Transfer Tokens API](https://apis.io/collections/strapi/open-strapi-transfer-tokens-api/)
+- [Strapi Admin Panel Admin Authentication Upload API](https://apis.io/collections/strapi/open-strapi-upload-api/)
+- [Strapi Users and Permissions API](https://apis.io/collections/strapi/open-strapi-users-and-permissions-api/)
+- [Strapi Admin Panel Admin Authentication Users API](https://apis.io/collections/strapi/open-strapi-users-api/)
+- [Strapi Admin Panel Admin Authentication Webhooks API](https://apis.io/collections/strapi/open-strapi-webhooks-api/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [Strapi — asyncapi rules](https://apis.io/rules/strapi/strapi-asyncapi-spectral-rules/)
+- [Strapi — jsonschema rules](https://apis.io/rules/strapi/strapi-jsonschema-spectral-rules/)
+- [Strapi API Rules](https://apis.io/rules/strapi/strapi-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Strapi Authentication](https://apis.io/security/strapi/strapi-authentication/)
+- [Strapi Domain Security](https://apis.io/security/strapi/strapi-domain-security/)
+- [Strapi Trust Center](https://apis.io/security/strapi/strapi-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Strapi Plans Pricing](https://apis.io/plans/strapi/strapi-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Strapi Rate Limits](https://apis.io/rate-limits/strapi/strapi-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Strapi Finops](https://apis.io/finops/strapi/strapi-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://strapi.io)
 - [Documentation](https://docs.strapi.io)
-- [Git Hub](https://github.com/strapi/strapi)
-- [Blog](https://strapi.io/blog)
-- [Forum](https://forum.strapi.io)
-- [Discord](https://discord.strapi.io)
-- [Roadmap](https://feedback.strapi.io)
-- [Changelog](https://github.com/strapi/strapi/releases)
 - [Pricing](https://strapi.io/pricing-cloud)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-admin-panel-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/openapi/strapi-users-and-permissions-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/asyncapi/strapi-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/json-schema/strapi-content-entry-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/strapi/refs/heads/main/json-ld/strapi-context.jsonld)
-- [Integrations](https://strapi.io/integrations)
-- [L L Ms Txt](https://docs.strapi.io/llms.txt)
+- [Changelog](https://github.com/strapi/strapi/releases)
+- [Blog](https://strapi.io/blog)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 39.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 61.0 |
+| Contract governance | 13.6 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 26.3 |
+
+**Agent readiness 31.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 21.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/strapi/](https://apis.io/providers/strapi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Strapi: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/strapi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
